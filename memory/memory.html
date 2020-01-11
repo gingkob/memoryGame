@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Memory game</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  
+  <section class="memory-game">
+    <div class="sredina">    
+      <div class="clear-format">
+        <h2>СТРАНИЦА У ИЗРАДИ</h2>
+      </div>
+    </div>
+    <div class="memory-game-header">
+      <div class="header-flex">
+        <div class="header-column1">
+          <input type="text"
+            style="font-size: 1.15vw; color: antiquewhite; background:#555555; border: none; width: fit-content;"
+            onkeyup={player1(this.value)} placeholder="Играч 1" />
+          <p id="score1" style="text-align: left; padding-left: 1vw; font-size: 2.5vw;">0</p>
+          <!-- <div class="paleta-levo">
+            <div class="square-blue"></div>
+            <div class="square-yellow"></div>
+            <div class="square-green"></div>
+            <div class="square-orange"></div>
+            <div class="square-red"></div>
+            <div class="square-black"></div>
+          </div> -->
+        </div>
+        <div class="header-column2">
+          <p rowspan="3" style="padding: 1vw; padding-bottom: 2vw; font-size: 3vw;text-align: center;">
+            Игра меморије
+          </p>
+        </div>
+        <div class="header-column1">
+          <input type="text"
+            style="text-align: right; font-size: 1.15vw; color: antiquewhite; background:#555555; border: none; width: fit-content;"
+            onkeyup={player1(this.value)} placeholder="Играч 2" />
+          <p id="score2" style="text-align: right; padding-right: 1vw; font-size: 2.5vw;">0</p>
+          <!-- <div class="paleta-desno">
+            <div class="square-blue"></div>
+            <div class="square-yellow"></div>
+            <div class="square-green"></div>
+            <div class="square-orange"></div>
+            <div class="square-red"></div>
+            <div class="square-black"></div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="memory-card" data-name="aurelia">
+      <img class="front-face" src="img/aurelia.svg" alt="Aurelia" />
+      <!-- <div class="ribbon ribbon-top-left"><span>player 1</span></div> -->
+      <img class="back-face" src="img/js-badge.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-name="aurelia">
+      <img class="front-face" src="img/aurelia.svg" alt="Aurelia" />
+      <img class="back-face" src="img/js-badge.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-name="angular">
+      <img class="front-face" src="img/angular.svg" alt="Angular" />
+      <img class="back-face" src="img/js-badge.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-name="angular">
+      <img class="front-face" src="img/angular.svg" alt="Angular" />
+      <img class="back-face" src="img/js-badge.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-name="backbone">
+      <img class="front-face" src="img/backbone.svg" alt="backbone" />
+      <img class="back-face" src="img/js-badge.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-name="backbone">
+      <img class="front-face" src="img/backbone.svg" alt="backbone" />
+      <img class="back-face" src="img/js-badge.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-name="ember">
+      <img class="front-face" src="img/ember.svg" alt="ember" />
+      <img class="back-face" src="img/js-badge.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-name="ember">
+      <img class="front-face" src="img/ember.svg" alt="ember" />
+      <img class="back-face" src="img/js-badge.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-name="react">
+      <img class="front-face" src="img/react.svg" alt="react" />
+      <img class="back-face" src="img/js-badge.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-name="react">
+      <img class="front-face" src="img/react.svg" alt="react" />
+      <img class="back-face" src="img/js-badge.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-name="vue">
+      <img class="front-face" src="img/vue.svg" alt="vue" />
+      <img class="back-face" src="img/js-badge.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-name="vue">
+      <img class="front-face" src="img/vue.svg" alt="vue" />
+      <img class="back-face" src="img/js-badge.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-name="jquery">
+      <img class="front-face" src="img/jquery.png" alt="jquery" />
+      <img class="back-face" src="img/js-badge.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-name="jquery">
+      <img class="front-face" src="img/jquery.png" alt="jquery" />
+      <img class="back-face" src="img/js-badge.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-name="meteor">
+      <img class="front-face" src="img/meteor.png" alt="meteor" />
+      <img class="back-face" src="img/js-badge.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-name="meteor">
+      <img class="front-face" src="img/meteor.png" alt="meteor" />
+      <img class="back-face" src="img/js-badge.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-name="mithril">
+      <img class="front-face" src="img/mithril.svg" alt="mithril" />
+      <img class="back-face" src="img/js-badge.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-name="mithril">
+      <img class="front-face" src="img/mithril.svg" alt="mithril" />
+      <img class="back-face" src="img/js-badge.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-name="nodejs">
+      <img class="front-face" src="img/nodejs.png" alt="nodejs" />
+      <img class="back-face" src="img/js-badge.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-name="nodejs">
+      <img class="front-face" src="img/nodejs.png" alt="nodejs" />
+      <img class="back-face" src="img/js-badge.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-name="polymer">
+      <img class="front-face" src="img/polymer.svg" alt="polymer" />
+      <img class="back-face" src="img/js-badge.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-name="polymer">
+      <img class="front-face" src="img/polymer.svg" alt="polymer" />
+      <img class="back-face" src="img/js-badge.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-name="wakanda">
+      <img class="front-face" src="img/wakanda.png" alt="wakanda" />
+      <img class="back-face" src="img/js-badge.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-name="wakanda">
+      <img class="front-face" src="img/wakanda.png" alt="wakanda" />
+      <img class="back-face" src="img/js-badge.svg" alt="JS Badge" />
+    </div>
+  </section>
+  <script src="scripts.js"></script>
+</body>
+
+</html>
