@@ -5,18 +5,39 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Memory Game the best in the world</title>
+  <title>Memory Game</title>
 </head>
 <body>
   <div>
     <h1>Одабери игру</h1>
   </div>
+<div>
+
 
   <div class="polazni">
-    <input type="text" id="player1" placeholder="Unesite ime igraca..."/>
-    <input type="text" id="player2" placeholder="Unesite ime igraca..."/>
-    <input type="text" id="player3" placeholder="Unesite ime igraca..."/>
-    <input type="text" id="player4" placeholder="Unesite ime igraca..."/>
+    <form id="nekiId" method="POST" action="" >
+      <div class="input-field">
+        <h3>Igrac:</h3>
+        <input type="text" id="player1" placeholder="Unesite ime igraca..." />
+      </div>
+      <div class="input-field">
+        <h3>Igrac:</h3>
+        <input type="text" id="player2" placeholder="Unesite ime igraca..." />
+      </div>
+      <div class="input-field">
+        <h3>Igrac:</h3>
+        <input type="text" id="player3" placeholder="Unesite ime igraca..." />
+      </div>
+      <div class="input-field">
+        <h3>Igrac:</h3>
+        <input type="text" id="player4" placeholder="Unesite ime igraca..." />
+      </div>
+      <div class="input-field">
+        <h3>Pokreni igru</h3>
+        <input type="button" id="submitPlayers" onclick={submitForm(this.form)} value="START >>" />
+      </div>
+      </form>
+    </div>
   </div>
   
   <div>

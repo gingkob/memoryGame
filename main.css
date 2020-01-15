@@ -1,14 +1,14 @@
 * {
   padding: 0;
   margin: 0;
-  box-sizing: border-box;
 }
 
 body {
   background: rgb(246, 248, 231);
 }
+
 div {
-  margin-top: 5rem;
+  margin-top: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,15 +22,29 @@ button {
   padding: 10px;
   margin: 10px;
 }
+
 .polazni {
+  width:40vw;
   border: 1px solid green;
   border-radius: 5px;
 }
+
+form {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.input-field {
+  padding: 10px;
+  flex: 1;
+  flex-direction: column;
+}
+
 input {
-  margin: 5px;
+  margin: 10px;
   padding: 5px;
-  border-radius: 10px 3px;
-  background: rgb(243, 233, 248);
   width: 8rem;
   height: 2rem;
 }

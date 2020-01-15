@@ -5,11 +5,45 @@
 }
 
 body {
-  height: 80vh;
+  height: 95vh;
   background: #fffff5;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.player-container{
+  width: 20vw;
+  height: 40vh;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.memory-game-player-left {
+  flex: 1;
+  flex-direction: column;
+}
+.memory-game-player {
+  padding: 10px;
+  flex: 1;
+  flex-direction: column;
+}
+
+.one-player-container {
+  box-sizing: content-box;
+  background: #eef9ed;
+  color: #555555;
+  width: calc(100% - 10px);
+  height: calc(50% - 10px);
+  position: relative;
+  margin: 10px;  
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 15px rgba(0,0,0,.1);
 }
 
 .memory-game {
@@ -22,7 +56,7 @@ body {
 }
 
 .sredina {
-  width: calc(100% - 10px);
+  width: 100%;
   margin: 5px;
   display: flex;
   justify-content: center;
@@ -38,7 +72,7 @@ body {
 }
 
 h2 { 
-  font-size: 100px;
+  font-size: 60px;
 }
 
 .memory-game-header {
@@ -145,7 +179,7 @@ h2 {
   height: 100%;
   padding: 5px;
   position: absolute;
-  background:none;
+  background: white;
   backface-visibility: hidden;
 }
 
@@ -171,6 +205,46 @@ h2 {
   width: 0;
   height: 0;
 	border-right: 2vw solid #d8eb4d;
+	border-left: 2vw solid transparent;
+  border-bottom: 2vw solid transparent;
+  backface-visibility: visible;
+  transform: rotateY(180deg);
+}
+
+.player1-corner {
+  width: 0;
+  height: 0;
+	border-right: 2vw solid #d8eb4d;
+	border-left: 2vw solid transparent;
+  border-bottom: 2vw solid transparent;
+  backface-visibility: visible;
+  transform: rotateY(180deg);
+}
+
+.player2-corner {
+  width: 0;
+  height: 0;
+	border-right: 2vw solid #4deb6f;
+	border-left: 2vw solid transparent;
+  border-bottom: 2vw solid transparent;
+  backface-visibility: visible;
+  transform: rotateY(180deg);
+}
+
+.player3-corner {
+  width: 0;
+  height: 0;
+	border-right: 2vw solid #4de1eb;
+	border-left: 2vw solid transparent;
+  border-bottom: 2vw solid transparent;
+  backface-visibility: visible;
+  transform: rotateY(180deg);
+}
+
+.player4-corner {
+  width: 0;
+  height: 0;
+	border-right: 2vw solid #4d6aeb;
 	border-left: 2vw solid transparent;
   border-bottom: 2vw solid transparent;
   backface-visibility: visible;
