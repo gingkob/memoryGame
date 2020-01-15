@@ -158,7 +158,7 @@ h2 {
   width: calc(16.66% - 10px);
   height: calc(25% - 10px);
   position: relative;
-  margin: 3px;
+  margin: 5px;
   transform: scale(1);
   transform-style: preserve-3d;
   transition: transform .7s;
