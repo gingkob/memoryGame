@@ -45,7 +45,7 @@ disableCards = () => {
   firstCard.removeEventListener('click', flipCard);
   secondCard.removeEventListener('click', flipCard);
   resetBoard();
-  firstOnMove ? score1.innerHTML = ++scorePlay1 : score2.innerHTML = ++scorePlay2;
+  firstOnMove ? score1.textContent = ++scorePlay1 : score2.textContent = ++scorePlay2;
 }
 
 unFlipCards = () => {

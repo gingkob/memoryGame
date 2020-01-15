@@ -11,10 +11,17 @@
   <div>
     <h1>Одабери игру</h1>
   </div>
+
+  <div class="polazni">
+    <input type="text" id="player1" placeholder="Unesite ime igraca..."/>
+    <input type="text" id="player2" placeholder="Unesite ime igraca..."/>
+    <input type="text" id="player3" placeholder="Unesite ime igraca..."/>
+    <input type="text" id="player4" placeholder="Unesite ime igraca..."/>
+  </div>
   
   <div>
-      <button type="button" onclick={memoryCall()}>ИГРА МЕМОРИЈЕ</button>
-      <button type="button" onclick={climbingToTheMountainCall()}>САЧУВАЈМО БЛАГО НАШИХ ПЛАНИНА</button>
+      <button type="button" id="memory" onclick={memoryCall()}>ИГРА МЕМОРИЈЕ</button>
+      <button type="button" id="mountain" onclick={climbingToTheMountainCall()}>САЧУВАЈМО БЛАГО НАШИХ ПЛАНИНА</button>
   </div>
   <script src="main.js"></script>
 </body>
