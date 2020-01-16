@@ -11,35 +11,32 @@
   <div>
     <h1>Одабери игру</h1>
   </div>
-<div>
-
-
-  <div class="polazni">
-    <form id="nekiId" method="POST" action="" >
-      <div class="input-field">
-        <h3>Igrac:</h3>
-        <input type="text" id="player1" placeholder="Unesite ime igraca..." />
+  <div>
+    <div class="polazni">
+      <div class="neka-klasa">
+        <div class="dva-u-nizu">
+          <div class="input-field">          
+            <input required type="text color" id="player1" placeholder="Unesite ime igraca..." />
+            <input class="boja" type="color" id="boja1" value="#d8eb4d" />
+          </div>
+          <div class="input-field">            
+            <input required type="text" id="player2" placeholder="Unesite ime igraca..." />
+            <input class="boja" type="color" id="boja2" value="#4deb6f" />
+          </div>
+        </div>
+        <div class="dva-u-nizu">
+          <div class="input-field">
+            <input type="text" id="player3" placeholder="Unesite ime igraca..." />
+            <input class="boja" type="color" id="boja3" value="#4de1eb" />
+          </div>
+          <div class="input-field">
+            <input type="text" id="player4" placeholder="Unesite ime igraca..." />
+            <input class="boja" type="color" id="boja4" value="#4d6aeb" />
+          </div>
+        </div>
       </div>
-      <div class="input-field">
-        <h3>Igrac:</h3>
-        <input type="text" id="player2" placeholder="Unesite ime igraca..." />
-      </div>
-      <div class="input-field">
-        <h3>Igrac:</h3>
-        <input type="text" id="player3" placeholder="Unesite ime igraca..." />
-      </div>
-      <div class="input-field">
-        <h3>Igrac:</h3>
-        <input type="text" id="player4" placeholder="Unesite ime igraca..." />
-      </div>
-      <div class="input-field">
-        <h3>Pokreni igru</h3>
-        <input type="button" id="submitPlayers" onclick={submitForm(this.form)} value="START >>" />
-      </div>
-      </form>
     </div>
   </div>
-  
   <div>
       <button type="button" id="memory" onclick={memoryCall()}>ИГРА МЕМОРИЈЕ</button>
       <button type="button" id="mountain" onclick={climbingToTheMountainCall()}>САЧУВАЈМО БЛАГО НАШИХ ПЛАНИНА</button>
