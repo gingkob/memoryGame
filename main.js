@@ -1,7 +1,6 @@
-(function (){
 let names = {};
 let memoryCall = () => { 
-  names = {
+ /*  names = {
     play1: document.getElementById("player1").value.trim(),
     play2: document.getElementById("player2").value.trim(),
     play3: document.getElementById("player3").value.trim(),
@@ -14,14 +13,12 @@ let memoryCall = () => {
     }
   }
 
-  if(validator <= 2){
+  if(validator <= 2){ */
     window.open("./memory/memory.html")
-  }else{
+  /* }else{
     alert("Potrebno je bar 2 igraca za igru memorije")
-  }
+  } */
 
 }
-let climbingToTheMountainCall = () => alert("mountain")
-return { memoryCall, names, climbingToTheMountainCall }
-})();
-// export { names, memoryCall, climbingToTheMountainCall };
+let climbingToTheMountainCall = () => alert("mountain");
+

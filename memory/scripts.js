@@ -1,8 +1,6 @@
-import {names} from "../main"
-
 const cards = document.querySelectorAll(".memory-card");
 
-const { play1, play2, play3, play4 } = names;
+//const { play1, play2, play3, play4 } = names;
 let scorePlay1 = 0, scorePlay2 = 0, scorePlay3 = 0, scorePlay4 = 0 ;
 let score1 = document.querySelector("#score1");
 let score2 = document.querySelector("#score2");
@@ -11,22 +9,22 @@ let score4 = document.querySelector("#score4");
 let hasFlippedCard = false;
 let firstCard, secondCard;
 let lockBoard = false;
-// let currentOnMove = ["player1", "player2", "player3", "player4"]
-let currentOnMove = [];
+let currentOnMove = ["player1", "player2", "player3", "player4"]
+//let currentOnMove = [];
 
 
-let player1 = document.querySelector("#player1");
+/* let player1 = document.querySelector("#player1");
 if(player1 != ""){currentOnMove.push(player1);}
 let player2 = document.querySelector("#player2");
 if(player2 != ""){currentOnMove.push(player2);}
 let player3 = document.querySelector("#player3");
 if(player3 != ""){currentOnMove.push(player3);}
 let player4 = document.querySelector("#player4");
-if(player4 != ""){currentOnMove.push(player4);}
-player1.textContent = play1;
+if(player4 != ""){currentOnMove.push(player4);} */
+/* player1.textContent = play1;
 player2.textContent = play2;
 player3.textContent = play3;
-player4.textContent = play4;
+player4.textContent = play4; */
 
 let onMove = currentOnMove[0];
 
