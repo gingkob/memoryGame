@@ -10,10 +10,10 @@ let introGameSectionChild = document.getElementById("intro-section-child")
 let names = {};
 let memoryCall = () => { 
   names = {
-    play1: document.getElementById("player1").value.trim(),
-    play2: document.getElementById("player2").value.trim(),
-    play3: document.getElementById("player3").value.trim(),
-    play4: document.getElementById("player4").value.trim()
+    play1: document.getElementById("player1").value,
+    play2: document.getElementById("player2").value,
+    play3: document.getElementById("player3").value,
+    play4: document.getElementById("player4").value
   }
   console.log(names)
   let validator = 0;
@@ -61,28 +61,28 @@ let player2 = document.getElementById("player2");
 let player3 = document.getElementById("player3");
 let player4 = document.getElementById("player4");
 
-( () => {if (play1.trim() != "") { 
+( () => {if (play1 != "") { 
   currentOnMove.push("player1");
   player1Container.style.order = playerActive++; 
 } else{
   player1Container.style.order = playerPassive--;
 }
 
-if (play2.trim() != "") {
+if (play2 != "") {
   currentOnMove.push("player2"); 
   player2Container.style.order = playerActive++; 
 } else{
   player2Container.style.order = playerPassive--;
 }
 
-if (play3.trim() != "") { 
+if (play3 != "") { 
   currentOnMove.push("player3"); 
   player3Container.style.order = playerActive++; 
 } else{
   player3Container.style.order = playerPassive--;
 }
 
-if (play4.trim() != "") { 
+if (play4 != "") { 
   currentOnMove.push("player4"); 
   player4Container.style.order = playerActive++; 
 } else{
@@ -223,6 +223,6 @@ changeCurrentOnMoveIndicator = (previous, next) => {
 }
 
 (shuffle = () => cards.forEach(card => card.style.order = Math.floor(Math.random() * 12)))()
-(() => memoryGameHtmlChild.remove())()
-cards.forEach(card => card.addEventListener("click", flipCard));
 
+cards.forEach(card => card.addEventListener("click", flipCard));
+(() => memoryGameHtmlChild.remove())()
