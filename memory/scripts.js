@@ -1,7 +1,38 @@
 const cards = document.querySelectorAll(".memory-card");
 
-const [play1, play2, play3, play4] = ["mika", "", "jana", ""];
+// -------------------start intro section------------------
+let names = {};
+let memoryCall = () => { 
+  names = {
+    play1: document.getElementById("player1").value.trim(),
+    play2: document.getElementById("player2").value.trim(),
+    play3: document.getElementById("player3").value.trim(),
+    play4: document.getElementById("player4").value.trim()
+  }
+  console.log(names)
+  let validator = 0;
+  for(let x in names){
+    if(!names[x]){
+      validator++
+    }
+  }
+
+  if(validator <= 2){
+    window.open("./memory/memory.html")
+  }else{
+    alert("Potrebno je bar 2 igraca za igru memorije")
+  }
+
+}
+let climbingToTheMountainCall = () => alert("mountain");
+
+// --------------------end intro section-----------------
+
+let [play1,play2, play3, play4] = ["A", "B", "C", ""];
+let { play15,play25, play35, play45 } = {names};
 let scorePlay1 = 0, scorePlay2 = 0, scorePlay3 = 0, scorePlay4 = 0, overAllScore = 0;
+let playerActive = 0, playerPassive = 3;
+
 let score1 = document.querySelector("#score1");
 let score2 = document.querySelector("#score2");
 let score3 = document.querySelector("#score3");
@@ -18,13 +49,38 @@ let player3Container = document.querySelector("#player3-container");
 let player4Container = document.querySelector("#player4-container");
 
 let player1 = document.querySelector("#player1");
-if (play1.trim() != "") { currentOnMove.push("player1"); }
 let player2 = document.querySelector("#player2");
-if (play2.trim() != "") { currentOnMove.push("player2"); }
 let player3 = document.querySelector("#player3");
-if (play3.trim() != "") { currentOnMove.push("player3"); }
 let player4 = document.querySelector("#player4");
-if (play4.trim() != "") { currentOnMove.push("player4"); }
+
+( () => {if (play1.trim() != "") { 
+  currentOnMove.push("player1");
+  player1Container.style.order = playerActive++; 
+} else{
+  player1Container.style.order = playerPassive--;
+}
+
+if (play2.trim() != "") {
+  currentOnMove.push("player2"); 
+  player2Container.style.order = playerActive++; 
+} else{
+  player2Container.style.order = playerPassive--;
+}
+
+if (play3.trim() != "") { 
+  currentOnMove.push("player3"); 
+  player3Container.style.order = playerActive++; 
+} else{
+  player3Container.style.order = playerPassive--;
+}
+
+if (play4.trim() != "") { 
+  currentOnMove.push("player4"); 
+  player4Container.style.order = playerActive++; 
+} else{
+  player4Container.style.order = playerPassive--;
+}})()
+
 player1.textContent = play1;
 player2.textContent = play2;
 player3.textContent = play3;
@@ -81,12 +137,18 @@ disableCards = () => {
 
   overAllScore++;
   if (overAllScore == 12) {
+    let prvi = [];
+    prvi.push(scorePlay1);
+    prvi.push(scorePlay2);
+    prvi.push(scorePlay3);
+    prvi.push(scorePlay4);
+    prvi.sort((a, b) => b-a);
+    console.log(prvi)
     setTimeout(() =>{
-      alert("kraj");
+      alert("kraj\nPobednik je: ", prvi[0]);
       changeCurrentOnMoveIndicator(onMove);
     },1000);
   }
-
 
   firstCard.removeEventListener('click', flipCard);
   secondCard.removeEventListener('click', flipCard);
@@ -119,26 +181,34 @@ resetBoard = () => {
 changeCurrentOnMoveIndicator = (previous, next) => {
 
   switch (previous) {
-    case "player1": player1Container.classList.remove("player1-border");
-      break;
-    case "player2": player2Container.classList.remove("player2-border");
-      break;
-    case "player3": player3Container.classList.remove("player3-border");
-      break;
-    case "player4": player4Container.classList.remove("player4-border");
-      break;
+    case "player1": player1Container.classList.remove("player1-border", "next-player-onMove-up");
+                    player1Container.classList.add("previous-player-onMove-down");
+                    break;
+    case "player2": player2Container.classList.remove("player2-border", "next-player-onMove-up");
+                    player2Container.classList.add("previous-player-onMove-down");
+                    break;
+    case "player3": player3Container.classList.remove("player3-border", "next-player-onMove-up");
+                    player3Container.classList.add("previous-player-onMove-down");                
+                    break;
+    case "player4": player4Container.classList.remove("player4-border", "next-player-onMove-up");
+                    player4Container.classList.add("previous-player-onMove-down");  
+                    break;
     default: break;
   }
 
   switch (next) {
-    case "player1": player1Container.classList.add("player1-border");
-      break;
-    case "player2": player2Container.classList.add("player2-border");
-      break;
-    case "player3": player3Container.classList.add("player3-border");
-      break;
-    case "player4": player4Container.classList.add("player4-border");
-      break;
+    case "player1": player1Container.classList.remove("previous-player-onMove-down");
+                    player1Container.classList.add("player1-border", "next-player-onMove-up");
+                    break;
+    case "player2": player2Container.classList.remove("previous-player-onMove-down");
+                    player2Container.classList.add("player2-border", "next-player-onMove-up");
+                    break;
+    case "player3": player3Container.classList.remove("previous-player-onMove-down");
+                    player3Container.classList.add("player3-border", "next-player-onMove-up");
+                    break;
+    case "player4": player4Container.classList.remove("previous-player-onMove-down");
+                    player4Container.classList.add("player4-border", "next-player-onMove-up");
+                    break;
     default: break;
   }
 }
