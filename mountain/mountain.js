@@ -5,6 +5,9 @@ const canvas1 = document.getElementById("canvas1");
 //const canvas4 = document.getElementById("canvas4");
 //const canvas5 = document.getElementById("canvas5"); // for rolling dice webgl
 
+const xOsa = [5200, 4970, 4740, 4507, 4288];
+const yOsa = [3490, 3500, 3495, 3495, 3483];
+
 
 let c0 = canvas0.getContext("2d");
 let c1 = canvas1.getContext("2d");
@@ -21,11 +24,18 @@ boardImage.onload = function() {
   c0.drawImage(boardImage, 0, 0, canvas0.width, canvas0.height );
 };
 boardImage.src = './img/board.png';
+let xRatio = canvas1.width/5670;
+let yRatio = canvas1.height/3780;
+let radius = 100 * xRatio;
+let fullCircle = Math.PI *2;
 
-c1.arc(5200*canvas1.width/5670, 3490*canvas1.height/3780, 100 * canvas1.width/5670, 0, Math.PI *2)
-c1.stroke();
+for(let i = 0; i< xOsa.length; i++){
+  c1.beginPath();
+  c1.arc(xOsa[i]*xRatio, yOsa[i]*yRatio, radius, 0, fullCircle);
+  c1.stroke();
+  c1.closePath();
+}
 //-------------ending first setting canvas
-
 
 let dynamicCanvas = () => {
   canvas0.width = window.innerWidth * 0.8;
