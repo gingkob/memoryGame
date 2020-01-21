@@ -1,68 +1,21 @@
-.mountain-part{
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-}
-
-.canvas-container {
-  flex: 4;
-  flex-direction: column;
-}
-
-.right-panel {
-  flex: 1;
-  flex-direction: column;
-}
-
-.player-container{
-  border: 2px solid green;
-  width: 18vw;
-  height: 65vh;
-  margin:  0px 10px;  
-  justify-content: center;
-  align-items: center;
-}
-
-.memory-game-player-left {
-  flex: 1;
-  flex-direction: column;
-}
-
-.one-player-container {
-  height:15vh;
-  box-sizing: border-box;
-  background: #eef9ed;
-  color: #555555;
-  position: relative;
-  margin: 10px;  
-  border-radius: 5px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 15px rgba(0,0,0,.1);
-}
-
-.memory-game-player {
-  width: calc(33.33% - 10px);
-  height: calc(25% - 10px);
-  padding: 10px;
-  flex: 1;
-  flex-direction: column;
-}
-.sredina {
-  margin: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.dice-container{
+* {
+  margin: 0;
+  padding: 0;
   vertical-align: baseline;
-  font-family: system-ui, sans-serif;
-  height: 35vh;
 }
-
+html {
+  font-family: system-ui, sans-serif;
+}
+main {
+  background: linear-gradient(#454545, #676767, #454545);
+  display: grid;
+  grid-template-columns: 1fr;
+  height: 100vh;
+  width: 100%;
+}
+body {
+  overflow: hidden;
+}
 .dice {  
   align-items: center;
   display: grid;
@@ -96,9 +49,9 @@
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
   height: 100%;
-  width: 70%;
   padding: 1rem;
   position: absolute;
+  width: 100%;
 }
 .hide-side{
   display:none;

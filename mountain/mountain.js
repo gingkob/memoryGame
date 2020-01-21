@@ -14,7 +14,7 @@ const xOsa = [
               4381, 4298, 4062, 3809, 3561, 3287, 3001, 2724, 2465, 2166,
               1897, 1609, 1328, 1167, 1058, 1082, 1081, 1086, 1088, 1241,
               1568, 1893, 2302, 2667, 2958, 3270, 3543, 3791, 3828, 3835,
-              3821, 3820, 3790, 3519, 3251, 3962, 2670, 2373, 2098, 1871,
+              3821, 3820, 3790, 3519, 3251, 2962, 2670, 2373, 2098, 1871,
               1664, 1531, 1574, 1775, 2015, 2365, 2658, 2954, 2962, 2659,
               2363
             ];
@@ -31,7 +31,6 @@ const yOsa = [
               2450, 2203, 1863, 1674, 1537, 1428, 1456, 1610, 1936, 1920,
               1843
             ];
-
 
 let c0 = canvas0.getContext("2d");
 let c1 = canvas1.getContext("2d");
@@ -56,6 +55,7 @@ let fullCircle = Math.PI *2;
 for(let i = 0; i< xOsa.length; i++){
   c1.beginPath();
   c1.arc(xOsa[i]*xRatio, yOsa[i]*yRatio, radius, 0, fullCircle);
+  c1.fill();
   c1.stroke();
   c1.closePath();
 }
@@ -82,6 +82,41 @@ canvas0.onclick = () => alert("clicked canvas");
 canvas0.style.border = "1px solid black";
 
 
+/* dice section starts here */
+const sides = [...document.querySelectorAll(".die-item")];
+const diceDIV = document.querySelector(".dice");
+diceDIV.addEventListener('click', rollDice);
 
-// c.style.width = 700;
-console.log(canvas0)
+function rollDice() {
+  const dice = [...document.querySelectorAll(".die-list")];
+  for (let i = 1; i <= 6; i++){
+        sides[i-1].classList.remove("hide-side");
+        console.log(sides[i-1])
+    }
+  dice.forEach(die => {
+    die.dataset.roll = getRandomNumber(1, 6);
+    toggleClasses(die);
+    console.log(die)
+  });
+}
+
+function toggleClasses(die) {
+  die.classList.toggle("odd-roll");
+  die.classList.toggle("even-roll");
+  setTimeout(() => {for (let i = 1; i <= 6; i++){
+      if (i == die.dataset.roll){
+        continue;
+      }else {
+        sides[i-1].classList.add("hide-side");
+      }}
+    }, 1150)
+}
+
+function getRandomNumber(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// document.getElementById("roll-button").addEventListener("click", rollDice);
+/* dice section ends here */

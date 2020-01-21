@@ -10,14 +10,96 @@
 </head>
 
 <body>
-  <h2>Hello world</h2>
-  <div style="position:relative;">
-    <canvas id="canvas0" style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
-    <canvas id="canvas1" style="position: absolute; left: 0; top: 0; z-index: 1;"></canvas>
+  <section class="mountain-part">  
+  <div class="canvas-container">
+    <div style="position:relative;">
+      <canvas id="canvas0" style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
+      <canvas id="canvas1" style="position: absolute; left: 0; top: 0; z-index: 1;"></canvas>
+      <!--   <canvas id="canvas2"></canvas>
+      <canvas id="canvas3"></canvas>
+      <canvas id="canvas4"></canvas> -->
+    </div>
   </div>
-  <!--   <canvas id="canvas2"></canvas>
-  <canvas id="canvas3"></canvas>
-  <canvas id="canvas4"></canvas> -->
+  <div class="right-panel">
+   <div class="players-container">
+
+    <div id="player-board-container">
+      <div id="player-board">
+        <section class="player-container">
+          <div class="memory-game-player-left">
+            <div class="one-player-container player1-border next-player-onMove-up" id="player1-container">
+              <div class="memory-game-player sredina">
+                <p id="player1"></p>
+                <p id="score1">0</p>
+              </div>
+            </div>
+            <div class="one-player-container" id="player2-container">
+              <div class="memory-game-player sredina">
+                <p id="player2"></p>
+                <p id="score2">0</p>
+              </div>
+            </div>
+            <div class="one-player-container" id="player3-container">
+              <div class="memory-game-player sredina">
+                <p id="player3"></p>
+                <p id="score3">0</p>
+              </div>
+            </div>
+            <div class="one-player-container" id="player4-container">
+              <div class="memory-game-player sredina">
+                <p id="player4"></p>
+                <p id="score4">0</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+   </div>
+   <div class="dice-container">
+    <div class="dice">
+      <ol class="die-list even-roll" data-roll="1" id="die-1">
+        <li class="die-item" data-side="1">      
+          <span class="dot"></span>
+        </li>
+        <li class="die-item hide-side" data-side="2">
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </li>
+        <li class="die-item hide-side" data-side="3">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </li>
+        <li class="die-item hide-side" data-side="4">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </li>
+        <li class="die-item hide-side" data-side="5">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </li>
+        <li class="die-item hide-side" data-side="6">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </li>
+      </ol>
+    </div>
+   </div>
+
+  </div>
+</section>
+  
   <script src="mountain.js"></script>
 </body>
 
