@@ -55,7 +55,6 @@ let fullCircle = Math.PI *2;
 for(let i = 0; i< xOsa.length; i++){
   c1.beginPath();
   c1.arc(xOsa[i]*xRatio, yOsa[i]*yRatio, radius, 0, fullCircle);
-  c1.fill();
   c1.stroke();
   c1.closePath();
 }
@@ -76,6 +75,24 @@ let dynamicCanvas = () => {
    c1.stroke();
    c1.closePath();
 }
+let currentPossition = 0;
+let i = 0;
+let number = 0;
+let movePlayer = () => {
+  if (i < number){
+    console.log("usao ", number, typeof number);    
+    requestAnimationFrame(movePlayer)
+    c1.beginPath();
+    c1.arc(xOsa[i+currentPossition]*xRatio, yOsa[i+currentPossition]*yRatio, radius, 0, fullCircle);
+    c1.fill();
+    c1.stroke();
+    c1.closePath();  
+    i++;
+  }else{
+    i=0;
+    currentPossition += number;
+  } 
+}
 
 window.onresize = () => dynamicCanvas();
 canvas0.onclick = () => alert("clicked canvas");
@@ -87,23 +104,25 @@ const sides = [...document.querySelectorAll(".die-item")];
 const diceDIV = document.querySelector(".dice");
 diceDIV.addEventListener('click', rollDice);
 
+
 function rollDice() {
   const dice = [...document.querySelectorAll(".die-list")];
   for (let i = 1; i <= 6; i++){
         sides[i-1].classList.remove("hide-side");
-        console.log(sides[i-1])
     }
   dice.forEach(die => {
     die.dataset.roll = getRandomNumber(1, 6);
+    number = +die.dataset.roll;
     toggleClasses(die);
-    console.log(die)
   });
+ setTimeout(() => movePlayer(), 1500);
 }
 
 function toggleClasses(die) {
   die.classList.toggle("odd-roll");
   die.classList.toggle("even-roll");
-  setTimeout(() => {for (let i = 1; i <= 6; i++){
+  setTimeout(() => {
+    for (let i = 1; i <= 6; i++){
       if (i == die.dataset.roll){
         continue;
       }else {
