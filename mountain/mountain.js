@@ -86,9 +86,16 @@ let movePlayer = () => {
     c1.arc(xOsa[i+currentPossition]*xRatio, yOsa[i+currentPossition]*yRatio, radius, 0, fullCircle);
     c1.fill();
     c1.stroke();
-    c1.closePath();  
+    c1.closePath(); 
     i++;
   }else{
+    c1.clearRect(0, 0, canvas1.width, canvas1.height);
+    c1.beginPath();
+    c1.arc(xOsa[i+currentPossition-1]*xRatio, yOsa[i+currentPossition-1]*yRatio, radius*0.75, 0, fullCircle);
+    c1.fillStyle= "rgba(0, 0, 255, 0.5)";
+    c1.fill()   
+    // c1.stroke();
+    c1.closePath();
     i=0;
     currentPossition += number;
   } 
