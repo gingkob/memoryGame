@@ -6,10 +6,10 @@ const canvas1 = document.getElementById("canvas1");
 //const canvas5 = document.getElementById("canvas5"); // for rolling dice webgl
 
 const xOsa = [
-              5200, 4970, 4740, 4507, 4288, 4041, 3783, 3559, 3335, 3113,
-              2885, 2649, 2417, 2184, 1953, 1718, 1488, 1267, 965, 702,
-              568, 514, 504, 500, 505, 501, 502, 508, 499, 501,
-              651, 896, 1176, 1457, 1739, 2020, 2291, 2596, 2862, 3144,
+              5200, 4975, 4743, 4511, 4294, 4046, 3788, 3564, 3338, 3118,
+              2889, 2651, 2420, 2187, 1956, 1720, 1491, 1270, 970, 705,
+              573, 519, 508, 505, 508, 505, 506, 508, 503, 505, 
+              655, 899, 1180, 1461, 1742, 2023, 2292, 2598, 2867, 3150, // corrected
               3426, 3706, 3983, 4212, 4363, 4369, 4383, 4403, 4392, 4417,
               4381, 4298, 4062, 3809, 3561, 3287, 3001, 2724, 2465, 2166,
               1897, 1609, 1328, 1167, 1058, 1082, 1081, 1086, 1088, 1241,
@@ -19,10 +19,10 @@ const xOsa = [
               2363
             ];
 const yOsa = [
-              3490, 3500, 3495, 3495, 3483, 3498, 3492, 3493, 3504, 3490,
-              3501, 3487, 3495, 3496, 3485, 3494, 3496, 3493, 3489, 3423,
-              3252, 3039, 2786, 2545, 2313, 2096, 1830, 1610, 1350, 1098,
-              888, 788, 788, 787, 787, 788, 795, 831, 788, 787,
+              3490, 3505, 3500, 3499, 3491, 3504, 3498, 3499, 3509, 3496,
+              3505, 3492, 3501, 3501, 3490, 3497, 3501, 3499, 3494, 3429,
+              3258, 3045, 2792, 2550, 2319, 2102, 1835, 1615, 1354, 1101, 
+              892, 792, 792, 792, 792, 792, 799, 834, 792, 792, // corrected
               787, 788, 837, 910, 1167, 1388, 1743, 1991, 2246, 2506,
               2772, 3009, 3079, 3093, 3093, 3086, 3079, 3092, 3095, 3085,
               3092, 3088, 3067, 2888, 2582, 2326, 2043, 1769, 1461, 1236,
@@ -52,6 +52,9 @@ let yRatio = canvas1.height/3780;
 let radius = 100 * xRatio;
 let fullCircle = Math.PI *2;
 
+/* c1.strokeStyle = "yellow";
+c1.lineWidth = 3; */
+
 for(let i = 0; i< xOsa.length; i++){
   c1.beginPath();
   c1.arc(xOsa[i]*xRatio, yOsa[i]*yRatio, radius, 0, fullCircle);
@@ -70,35 +73,217 @@ let dynamicCanvas = () => {
     c0.drawImage(boardImage, 0, 0, canvas0.width, canvas0.height );    
   };
   boardImage.src = './img/board.png';
-   c1.beginPath();
+  /*  c1.beginPath();
    c1.arc(5200*canvas1.width/5670, 3490*canvas1.height/3780, 100 * canvas1.width/5670, 0, Math.PI *2)
    c1.stroke();
-   c1.closePath();
+   c1.closePath(); */
 }
 let currentPossition = 0;
 let i = 0;
 let number = 0;
 let movePlayer = () => {
-  if (i < number){
-    console.log("usao ", number, typeof number);    
+  if (i < number){    
     requestAnimationFrame(movePlayer)
     c1.beginPath();
     c1.arc(xOsa[i+currentPossition]*xRatio, yOsa[i+currentPossition]*yRatio, radius, 0, fullCircle);
+    c1.fillStyle = "rgba(0, 0, 255, 0.5)";
     c1.fill();
-    c1.stroke();
+    // c1.stroke();
     c1.closePath(); 
     i++;
   }else{
+    setTimeout(() => endTurn(), 1000)
+  } 
+}
+
+let movePlayerBack = () => {
+  if (i <= number){    
+    requestAnimationFrame(movePlayerBack)
+    c1.beginPath();
+    c1.arc(xOsa[currentPossition-i-1]*xRatio, yOsa[currentPossition-i-1]*yRatio, radius, 0, fullCircle);
+    c1.fill();
+    // c1.stroke();
+    c1.closePath(); 
+    i++;
+  }else{
+    setTimeout(() => endTurnBack(), 1000)
+  } 
+}
+
+let endTurnBack = () => {
+  c1.clearRect(0, 0, canvas1.width, canvas1.height);
+  c1.beginPath();
+  c1.arc(xOsa[currentPossition-i]*xRatio, yOsa[currentPossition-i]*yRatio, radius*0.85, 0, fullCircle);
+  c1.fillStyle = "rgba(0, 0, 255, 0.5)";
+  c1.fill()
+  c1.closePath();
+  i=0;
+  currentPossition -= number;
+  switch (currentPossition){
+    case 1: 
+      number = 37;
+      movePlayer(); 
+      break;
+    case 5:
+      number = 10;
+      movePlayer(); 
+      break;
+    case 9:
+      number = 22;
+      movePlayer(); 
+      break;
+    case 16:
+      number = 10;
+      movePlayerBack(); 
+      break;
+    case 28:
+      number = 56;
+      movePlayer(); 
+      break;
+    case 37:
+      number = 6;
+      movePlayer(); 
+      break;
+    case 45:
+      number = 19;
+      movePlayerBack();
+      break;
+    case 49:
+      number = 38;
+      movePlayerBack();
+      break;
+    case 51:
+      number = 17;
+      movePlayer(); 
+      break;
+    case 56:
+      number = 9;
+      movePlayerBack();
+      break;
+    case 62:
+      number = 43;
+      movePlayerBack();
+      break;
+    case 64:
+      number = 4;
+      movePlayerBack();
+      break;
+    case 72:
+      number = 18;
+      movePlayer(); 
+      break;
+    case 80:
+      number = 19;
+      movePlayer(); 
+      break;
+    case 87:
+      number = 63;
+      movePlayerBack();
+      break;
+    case 92:
+      number = 19;
+      movePlayerBack();
+      break;
+    case 95:
+      number = 19;
+      movePlayerBack();
+      break;
+    case 98:
+      number = 20;
+      movePlayerBack();
+      break;
+    default:
+      diceDIV.addEventListener('click', rollDice);
+      break;
+  }
+}
+
+let endTurn = () => {
     c1.clearRect(0, 0, canvas1.width, canvas1.height);
     c1.beginPath();
-    c1.arc(xOsa[i+currentPossition-1]*xRatio, yOsa[i+currentPossition-1]*yRatio, radius*0.75, 0, fullCircle);
+    c1.arc(xOsa[i+currentPossition-1]*xRatio, yOsa[i+currentPossition-1]*yRatio, radius*0.85, 0, fullCircle);
     c1.fillStyle= "rgba(0, 0, 255, 0.5)";
-    c1.fill()   
-    // c1.stroke();
+    c1.fill()
     c1.closePath();
     i=0;
     currentPossition += number;
-  } 
+    switch (currentPossition){
+      case 1: 
+        number = 37;
+        movePlayer(); 
+        break;
+      case 5:
+        number = 10;
+        movePlayer(); 
+        break;
+      case 9:
+        number = 22;
+        movePlayer(); 
+        break;
+      case 16:
+        number = 10;
+        movePlayerBack(); 
+        break;
+      case 28:
+        number = 56;
+        movePlayer(); 
+        break;
+      case 37:
+        number = 6;
+        movePlayer(); 
+        break;
+      case 45:
+        number = 19;
+        movePlayerBack();
+        break;
+      case 49:
+        number = 38;
+        movePlayerBack();
+        break;
+      case 51:
+        number = 17;
+        movePlayer(); 
+        break;
+      case 56:
+        number = 9;
+        movePlayerBack();
+        break;
+      case 62:
+        number = 43;
+        movePlayerBack();
+        break;
+      case 64:
+        number = 4;
+        movePlayerBack();
+        break;
+      case 72:
+        number = 18;
+        movePlayer(); 
+        break;
+      case 80:
+        number = 19;
+        movePlayer(); 
+        break;
+      case 87:
+        number = 63;
+        movePlayerBack();
+        break;
+      case 92:
+        number = 19;
+        movePlayerBack();
+        break;
+      case 95:
+        number = 19;
+        movePlayerBack();
+        break;
+      case 98:
+        number = 20;
+        movePlayerBack();
+        break;
+      default:
+        diceDIV.addEventListener('click', rollDice);
+        break;
+    }
 }
 
 window.onresize = () => dynamicCanvas();
@@ -113,6 +298,7 @@ diceDIV.addEventListener('click', rollDice);
 
 
 function rollDice() {
+  diceDIV.removeEventListener('click', rollDice);
   const dice = [...document.querySelectorAll(".die-list")];
   for (let i = 1; i <= 6; i++){
         sides[i-1].classList.remove("hide-side");
