@@ -113,8 +113,8 @@ function flipCard() {
   matchCheck(firstCard.dataset.name, secondCard.dataset.name)
 }
 
-// matchCheck = (a, b) => (a === b) ? disableCards() : unFlipCards();
-matchCheck = (a, b) => true ? disableCards() : unFlipCards();
+matchCheck = (a, b) => (a === b) ? disableCards() : unFlipCards();
+//matchCheck = (a, b) => true ? disableCards() : unFlipCards();
 
 disableCards = () => {
 
@@ -154,7 +154,7 @@ disableCards = () => {
     prvi.sort((a, b) => b-a);
     console.log(prvi)
     setTimeout(() =>{
-      alert("kraj\nPobednik je: ", prvi[0]);
+      alert("kraj\nPobednik je: " + prvi[0]);
       changeCurrentOnMoveIndicator(onMove);
       playerBoard.remove();
       playerBoardContainer.append(playerBoard);

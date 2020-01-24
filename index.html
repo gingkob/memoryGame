@@ -2,9 +2,7 @@
 <html lang="en">
 
 <head>
-  
   <link rel="stylesheet" href="./main.css">
-  <link rel="stylesheet" href="./memory/styles.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -13,78 +11,62 @@
 
 <body>
   <!-- intro section starts here -->
-  <div id="input-form">
-    <div id="intro-section-child">
-      <div>
-        <h1>Одабери игру</h1>
+  <div class="index__container">
+      <div class="index__title__container">
+        <h1 class="index__title">Одабери игру</h1>      
       </div>
-      <div>
-        <div class="polazni">
-          <div class="neka-klasa">
-            <div class="dva-u-nizu">
-              <div class="input-field">
-                <input required type="text color" id="player1" placeholder="Unesite ime igraca..." />
-                <input class="boja" type="color" id="boja1" value="#d8eb4d" />
-              </div>
-              <div class="input-field">
-                <input required type="text" id="player2" placeholder="Unesite ime igraca..." />
-                <input class="boja" type="color" id="boja2" value="#4deb6f" />
-              </div>
-            </div>
-            <div class="dva-u-nizu">
-              <div class="input-field">
-                <input type="text" id="player3" placeholder="Unesite ime igraca..." />
-                <input class="boja" type="color" id="boja3" value="#4de1eb" />
-              </div>
-              <div class="input-field">
-                <input type="text" id="player4" placeholder="Unesite ime igraca..." />
-                <input class="boja" type="color" id="boja4" value="#4d6aeb" />
-              </div>
-            </div>
-          </div>
+      <div class="index__players__container">
+        <div class="index__player">
+          <input class="index__player__input" id="player1" type="text" placeholder="Unesite ime igraca..."/>
+          <input class="index__player__color" id="boja1" type="color" value="#d8eb4d" />
         </div>
-      </div>
-      <div>
-        <button type="button" id="memory" onclick={memoryCall()}>ИГРА МЕМОРИЈЕ</button>
-        <button type="button" id="mountain" onclick={climbingToTheMountainCall()}>САЧУВАЈМО БЛАГО НАШИХ ПЛАНИНА</button>
-      </div>
-    </div>
+        <div class="index__player">
+          <input class="index__player__input" id="player2" type="text" placeholder="Unesite ime igraca..."/>
+          <input class="index__player__color" id="boja2" type="color" value="#4deb6f" />
+        </div>
+        <div class="index__player">
+          <input class="index__player__input" id="player3" type="text" placeholder="Unesite ime igraca..." />
+          <input class="index__player__color" id="boja3" type="color" value="#4de1eb" />
+        </div>
+        <div class="index__player">
+          <input class="index__player__input" id="player4" type="text" placeholder="Unesite ime igraca..." />
+          <input class="index__player__color" id="boja4" type="color" value="#4d6aeb" />
+        </div>
+      </div>        
+      <div class="index__buttons_container">
+        <button class="index__button" type="button" id="memory" onclick={memoryCall()}>ИГРА МЕМОРИЈЕ</button>
+        <button class="index__button" type="button" id="mountain" onclick={climbingToTheMountainCall()}>САЧУВАЈМО БЛАГО НАШИХ ПЛАНИНА</button>
+      </div>    
   </div>
   <!-- intro section ends here -->
 
   <!-- code for card memory game starts here -->
-
   <div id="memory-game-html">
-    <div id="memory-game-html-child">
+    <div class="memory__container" id="memory-game-html-child">
       <div id="player-board-container">
         <div id="player-board">
-          <section class="player-container">
-            <div class="memory-game-player-left">
-              <div class="one-player-container player1-border next-player-onMove-up" id="player1-container">
-                <div class="memory-game-player sredina">
-                  <p id="player1"></p>
-                  <p id="score1">0</p>
-                </div>
+          <section class="memory__playerboard__container">
+            <!-- <div class="memory__playerboard" class="memory-game-player-left"> -->
+              <!--<div class="one-player-container player1-border next-player-onMove-up" id="player1-container">-->
+              <div class="memory__player" id="player1-container">
+                <label id="player1">Aleksandar</label>
+                <p id="score1">0</p>
               </div>
-              <div class="one-player-container" id="player2-container">
-                <div class="memory-game-player sredina">
-                  <p id="player2"></p>
-                  <p id="score2">0</p>
-                </div>
+              <!-- <div class="one-player-container" id="player2-container"> -->
+              <div class="memory__player" id="player2-container">                
+                <label id="player2">kkk</label>
+                <p id="score2">0</p>
               </div>
-              <div class="one-player-container" id="player3-container">
-                <div class="memory-game-player sredina">
-                  <p id="player3"></p>
-                  <p id="score3">0</p>
-                </div>
+              <!-- <div class="one-player-container" id="player3-container"> -->
+              <div class="memory__player" id="player3-container">                
+                <label id="player3">kkk</label>
+                <p id="score3">0</p>
               </div>
-              <div class="one-player-container" id="player4-container">
-                <div class="memory-game-player sredina">
-                  <p id="player4"></p>
-                  <p id="score4">0</p>
-                </div>
+              <!-- <div class="one-player-container" id="player4-container"> -->
+              <div class="memory__player" id="player4-container">                
+                <label id="player4">kkk</label>
+                <p id="score4">0</p>
               </div>
-            </div>
           </section>
         </div>
       </div>
@@ -187,21 +169,17 @@
           <img class="back-face" src="img/pamtim-recikliram.svg" alt="Pamtim Recikliram" />
         </div>
       </section>
-      <section class="player-container">
-        <div class="memory-game-player-left">
-          <div class="one-player-container">
-            <div class="memory-game-player sredina">
-              <label id="uputstvo">Uputstvo</label>
-              <p id="score3" style="text-align: left; padding-left: 1vw; font-size: 2.5vw;">0</p>
-            </div>
-          </div>
-        </div>
-      </section>     
+      <section class="memory__playerboard__container">        
+        <div class="memory__player">
+          <label id="uputstvo">Uputstvo</label>
+          <p id="score3">0</p>
+        </div>          
+      </section>
     </div>
   </div>
   <!-- code for card memory game ends here -->
 
-  <script src="./memory/scripts.js"></script>
+  <script src="./scripts.js"></script>
 </body>
 
 </html>
