@@ -15,16 +15,19 @@
 .index__title__container{
   width: 60vw;
   text-align: center;
+  margin: 1rem auto 1rem;
+  padding: 1rem;
   border: 1px solid red;
 }
 .index__title{
   font-size: 6rem;
+  
 }
 .index__players__container{
   display: flex;
   flex-wrap: wrap;
   width: 60vw;
-  margin: 3rem auto 3rem;
+  margin: 2rem auto 3rem;
   padding: 1rem;
   border: 0.1rem solid rgb(61, 170, 18);
 }
@@ -36,7 +39,7 @@
   vertical-align: top;
   margin: 1rem auto 1rem;
   padding: 0 0.5rem 0;
-  width: 8rem;
+  width: 10rem;
   height: 2rem;
 }
 .index__player__color{
@@ -53,8 +56,8 @@
 }
 .index__button{
   vertical-align: top;
-  width: 20rem;
-  height: 5rem;
+  width: 24rem;
+  height: 6rem;
   font-size: 1.5rem;
   margin: 1rem;
 }
@@ -138,3 +141,6 @@
 }
 
 /* mountain */
+.show-nothing {
+  display: none;
+}

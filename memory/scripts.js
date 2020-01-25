@@ -3,7 +3,7 @@ const playerBoard = document.getElementById("player-board");
 const playerBoardContainer = document.getElementById("player-board-container");
 let memoryGameHtml = document.getElementById("memory-game-html");
 let memoryGameHtmlChild = document.getElementById("memory-game-html-child")
-let introGameSection = document.getElementById("input-form")
+let introGameSection = document.getElementById("intro-section")
 let introGameSectionChild = document.getElementById("intro-section-child")
 
 // -------------------start intro section------------------
@@ -25,8 +25,10 @@ let memoryCall = () => {
 
   if(validator <= 2){
     // window.open("./memory/memory.html")
+    introGameSection.classList.add("show-nothing")
     introGameSectionChild.remove();
     memoryGameHtml.append(memoryGameHtmlChild);
+    memoryGameHtml.classList.remove("show-nothing");
     startMemory(names);
   }else{
     alert("Potrebno je bar 2 igraca za igru memorije")
@@ -42,7 +44,7 @@ let climbingToTheMountainCall = () => alert("mountain");
 let startMemory = names => {
 
   let { play1, play2, play3, play4 } = names;
-  
+
   let scorePlay1 = 0, scorePlay2 = 0, scorePlay3 = 0, scorePlay4 = 0, overAllScore = 0;
   let playerActive = 0, playerPassive = 3;
 

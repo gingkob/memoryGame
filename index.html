@@ -11,37 +11,39 @@
 
 <body>
   <!-- intro section starts here -->
-  <div class="index__container">
+  <div class="index__container" id="intro-section">
+    <div id="intro-section-child">
       <div class="index__title__container">
         <h1 class="index__title">Одабери игру</h1>      
       </div>
       <div class="index__players__container">
         <div class="index__player">
           <input class="index__player__input" id="player1" type="text" placeholder="Unesite ime igraca..."/>
-          <input class="index__player__color" id="boja1" type="color" value="#d8eb4d" />
+          <input class="index__player__color" id="boja1" type="color" value="#d8eb4d" disabled />
         </div>
         <div class="index__player">
           <input class="index__player__input" id="player2" type="text" placeholder="Unesite ime igraca..."/>
-          <input class="index__player__color" id="boja2" type="color" value="#4deb6f" />
+          <input class="index__player__color" id="boja2" type="color" value="#4deb6f" disabled />
         </div>
         <div class="index__player">
-          <input class="index__player__input" id="player3" type="text" placeholder="Unesite ime igraca..." />
-          <input class="index__player__color" id="boja3" type="color" value="#4de1eb" />
+          <input class="index__player__input" id="player3" type="text" placeholder="Unesite ime igraca..."/>
+          <input class="index__player__color" id="boja3" type="color" value="#4de1eb" disabled />
         </div>
         <div class="index__player">
           <input class="index__player__input" id="player4" type="text" placeholder="Unesite ime igraca..." />
-          <input class="index__player__color" id="boja4" type="color" value="#4d6aeb" />
+          <input class="index__player__color" id="boja4" type="color" value="#4d6aeb" disabled />
         </div>
       </div>        
       <div class="index__buttons_container">
         <button class="index__button" type="button" id="memory" onclick={memoryCall()}>ИГРА МЕМОРИЈЕ</button>
         <button class="index__button" type="button" id="mountain" onclick={climbingToTheMountainCall()}>САЧУВАЈМО БЛАГО НАШИХ ПЛАНИНА</button>
-      </div>    
+      </div> 
+    </div>   
   </div>
   <!-- intro section ends here -->
 
   <!-- code for card memory game starts here -->
-  <div id="memory-game-html">
+  <div class="show-nothing" id="memory-game-html">
     <div class="memory__container" id="memory-game-html-child">
       <div id="player-board-container">
         <div id="player-board">
