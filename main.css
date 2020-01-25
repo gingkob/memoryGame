@@ -3,6 +3,7 @@
   margin: 0;  
   background: #fffff5;
   text-align: center;
+  box-sizing: border-box;
 }
 /* index.html */
 .index__container{
@@ -100,7 +101,6 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  box-sizing: border-box;
   perspective: 1000px;
 }
 .memory-card{
@@ -128,6 +128,7 @@
 .front-face, .back-face {
   width: 100%;
   height: 100%;
+  padding: 5px;
   position: absolute;
   left: 0px;
   background: white;

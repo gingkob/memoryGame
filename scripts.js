@@ -160,7 +160,7 @@ let startMemory = names => {
     }
 
     overAllScore++;
-    if (overAllScore == 6) {
+    if (overAllScore == 12) {
       /* let prvi = [];
       prvi.push(scorePlay1);
       prvi.push(scorePlay2);
@@ -247,7 +247,7 @@ let startMemory = names => {
     }
   }
 
-  (shuffle = () => cards.forEach(card => card.style.order = Math.floor(Math.random() * 6)))()
+  (shuffle = () => cards.forEach(card => card.style.order = Math.floor(Math.random() * 12)))()
 
   cards.forEach(card => card.addEventListener("click", flipCard));
 }
