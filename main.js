@@ -20,5 +20,5 @@ let memoryCall = () => {
   } */
 
 }
-let climbingToTheMountainCall = () => alert("mountain");
+let climbingToTheMountainCall = () => window.open("./mountain/mountain.html");
 
