@@ -42,11 +42,13 @@ let climbingToTheMountainCall = () => alert("mountain");
 // --------------------start of memory section board----------------
 
 let startMemory = names => {
+  let playInfoArr = []
+  Object.keys(names).forEach(key => {
+    playInfoArr.push({"player":names[key], "score":0})
+  })
+  console.log(playInfoArr)
 
-  let { play1, play2, play3, play4 } = names;
-
-  let scorePlay1 = 0, scorePlay2 = 0, scorePlay3 = 0, scorePlay4 = 0, overAllScore = 0;
-  let playerActive = 0, playerPassive = 3;
+  let playerActive = 0, playerPassive = 3, overAllScore = 0;
 
   let score1 = document.getElementById("score1");
   let score2 = document.getElementById("score2");
@@ -69,39 +71,43 @@ let startMemory = names => {
   let player4 = document.getElementById("player4");
 
   (() => {
-    if (play1.trim() != "") {
+    if (playInfoArr[0].player.trim() != "") {
       currentOnMove.push("player1");
       player1Container.style.order = playerActive++;
     } else {
       player1Container.style.order = playerPassive--;
+      player1Container.classList.add("show-nothing")
     }
 
-    if (play2.trim() != "") {
+    if (playInfoArr[1].player.trim() != "") {
       currentOnMove.push("player2");
       player2Container.style.order = playerActive++;
     } else {
       player2Container.style.order = playerPassive--;
+      player2Container.classList.add("show-nothing")
     }
 
-    if (play3.trim() != "") {
+    if (playInfoArr[2].player.trim() != "") {
       currentOnMove.push("player3");
       player3Container.style.order = playerActive++;
     } else {
       player3Container.style.order = playerPassive--;
+      player3Container.classList.add("show-nothing")
     }
 
-    if (play4.trim() != "") {
+    if (playInfoArr[3].player.trim() != "") {
       currentOnMove.push("player4");
       player4Container.style.order = playerActive++;
     } else {
       player4Container.style.order = playerPassive--;
+      player4Container.classList.add("show-nothing")
     }
   })()
 
-  player1.textContent = play1;
-  player2.textContent = play2;
-  player3.textContent = play3;
-  player4.textContent = play4;
+  player1.textContent = playInfoArr[0].player;
+  player2.textContent = playInfoArr[1].player;
+  player3.textContent = playInfoArr[2].player;
+  player4.textContent = playInfoArr[3].player;
 
   let onMove = currentOnMove[0];
 
@@ -132,38 +138,48 @@ let startMemory = names => {
       case "player1":
         firstCard.insertAdjacentHTML('beforeend', '<img class="player1-corner"/>');
         secondCard.insertAdjacentHTML('beforeend', '<img class="player1-corner"/>');
-        score1.textContent = ++scorePlay1;
+        score1.textContent = ++playInfoArr[0].score;
         break;
       case "player2":
         firstCard.insertAdjacentHTML('beforeend', '<img class="player2-corner"/>');
         secondCard.insertAdjacentHTML('beforeend', '<img class="player2-corner"/>');
-        score2.textContent = ++scorePlay2;
+        score2.textContent = ++playInfoArr[1].score;
         break;
       case "player3":
         firstCard.insertAdjacentHTML('beforeend', '<img class="player3-corner"/>');
         secondCard.insertAdjacentHTML('beforeend', '<img class="player3-corner"/>');
-        score3.textContent = ++scorePlay3;
+        score3.textContent = ++playInfoArr[2].score;
         break;
       case "player4":
         firstCard.insertAdjacentHTML('beforeend', '<img class="player4-corner"/>');
         secondCard.insertAdjacentHTML('beforeend', '<img class="player4-corner"/>');
-        score4.textContent = ++scorePlay4;
+        score4.textContent = ++playInfoArr[3].score;
         break;
 
       default: alert("Something went wrong!");
     }
 
     overAllScore++;
-    if (overAllScore == 12) {
-      let prvi = [];
+    if (overAllScore == 6) {
+      /* let prvi = [];
       prvi.push(scorePlay1);
       prvi.push(scorePlay2);
       prvi.push(scorePlay3);
       prvi.push(scorePlay4);
       prvi.sort((a, b) => b - a);
-      console.log(prvi)
+      console.log(prvi) */
+      let maxScore = Math.max(...playInfoArr.map(o => o.score), 0);
+      let winners = playInfoArr.filter(item => item.score == maxScore)
+      console.log(winners)
       setTimeout(() => {
-        alert("kraj\nPobednik je: " + prvi[0]);
+        if (winners.length == 1){
+          alert("kraj\nPobednik je: " + winners[0].player);
+        } else {
+          let winnersMulti = "";
+          winners.forEach(item => winnersMulti += item.player + ", ")
+          alert("kraj\nPobednici su: " + winnersMulti.trim().slice(0,-1));
+        }
+        
         changeCurrentOnMoveIndicator(onMove);
         playerBoard.remove();
         playerBoardContainer.append(playerBoard);
@@ -231,7 +247,7 @@ let startMemory = names => {
     }
   }
 
-  (shuffle = () => cards.forEach(card => card.style.order = Math.floor(Math.random() * 12)))()
+  (shuffle = () => cards.forEach(card => card.style.order = Math.floor(Math.random() * 6)))()
 
   cards.forEach(card => card.addEventListener("click", flipCard));
 }
