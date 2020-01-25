@@ -17,7 +17,7 @@
   text-align: center;
   margin: 1rem auto 1rem;
   padding: 1rem;
-  border: 1px solid red;
+/*   border: 1px solid red; */
 }
 .index__title{
   font-size: 6rem;
@@ -29,7 +29,7 @@
   width: 60vw;
   margin: 2rem auto 3rem;
   padding: 1rem;
-  border: 0.1rem solid rgb(61, 170, 18);
+  /* border: 0.1rem solid rgb(61, 170, 18); */
 }
 .index__player{
   width: 50%;
@@ -51,7 +51,7 @@
 .index__buttons_container{
   display: inline-block;
   width: 60vw;
-  border: 1px solid red;
+/*   border: 1px solid red; */
   padding: 1rem;
 }
 .index__button{
@@ -63,10 +63,9 @@
 }
 /* memory */
 .memory__container{
+  height: 100vh;
   display: flex;
-  justify-content: center;
   align-items: center;
-  box-sizing: border-box;
 }
 .memory__playerboard__container{
   height: 80vh;
