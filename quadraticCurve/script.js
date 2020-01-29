@@ -90,7 +90,8 @@ function drawPin(pin){
   ctx.closePath();
   ctx.lineTo(0, 0);
   ctx.closePath();
-  ctx.arc(0, -15, 30, 0, Math.PI, false)
+  ctx.arc(0, -15, 24, Math.PI/6, Math.PI*5/6, false)
+  
   ctx.closePath();
   //ctx.beginPath();
   ctx.arc(0, -50, 15, 0, Math.PI * 2, false)
@@ -98,6 +99,7 @@ function drawPin(pin){
   
   ctx.fillStyle=pin.color;
   ctx.fill();
+  // ctx.stroke();
 /*   ctx.strokeStyle="black";
   ctx.lineWidth=1.5;
   ctx.stroke(); */

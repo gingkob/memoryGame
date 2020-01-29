@@ -6,6 +6,7 @@ const canvasPlayer2 = document.getElementById("canvasPlayer2");
 //const canvas5 = document.getElementById("canvas5"); // for rolling dice webgl
 let playerOnMove = ["player1", "player2"];
 let currentPossitionArr = [];
+let occupiedFields = [];
 
 
 const xOsa = [
@@ -38,9 +39,13 @@ const yOsa = [
 let c0 = canvas0.getContext("2d");
 let c1 = canvas1.getContext("2d");
 let cPlayer1 = canvasPlayer1.getContext("2d");
-cPlayer1.color = "rgba(0, 255, 255, 0.85)"
+cPlayer1.color = "rgba(0, 255, 255, 0.95)"
+cPlayer1.xOsa = 5450; 
+cPlayer1.yOsa = 3500;
 let cPlayer2 = canvasPlayer2.getContext("2d");
-cPlayer2.color = "rgba(255, 0, 255, 0.85)"
+cPlayer2.color = "rgba(255, 0, 255, 0.95)"
+cPlayer2.xOsa = 5450; 
+cPlayer2.yOsa = 3500;
 let arrOfPlayers = [{ "player": "Miroslav", currentPossition: 0, ctx: cPlayer1 }, { "player": "Vladica", currentPossition: 0, ctx: cPlayer2 }];
 
 
@@ -138,13 +143,25 @@ let movePlayerBack = (currentPossition) => {
 let endTurnBack = (ctx, currentPossition) => {
   c1.clearRect(0, 0, canvas0.width, canvas0.height);
   ctx.clearRect(0, 0, canvas0.width, canvas0.height);
-  ctx.beginPath();
+  ctx.fillStyle = ctx.color;
+  
+  let startingPositionX = arrOfPlayers[0].currentPossition == 0 ? 5400 : xOsa[arrOfPlayers[0].currentPossition];
+  let startingPositionY = arrOfPlayers[0].currentPossition == 0 ? 3500 : yOsa[arrOfPlayers[0].currentPossition];
+
+  relocatePawn(ctx, startingPositionX * xRatio, startingPositionY * yRatio, xOsa[currentPossition - i] * xRatio, yOsa[currentPossition - i] * yRatio)
+
+ /*  ctx.beginPath();
   ctx.arc(xOsa[currentPossition - i] * xRatio, yOsa[currentPossition - i] * yRatio, radius * 0.85, 0, fullCircle);
   ctx.fillStyle = "rgba(0, 0, 255, 0.5)";
   ctx.fill()
-  ctx.closePath();
+  ctx.closePath(); */
   i = 0;
+  if(occupiedFields.includes(arrOfPlayers[0].currentPossition)){
+  occupiedFields.splice(occupiedFields.indexOf(arrOfPlayers[0].currentPossition), 1);} 
   arrOfPlayers[0].currentPossition -= number;
+  if(occupiedFields.includes(arrOfPlayers[0].currentPossition)){
+    alert("Polje zauzeto!")
+  }
   switch (arrOfPlayers[0].currentPossition) {
     case 1:
       number = 37;
@@ -219,6 +236,8 @@ let endTurnBack = (ctx, currentPossition) => {
       movePlayerBack(arrOfPlayers[0].currentPossition);
       break;
     default:
+      occupiedFields.push(arrOfPlayers[0].currentPossition)
+      console.log("zauzetoB", occupiedFields)
       if (diceNumber != 6) {
         arrOfPlayers.push(arrOfPlayers.shift());
       }
@@ -233,7 +252,7 @@ let endTurn = (ctx, currentPossition) => {
   ctx.fillStyle = ctx.color;
 
   let startingPositionX = arrOfPlayers[0].currentPossition == 0 ? 5400 : xOsa[arrOfPlayers[0].currentPossition-1];
-  let startingPositionY = arrOfPlayers[0].currentPossition == 0 ? 3500 : xOsa[arrOfPlayers[0].currentPossition-1];
+  let startingPositionY = arrOfPlayers[0].currentPossition == 0 ? 3500 : yOsa[arrOfPlayers[0].currentPossition-1];
 
   relocatePawn(ctx, startingPositionX * xRatio, startingPositionY * yRatio, xOsa[i + currentPossition - 1] * xRatio, yOsa[i + currentPossition - 1] * yRatio)
 
@@ -242,8 +261,12 @@ let endTurn = (ctx, currentPossition) => {
   ctx.fill()
   ctx.closePath(); */
   i = 0;
-
+  if(occupiedFields.includes(arrOfPlayers[0].currentPossition)){
+  occupiedFields.splice(occupiedFields.indexOf(arrOfPlayers[0].currentPossition), 1);}
   arrOfPlayers[0].currentPossition += number;
+  if(occupiedFields.includes(arrOfPlayers[0].currentPossition)){
+    alert("Polje zauzeto!")
+  }
   switch (arrOfPlayers[0].currentPossition) {
     case 1:
       number = 37;
@@ -318,6 +341,8 @@ let endTurn = (ctx, currentPossition) => {
       movePlayerBack(arrOfPlayers[0].currentPossition);
       break;
     default:
+      occupiedFields.push(arrOfPlayers[0].currentPossition)
+      console.log("zauzetoF", occupiedFields)
       if (diceNumber != 6) {
         arrOfPlayers.push(arrOfPlayers.shift());
       }
@@ -341,7 +366,7 @@ function relocatePawn(ctx, xs, ys, xd, yd) {
   let xr, yr, xl, yl, x, y;  
 
   let i = 0;
-  let n = 32;
+  let n = 64;
   let radius = 10;
   let resizer = 1;
   
@@ -404,7 +429,7 @@ function relocatePawn(ctx, xs, ys, xd, yd) {
     ctx.closePath();
     ctx.lineTo(0, 0);
     ctx.closePath();
-    ctx.arc(0, -15, 30, 0, Math.PI, false)
+    ctx.arc(0, -15, 24, Math.PI/6, Math.PI*5/6, false)
     ctx.closePath();
     ctx.arc(0, -50, 15, 0, Math.PI * 2, false)
     ctx.closePath();
