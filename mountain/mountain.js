@@ -297,6 +297,20 @@ let endTurnBack = (ctx, currentPossition) => {
   }
 }
 
+function smazen (ctx){
+  if(ctx.currentPossition -12 > 0){
+    relocatePawn(ctx.ctx, xOsa[ctx.currentPossition-1] * xRatio, yOsa[ctx.currentPossition-1] * yRatio, xOsa[ctx.currentPossition-13] * xRatio, yOsa[ctx.currentPossition-13] * yRatio);
+    occupiedFields.splice(occupiedFields.indexOf(ctx.currentPossition), 1);
+    ctx.currentPossition -= 12;
+    occupiedFields.push(ctx.currentPossition); 
+  }else{
+    relocatePawn(ctx.ctx, xOsa[ctx.currentPossition-1] * xRatio, yOsa[ctx.currentPossition-1] * yRatio, ctx.ctx.xOsaStart * xRatio, ctx.ctx.yOsaStart * yRatio);
+    occupiedFields.splice(occupiedFields.indexOf(ctx.currentPossition), 1);
+    ctx.currentPossition = 0;
+  }
+  
+}
+
 let endTurn = (ctx, currentPossition) => {
   c1.clearRect(0, 0, canvas0.width, canvas0.height);
   ctx.clearRect(0, 0, canvas0.width, canvas0.height);
@@ -313,7 +327,7 @@ let endTurn = (ctx, currentPossition) => {
     setTimeout(()=>{      
       relocatePawn(ctx, xOsa[99] * xRatio, yOsa[99] * yRatio, ctx.xOsaEnd * xRatio, ctx.yOsaEnd * yRatio)
     },1000)
-  } else if(arrOfPlayers[0].currentPossition + number > 100){
+  } else if(arrOfPlayers[0].currentPossition + number == 101){
     relocatePawn(ctx, startingPositionX * xRatio, startingPositionY * yRatio, xOsa[100] * xRatio, yOsa[100] * yRatio)
     haveWinner = true;
     ctx.winner = true;
@@ -321,11 +335,13 @@ let endTurn = (ctx, currentPossition) => {
     setTimeout(()=>{ 
     relocatePawn(ctx, xOsa[100] * xRatio, yOsa[100] * yRatio, ctx.xOsaEnd * xRatio, ctx.yOsaEnd * yRatio)
   },1000)
+  }else if(arrOfPlayers[0].currentPossition + number > 101){
+    occupiedFields.splice(occupiedFields.indexOf(arrOfPlayers[0].currentPossition), 1);
+    drawPin(ctx, xOsa[arrOfPlayers[0].currentPossition-1] * xRatio, yOsa[arrOfPlayers[0].currentPossition-1] * yRatio)
+    arrOfPlayers[0].currentPossition -= number;
   }else {
     relocatePawn(ctx, startingPositionX * xRatio, startingPositionY * yRatio, xOsa[i + currentPossition - 1] * xRatio, yOsa[i + currentPossition - 1] * yRatio)
-  }
-
-  
+  }  
 
   /* ctx.beginPath();
   ctx.arc(xOsa[i + currentPossition - 1] * xRatio, yOsa[i + currentPossition - 1] * yRatio, radius * 0.85, 0, fullCircle);
@@ -342,6 +358,8 @@ let endTurn = (ctx, currentPossition) => {
       }
     }
     alert(`Polje zauzeto! - ${okupator.player}`)
+    smazen(okupator);
+
   }
   switch (arrOfPlayers[0].currentPossition) {
     case 1:
@@ -433,6 +451,7 @@ let endTurn = (ctx, currentPossition) => {
         }        
         arrOfPlayers.push(arrOfPlayers.shift());        
       }
+      console.log(occupiedFields)
       diceDIV.addEventListener('click', rollDice);
       break;
   }
