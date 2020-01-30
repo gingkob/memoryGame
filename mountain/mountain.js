@@ -1,4 +1,5 @@
 const canvas0 = document.getElementById("canvas0");
+const canvasCont = document.getElementById("canvasCont");
 const canvas1 = document.getElementById("canvas1");
 const canvasPlayer1 = document.getElementById("canvasPlayer1");
 const canvasPlayer2 = document.getElementById("canvasPlayer2");
@@ -7,7 +8,9 @@ const canvasPlayer2 = document.getElementById("canvasPlayer2");
 let playerOnMove = ["player1", "player2"];
 let currentPossitionArr = [];
 let occupiedFields = [];
-
+let haveWinner = false;
+let turnFinished = false;
+let counter = 1;
 
 const xOsa = [
   5200, 4975, 4743, 4511, 4294, 4046, 3788, 3564, 3338, 3118,
@@ -37,15 +40,20 @@ const yOsa = [
 ];
 
 let c0 = canvas0.getContext("2d");
+let ctxCont = canvasCont.getContext("2d");
 let c1 = canvas1.getContext("2d");
 let cPlayer1 = canvasPlayer1.getContext("2d");
 cPlayer1.color = "rgba(0, 255, 255, 0.95)"
-cPlayer1.xOsa = 5450; 
-cPlayer1.yOsa = 3500;
+cPlayer1.xOsaStart = 4720; 
+cPlayer1.yOsaStart = 3180;
+cPlayer1.xOsaEnd = 4720; 
+cPlayer1.yOsaEnd = 800;
 let cPlayer2 = canvasPlayer2.getContext("2d");
 cPlayer2.color = "rgba(255, 0, 255, 0.95)"
-cPlayer2.xOsa = 5450; 
-cPlayer2.yOsa = 3500;
+cPlayer2.xOsaStart = 4949; 
+cPlayer2.yOsaStart = 3180;
+cPlayer2.xOsaEnd = 4949; 
+cPlayer2.yOsaEnd = 800;
 let arrOfPlayers = [{ "player": "Miroslav", currentPossition: 0, ctx: cPlayer1 }, { "player": "Vladica", currentPossition: 0, ctx: cPlayer2 }];
 
 
@@ -53,6 +61,8 @@ let arrOfPlayers = [{ "player": "Miroslav", currentPossition: 0, ctx: cPlayer1 }
 //-------------very first time seting canvas0-4
 canvas0.width = window.innerWidth * 0.8;
 canvas0.height = canvas0.width * 2 / 3;
+canvasCont.width = window.innerWidth * 0.8;
+canvasCont.height = canvas0.width * 2 / 3;
 canvas1.width = window.innerWidth * 0.8;
 canvas1.height = canvas0.width * 2 / 3;
 canvasPlayer1.width = window.innerWidth * 0.8;
@@ -65,10 +75,35 @@ boardImage.onload = function () {
   c0.drawImage(boardImage, 0, 0, canvas0.width, canvas0.height);
 };
 boardImage.src = './img/board.png';
-let xRatio = canvas1.width / 5670;
-let yRatio = canvas1.height / 3780;
+
+let xRatio = canvas0.width / 5670;
+let yRatio = canvas0.height / 3780;
 let radius = 100 * xRatio;
 let fullCircle = Math.PI * 2;
+
+ctxCont.beginPath();
+ctxCont.rect(4580*xRatio, 2900*yRatio, 974*xRatio, 350*yRatio);
+ctxCont.strokeStyle = "green";
+ctxCont.lineWidth = 1;
+ctxCont.stroke();
+ctxCont.closePath();
+ctxCont.fillStyle = "rgba(255, 255, 255, 0.35)"
+drawPin(ctxCont, 4720*xRatio, 3180*yRatio);
+drawPin(ctxCont, 4949*xRatio, 3180*yRatio);
+drawPin(ctxCont, 5185*xRatio, 3180*yRatio);
+drawPin(ctxCont, 5414*xRatio, 3180*yRatio);
+ctxCont.beginPath();
+ctxCont.rect(4580*xRatio, 520*yRatio, 974*xRatio, 350*yRatio);
+ctxCont.stroke();
+ctxCont.closePath();
+drawPin(ctxCont, 4720*xRatio, 800*yRatio);
+drawPin(ctxCont, 4949*xRatio, 800*yRatio);
+drawPin(ctxCont, 5185*xRatio, 800*yRatio);
+drawPin(ctxCont, 5414*xRatio, 800*yRatio);
+cPlayer1.fillStyle = cPlayer1.color;
+drawPin(cPlayer1, 4720*xRatio, 3180*yRatio);
+cPlayer2.fillStyle = cPlayer2.color;
+drawPin(cPlayer2, 4949*xRatio, 3180*yRatio);
 
 /* c1.strokeStyle = "yellow";
 c1.lineWidth = 2;
@@ -122,7 +157,6 @@ let movePlayer = (currentPossition) => {
   }
 }
 
-
 let movePlayerBack = (currentPossition) => {
   if (i <= number) {
     setTimeout(function () {
@@ -145,8 +179,8 @@ let endTurnBack = (ctx, currentPossition) => {
   ctx.clearRect(0, 0, canvas0.width, canvas0.height);
   ctx.fillStyle = ctx.color;
   
-  let startingPositionX = arrOfPlayers[0].currentPossition == 0 ? 5400 : xOsa[arrOfPlayers[0].currentPossition];
-  let startingPositionY = arrOfPlayers[0].currentPossition == 0 ? 3500 : yOsa[arrOfPlayers[0].currentPossition];
+  let startingPositionX = arrOfPlayers[0].currentPossition == 0 ? ctx.xOsaStart : xOsa[arrOfPlayers[0].currentPossition-1];
+  let startingPositionY = arrOfPlayers[0].currentPossition == 0 ? ctx.yOsaStart : yOsa[arrOfPlayers[0].currentPossition-1];
 
   relocatePawn(ctx, startingPositionX * xRatio, startingPositionY * yRatio, xOsa[currentPossition - i] * xRatio, yOsa[currentPossition - i] * yRatio)
 
@@ -237,8 +271,19 @@ let endTurnBack = (ctx, currentPossition) => {
       break;
     default:
       occupiedFields.push(arrOfPlayers[0].currentPossition)
-      console.log("zauzetoB", occupiedFields)
-      if (diceNumber != 6) {
+     // console.log("zauzetoB", occupiedFields)
+      if (diceNumber != 6) {        
+        if(counter == playerOnMove.length){
+          turnFinished = true;
+          counter = 1;
+        } else {
+          turnFinished = false;
+          counter++;
+        }
+        console.log("hello winner BACK: ", counter, turnFinished, haveWinner)
+        if (haveWinner && turnFinished){
+          return setTimeout(()=>alert("game over!"),2500)
+        }
         arrOfPlayers.push(arrOfPlayers.shift());
       }
       diceDIV.addEventListener('click', rollDice);
@@ -251,10 +296,30 @@ let endTurn = (ctx, currentPossition) => {
   ctx.clearRect(0, 0, canvas0.width, canvas0.height);
   ctx.fillStyle = ctx.color;
 
-  let startingPositionX = arrOfPlayers[0].currentPossition == 0 ? 5400 : xOsa[arrOfPlayers[0].currentPossition-1];
-  let startingPositionY = arrOfPlayers[0].currentPossition == 0 ? 3500 : yOsa[arrOfPlayers[0].currentPossition-1];
+  let startingPositionX = arrOfPlayers[0].currentPossition == 0 ? ctx.xOsaStart : xOsa[arrOfPlayers[0].currentPossition-1];
+  let startingPositionY = arrOfPlayers[0].currentPossition == 0 ? ctx.yOsaStart : yOsa[arrOfPlayers[0].currentPossition-1];
 
-  relocatePawn(ctx, startingPositionX * xRatio, startingPositionY * yRatio, xOsa[i + currentPossition - 1] * xRatio, yOsa[i + currentPossition - 1] * yRatio)
+  if (arrOfPlayers[0].currentPossition + number == 100){
+    relocatePawn(ctx, startingPositionX * xRatio, startingPositionY * yRatio, xOsa[i + currentPossition - 1] * xRatio, yOsa[i + currentPossition - 1] * yRatio);
+    haveWinner = true;
+    ctx.winner = true;
+    diceNumber = 0;
+    setTimeout(()=>{      
+      relocatePawn(ctx, xOsa[99] * xRatio, yOsa[99] * yRatio, ctx.xOsaEnd * xRatio, ctx.yOsaEnd * yRatio)
+    },1000)
+  } else if(arrOfPlayers[0].currentPossition + number > 100){
+    relocatePawn(ctx, startingPositionX * xRatio, startingPositionY * yRatio, xOsa[100] * xRatio, yOsa[100] * yRatio)
+    haveWinner = true;
+    ctx.winner = true;
+    diceNumber = 0;
+    setTimeout(()=>{ 
+    relocatePawn(ctx, xOsa[100] * xRatio, yOsa[100] * yRatio, ctx.xOsaEnd * xRatio, ctx.yOsaEnd * yRatio)
+  },1000)
+  }else {
+    relocatePawn(ctx, startingPositionX * xRatio, startingPositionY * yRatio, xOsa[i + currentPossition - 1] * xRatio, yOsa[i + currentPossition - 1] * yRatio)
+  }
+
+  
 
   /* ctx.beginPath();
   ctx.arc(xOsa[i + currentPossition - 1] * xRatio, yOsa[i + currentPossition - 1] * yRatio, radius * 0.85, 0, fullCircle);
@@ -280,10 +345,10 @@ let endTurn = (ctx, currentPossition) => {
       number = 22;
       movePlayer(arrOfPlayers[0].currentPossition);
       break;
-    case 16:
+   /*  case 16:
       number = 10;
       movePlayerBack(arrOfPlayers[0].currentPossition);
-      break;
+      break; */
     case 28:
       number = 56;
       movePlayer(arrOfPlayers[0].currentPossition);
@@ -292,19 +357,19 @@ let endTurn = (ctx, currentPossition) => {
       number = 6;
       movePlayer(arrOfPlayers[0].currentPossition);
       break;
-    case 45:
+    /* case 45:
       number = 19;
       movePlayerBack(arrOfPlayers[0].currentPossition);
-      break;
-    case 49:
+      break; */
+    /* case 49:
       number = 38;
       movePlayerBack(arrOfPlayers[0].currentPossition);
-      break;
+      break; */
     case 51:
       number = 17;
       movePlayer(arrOfPlayers[0].currentPossition);
       break;
-    case 56:
+    /* case 56:
       number = 9;
       movePlayerBack(arrOfPlayers[0].currentPossition);
       break;
@@ -315,7 +380,7 @@ let endTurn = (ctx, currentPossition) => {
     case 64:
       number = 4;
       movePlayerBack(arrOfPlayers[0].currentPossition);
-      break;
+      break; */
     case 72:
       number = 18;
       movePlayer(arrOfPlayers[0].currentPossition);
@@ -324,7 +389,7 @@ let endTurn = (ctx, currentPossition) => {
       number = 19;
       movePlayer(arrOfPlayers[0].currentPossition);
       break;
-    case 87:
+    /* case 87:
       number = 63;
       movePlayerBack(arrOfPlayers[0].currentPossition);
       break;
@@ -339,12 +404,23 @@ let endTurn = (ctx, currentPossition) => {
     case 98:
       number = 20;
       movePlayerBack(arrOfPlayers[0].currentPossition);
-      break;
+      break; */
     default:
       occupiedFields.push(arrOfPlayers[0].currentPossition)
-      console.log("zauzetoF", occupiedFields)
-      if (diceNumber != 6) {
-        arrOfPlayers.push(arrOfPlayers.shift());
+     // console.log("zauzetoF", occupiedFields)      
+        if (diceNumber != 6) {
+        if(counter == playerOnMove.length){
+          turnFinished = true;
+          counter = 1;
+        } else {
+          turnFinished = false;
+          counter++;
+        }
+        console.log("hello winner: ", counter, turnFinished, haveWinner)
+        if (haveWinner && turnFinished){
+          return setTimeout(()=>alert("game over!"),2500)
+        }        
+        arrOfPlayers.push(arrOfPlayers.shift());        
       }
       diceDIV.addEventListener('click', rollDice);
       break;
@@ -417,7 +493,7 @@ function relocatePawn(ctx, xs, ys, xd, yd) {
   }
 
   makeMove();
-
+}
   function drawPin(ctx, x, y) {
     ctx.save();
     ctx.translate(x, y);
@@ -436,7 +512,7 @@ function relocatePawn(ctx, xs, ys, xd, yd) {
     ctx.fill();
     ctx.restore();
   }
-}
+
 
 /* relocate player's pawn ends here */
 
