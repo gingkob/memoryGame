@@ -11,6 +11,7 @@ let occupiedFields = [];
 let haveWinner = false;
 let turnFinished = false;
 let counter = 1;
+let okupator = "";
 
 const xOsa = [
   5200, 4975, 4743, 4511, 4294, 4046, 3788, 3564, 3338, 3118,
@@ -194,7 +195,12 @@ let endTurnBack = (ctx, currentPossition) => {
   occupiedFields.splice(occupiedFields.indexOf(arrOfPlayers[0].currentPossition), 1);} 
   arrOfPlayers[0].currentPossition -= number;
   if(occupiedFields.includes(arrOfPlayers[0].currentPossition)){
-    alert("Polje zauzeto!")
+    for (let i = 1; i < arrOfPlayers.length; i++){
+      if(arrOfPlayers[i].currentPossition == arrOfPlayers[0].currentPossition){
+        okupator = arrOfPlayers[i];
+      }
+    }
+    alert(`Polje zauzeto! - ${okupator.player}`)
   }
   switch (arrOfPlayers[0].currentPossition) {
     case 1:
@@ -330,7 +336,12 @@ let endTurn = (ctx, currentPossition) => {
   occupiedFields.splice(occupiedFields.indexOf(arrOfPlayers[0].currentPossition), 1);}
   arrOfPlayers[0].currentPossition += number;
   if(occupiedFields.includes(arrOfPlayers[0].currentPossition)){
-    alert("Polje zauzeto!")
+    for (let i = 1; i < arrOfPlayers.length; i++){
+      if(arrOfPlayers[i].currentPossition == arrOfPlayers[0].currentPossition){
+        okupator = arrOfPlayers[i];
+      }
+    }
+    alert(`Polje zauzeto! - ${okupator.player}`)
   }
   switch (arrOfPlayers[0].currentPossition) {
     case 1:
