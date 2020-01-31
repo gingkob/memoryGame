@@ -49,6 +49,25 @@
   width: 2rem;
   height: 2rem;
 }
+.index__player__dice{
+  vertical-align: top;
+  margin: 1rem auto 1rem;
+  width: 2rem;
+  height: 2rem;
+  background-image: url( './img/kockica.png' );
+  background-size: 1.8rem 1.8rem;
+}
+.index__player__dice__rolled{
+  vertical-align: top;
+  margin: 1rem auto 1rem;
+  width: 2rem;
+  height: 2rem;  
+}
+.index__inputs__bordered{
+  font-size: 1.5rem;
+  color: black;
+  border: 1px solid green;
+}
 .index__buttons_container{
   display: inline-block;
   width: 60vw;

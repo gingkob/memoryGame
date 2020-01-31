@@ -5,23 +5,42 @@ let memoryGameHtml = document.getElementById("memory-game-html");
 let memoryGameHtmlChild = document.getElementById("memory-game-html-child")
 let introGameSection = document.getElementById("intro-section")
 let introGameSectionChild = document.getElementById("intro-section-child")
+let dice1 = document.getElementById("dice1")
 
 // -------------------start intro section------------------
 let names = {};
 let memoryCall = () => { 
-  names = {
-    play1: document.getElementById("player1").value.trim(),
-    play2: document.getElementById("player2").value.trim(),
-    play3: document.getElementById("player3").value.trim(),
-    play4: document.getElementById("player4").value.trim()
-  }
+  names = [
+    { play1:{ 
+        name: document.getElementById("player1").value.trim(),
+        dice: document.getElementById("dice1").value.trim()
+      }
+    },
+    { play2:{ 
+        name: document.getElementById("player2").value.trim(),
+        dice: document.getElementById("dice2").value.trim()
+      }
+    },
+    { play3:{ 
+        name: document.getElementById("player3").value.trim(),
+        dice: document.getElementById("dice3").value.trim()
+      }
+    },
+    { play4:{ 
+        name: document.getElementById("player4").value.trim(),
+        dice: document.getElementById("dice4").value.trim()
+      }
+    }
+  ]
 
   let validator = 0;
-  for(let x in names){
-    if(!names[x]){
-      validator++
+  for(let i = 0; i < names.length; i++){
+      console.log(names[i][`play${i+1}`].name)
+      console.log(names[i][`play${i+1}`].dice)
+      if(!names[i][`play${i+1}`].name && !names[i][`play${i+1}`].dice){
+        validator++
+      }
     }
-  }
 
   if(validator <= 2){
     // window.open("./memory/memory.html")
@@ -36,15 +55,82 @@ let memoryCall = () => {
 
 }
 let climbingToTheMountainCall = () => alert("mountain");
+let rollDice = (dice) => {
+  switch (dice){
+    case "dice1":
+      if(document.getElementById("player1").value.trim() != ""){
+        dice1.classList.remove("index__player__dice");
+        dice1.classList.add("index__player__dice__rolled", "index__inputs__bordered");
+        dice1.textContent = Math.floor(Math.random()*6+1);
+        dice1.setAttribute("disabled", true);
+        dice1.setAttribute("value", dice1.textContent);
+        document.getElementById("player1").setAttribute("disabled", true);
+        document.getElementById("player1").classList.add("index__inputs__bordered");
+      }else{
+        alert("input name");
+        return;
+      }      
+      break;    
+    case "dice2":
+      if(document.getElementById("player2").value.trim() != ""){
+        dice2.classList.remove("index__player__dice")
+        dice2.classList.add("index__player__dice__rolled", "index__inputs__bordered")
+        dice2.textContent = Math.floor(Math.random()*6+1);
+        dice2.setAttribute("disabled", true);
+        dice2.setAttribute("value", dice2.textContent);
+        document.getElementById("player2").setAttribute("disabled", true);
+        document.getElementById("player2").classList.add("index__inputs__bordered");
+      }else{
+        alert("input name");
+        return;
+      }      
+      break;
+    case "dice3":
+      if(document.getElementById("player3").value.trim() != ""){
+        dice3.classList.remove("index__player__dice")
+        dice3.classList.add("index__player__dice__rolled", "index__inputs__bordered")
+        dice3.textContent = Math.floor(Math.random()*6+1);
+        dice3.setAttribute("disabled", true);
+        dice3.setAttribute("value", dice3.textContent);
+        document.getElementById("player3").setAttribute("disabled", true);
+        document.getElementById("player3").classList.add("index__inputs__bordered");
+      }else{
+        alert("input name");
+        return;
+      }      
+      break;
+    case "dice4":
+      if(document.getElementById("player4").value.trim() != ""){
+        dice4.classList.remove("index__player__dice")
+        dice4.classList.add("index__player__dice__rolled", "index__inputs__bordered")
+        dice4.textContent = Math.floor(Math.random()*6+1);
+        dice4.setAttribute("disabled", true);
+        dice4.setAttribute("value", dice4.textContent);
+        document.getElementById("player4").setAttribute("disabled", true);
+        document.getElementById("player4").classList.add("index__inputs__bordered");
+      }else{
+        alert("input name");
+        return;
+      }      
+      break;
+    default:
+      break;
+  }
+};
 
 // --------------------end intro section-----------------
 
 // --------------------start of memory section board----------------
 
 let startMemory = names => {
+  names.sort((a,b) =>{
+    console.log(names)
+    return b.dice - a.dice;
+  })
+  console.log(names)
   let playInfoArr = []
-  Object.keys(names).forEach(key => {
-    playInfoArr.push({"player":names[key], "score":0})
+  names.forEach(item => {
+    playInfoArr.push({"player":names[item], "score":0})
   })
   console.log(playInfoArr)
 
@@ -69,6 +155,10 @@ let startMemory = names => {
   let player2 = document.getElementById("player2");
   let player3 = document.getElementById("player3");
   let player4 = document.getElementById("player4");
+  let dice1 = document.getElementById("dice1");
+  let dice2 = document.getElementById("dice2");
+  let dice3 = document.getElementById("dice3");
+  let dice4 = document.getElementById("dice4");
 
   (() => {
     if (playInfoArr[0].player.trim() != "") {
