@@ -47,8 +47,8 @@
   <!-- intro section ends here -->
 
   <!-- code for card memory game starts here -->
-  <!-- <div class="show-nothing" id="memory-game-html"> -->
-  <div id="memory-game-html">
+  <div class="show-nothing" id="memory-game-html">
+  <!-- <div id="memory-game-html"> -->
     <div class="memory__container" id="memory-game-html-child">
       <div id="player-board-container">
         <div id="player-board">
@@ -198,6 +198,82 @@
         </div>          
       </section>
       
+  </div>
+  <div id="mountain-game-html">
+    <div id="mountain-game-html-child">
+      <section class="mountain-part">  
+        <div class="canvas-container">
+          <div style="position:relative;">
+            <canvas id="canvas0" style="position: absolute; left: 0; top: 0; z-index: 1; background:transparent;"></canvas>
+            <canvas id="canvasCont" style="position: absolute; left: 0; top: 0; z-index: 2; background:transparent;"></canvas>
+            <canvas id="canvas1" style="position: absolute; left: 0; top: 0; z-index: 3; background:transparent;"></canvas>
+            <canvas id="canvasPlayer1" style="position: absolute; left: 0; top: 0; z-index: 4; background:transparent;"></canvas>
+            <canvas id="canvasPlayer2" style="position: absolute; left: 0; top: 0; z-index: 5; background:transparent;"></canvas>
+            <canvas id="canvasPlayer3" style="position: absolute; left: 0; top: 0; z-index: 6; background:transparent;"></canvas>
+            <canvas id="canvasPlayer4" style="position: absolute; left: 0; top: 0; z-index: 7; background:transparent;"></canvas>
+            <!-- <canvas id="canvas4"></canvas> -->
+          </div>
+        </div>
+      
+        <div class="right-panel">
+          <div id="player-board-container">
+            <div class="player-container" id="player-board">
+              <div class="one-player-container" id="player1-container">              
+                <p id="player-1">Nesto</p>              
+              </div>
+              <div class="one-player-container" id="player2-container">              
+                <p id="player-2">Jos nesto</p>              
+              </div>
+              <div class="one-player-container" id="player3-container">              
+                <p id="player-3">Treci covek</p>              
+              </div>
+              <div class="one-player-container" id="player4-container">              
+                <p id="player-4">I cetvrti</p>              
+              </div>
+            </div>
+          </div>
+      
+         <div class="dice-container">
+          <div class="dice">
+            <ol class="die-list even-roll" data-roll="1" id="die-1">
+              <li class="die-item" data-side="1">      
+                <span class="dot"></span>
+              </li>
+              <li class="die-item hide-side" data-side="2">
+                <span class="dot"></span>
+                <span class="dot"></span>
+              </li>
+              <li class="die-item hide-side" data-side="3">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+              </li>
+              <li class="die-item hide-side" data-side="4">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+              </li>
+              <li class="die-item hide-side" data-side="5">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+              </li>
+              <li class="die-item hide-side" data-side="6">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+              </li>
+            </ol>
+          </div>
+         </div>
+        </div>
+      </section>
     </div>
   </div>
   <!-- code for card memory game ends here -->

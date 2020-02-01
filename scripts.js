@@ -3,6 +3,8 @@ const playerBoard = document.getElementById("player-board");
 const playerBoardContainer = document.getElementById("player-board-container");
 let memoryGameHtml = document.getElementById("memory-game-html");
 let memoryGameHtmlChild = document.getElementById("memory-game-html-child")
+let mountainGameHtml = document.getElementById("mountain-game-html");
+let mountainGameHtmlChild = document.getElementById("mountain-game-html-child")
 let introGameSection = document.getElementById("intro-section")
 let introGameSectionChild = document.getElementById("intro-section-child")
 let dice1 = document.getElementById("dice1")
@@ -57,7 +59,54 @@ let memoryCall = () => {
   }
 
 }
-let climbingToTheMountainCall = () => alert("mountain");
+let climbingToTheMountainCall = () => {
+  names = [
+    { id: "player1",
+      name: document.getElementById("player1").value.trim(),
+      dice: document.getElementById("dice1").value.trim()
+    },
+    { id: "player2",
+      name: document.getElementById("player2").value.trim(),
+      dice: document.getElementById("dice2").value.trim()
+    },
+    {  id: "player3", 
+      name: document.getElementById("player3").value.trim(),
+      dice: document.getElementById("dice3").value.trim()
+    },
+    { id: "player4", 
+      name: document.getElementById("player4").value.trim(),
+      dice: document.getElementById("dice4").value.trim()
+    }
+  ]
+
+  let validator = 0;
+  let pairValidation = true;
+
+
+  names.forEach( item => {
+    if(item.name){
+        validator++;
+      if(!item.dice){
+        pairValidation = false;
+      }
+    }    
+  })
+
+  if(validator > 1){
+    if(pairValidation){
+      introGameSection.classList.add("show-nothing")
+      introGameSectionChild.remove();
+      memoryGameHtml.append(memoryGameHtmlChild);
+      memoryGameHtml.classList.remove("show-nothing");
+      startMountain(names);
+    }else{
+      alert("Svaki uneti igrac mora baciti i kockicu")
+    }    
+  }else{
+    alert("Potrebno je bar 2 igraca za igru memorije")
+  }
+
+};
 
 let rollDice = (dice) => {
   switch (dice){
@@ -413,4 +462,657 @@ function chooseGame(id) {
 }
 // --------------------end of memory section board---------------------
 
-//(() => memoryGameHtmlChild.remove())()
+(() => memoryGameHtmlChild.remove())()
+
+// -------------------mountain section starts her----------------------
+
+function startMountain(names){
+
+const canvas0 = document.getElementById("canvas0");
+const canvasCont = document.getElementById("canvasCont");
+const canvas1 = document.getElementById("canvas1");
+const canvasPlayer1 = document.getElementById("canvasPlayer1");
+const canvasPlayer2 = document.getElementById("canvasPlayer2");
+const canvasPlayer3 = document.getElementById("canvasPlayer3");
+const canvasPlayer4 = document.getElementById("canvasPlayer4");
+//const canvas4 = document.getElementById("canvas4");
+//const canvas5 = document.getElementById("canvas5"); // for rolling dice webgl
+
+let currentPossitionArr = [];
+let occupiedFields = [];
+let haveWinner = false;
+let turnFinished = false;
+let counter = 1;
+let okupator = "";
+
+
+
+const xOsa = [
+  5200, 4975, 4743, 4511, 4294, 4046, 3788, 3564, 3338, 3118,
+  2889, 2651, 2420, 2187, 1956, 1720, 1491, 1270, 970, 705,
+  573, 519, 508, 505, 508, 505, 506, 508, 503, 505,
+  655, 899, 1180, 1461, 1742, 2023, 2292, 2598, 2867, 3150,
+  3431, 3712, 3988, 4217, 4365, 4374, 4387, 4408, 4400, 4423,
+  4383, 4302, 4067, 3814, 3566, 3290, 3006, 2727, 2469, 2168,
+  1899, 1609, 1332, 1168, 1062, 1085, 1086, 1088, 1093, 1245,// corrected
+  1568, 1893, 2302, 2667, 2958, 3270, 3543, 3791, 3828, 3835,
+  3821, 3820, 3790, 3519, 3251, 2962, 2672, 2373, 2098, 1871,
+  1664, 1534, 1574, 1775, 2018, 2368, 2661, 2957, 2968, 2663,
+  2367
+];
+const yOsa = [
+  3490, 3505, 3500, 3499, 3491, 3504, 3498, 3499, 3509, 3496,
+  3505, 3492, 3501, 3501, 3490, 3497, 3501, 3499, 3494, 3429,
+  3258, 3045, 2792, 2550, 2319, 2102, 1835, 1615, 1354, 1101,
+  892, 792, 792, 792, 792, 792, 799, 834, 792, 792,
+  792, 792, 842, 915, 1170, 1392, 1746, 1998, 2250, 2511,
+  2778, 3014, 3084, 3098, 3098, 3089, 3085, 3098, 3100, 3090,
+  3097, 3088, 3072, 2891, 2587, 2332, 2049, 1774, 1465, 1241,// corrected
+  1220, 1131, 1155, 1190, 1140, 1191, 1193, 1343, 1595, 1896,
+  2124, 2390, 2631, 2669, 2683, 2682, 2684, 2681, 2682, 2629,
+  2450, 2208, 1863, 1674, 1540, 1433, 1461, 1610, 1942, 1924,
+  1849
+];
+
+let c0 = canvas0.getContext("2d");
+let ctxCont = canvasCont.getContext("2d");
+let c1 = canvas1.getContext("2d");
+let cPlayer1 = canvasPlayer1.getContext("2d");
+cPlayer1.color = "rgba(0, 255, 255, 0.95)"
+cPlayer1.xOsaStart = 4720; 
+cPlayer1.yOsaStart = 3180;
+cPlayer1.xOsaEnd = 4720; 
+cPlayer1.yOsaEnd = 800;
+let cPlayer2 = canvasPlayer2.getContext("2d");
+cPlayer2.color = "rgba(255, 0, 255, 0.95)"
+cPlayer2.xOsaStart = 4949; 
+cPlayer2.yOsaStart = 3180;
+cPlayer2.xOsaEnd = 4949; 
+cPlayer2.yOsaEnd = 800;
+let cPlayer3 = canvasPlayer3.getContext("2d");
+cPlayer3.color = "rgba(50, 170, 255, 0.95)"
+cPlayer3.xOsaStart = 5185; 
+cPlayer3.yOsaStart = 3180;
+cPlayer3.xOsaEnd = 5185; 
+cPlayer3.yOsaEnd = 800;
+let cPlayer4 = canvasPlayer4.getContext("2d");
+cPlayer4.color = "rgba(22, 255, 70, 0.95)"
+cPlayer4.xOsaStart = 5414; 
+cPlayer4.yOsaStart = 3180;
+cPlayer4.xOsaEnd = 5414; 
+cPlayer4.yOsaEnd = 800;
+let canvasObj = {
+  player1:cPlayer1,
+  player2:cPlayer2,
+  player3:cPlayer3,
+  player4:cPlayer4,
+}
+let playerOnMove = [];
+names.sort((a,b) =>b.dice - a.dice);
+  names.forEach(item => {
+    if(item.name != ""){
+      playerOnMove.push(item.id)
+    }    
+  })
+console.log(playerOnMove)
+let arrOfPlayers = []
+names.forEach(name => {
+ arrOfPlayers.push({"player":name.name,currentPossition: 0, ctx:canvasObj[name.id] })
+})
+
+console.log(arrOfPlayers)
+let player1 = document.getElementById("player-1");
+let player2 = document.getElementById("player-2");
+let player3 = document.getElementById("player-3");
+let player4 = document.getElementById("player-4");
+player1.textContent = arrOfPlayers[0].player;
+player2.textContent = arrOfPlayers[1].player;
+player3.textContent = arrOfPlayers[2].player;
+player4.textContent = arrOfPlayers[3].player;
+
+
+
+//-------------very first time seting canvas0-4
+canvas0.width = window.innerWidth * 0.8;
+canvas0.height = canvas0.width * 2 / 3;
+canvasCont.width = window.innerWidth * 0.8;
+canvasCont.height = canvas0.width * 2 / 3;
+canvas1.width = window.innerWidth * 0.8;
+canvas1.height = canvas0.width * 2 / 3;
+canvasPlayer1.width = window.innerWidth * 0.8;
+canvasPlayer1.height = canvas0.width * 2 / 3;
+canvasPlayer2.width = window.innerWidth * 0.8;
+canvasPlayer2.height = canvas0.width * 2 / 3;
+canvasPlayer3.width = window.innerWidth * 0.8;
+canvasPlayer3.height = canvas0.width * 2 / 3;
+canvasPlayer4.width = window.innerWidth * 0.8;
+canvasPlayer4.height = canvas0.width * 2 / 3;
+
+let boardImage = new Image();
+boardImage.onload = function () {
+  c0.drawImage(boardImage, 0, 0, canvas0.width, canvas0.height);
+};
+boardImage.src = './img/board.png';
+
+console.log("*********", boardImage)
+
+let xRatio = canvas0.width / 5670;
+let yRatio = canvas0.height / 3780;
+let radius = 100 * xRatio;
+let fullCircle = Math.PI * 2;
+
+ctxCont.beginPath();
+ctxCont.rect(4580*xRatio, 2900*yRatio, 974*xRatio, 350*yRatio);
+ctxCont.strokeStyle = "green";
+ctxCont.lineWidth = 1;
+ctxCont.stroke();
+ctxCont.closePath();
+ctxCont.fillStyle = "rgba(255, 255, 255, 0.35)"
+drawPin(ctxCont, 4720*xRatio, 3180*yRatio);
+drawPin(ctxCont, 4949*xRatio, 3180*yRatio);
+drawPin(ctxCont, 5185*xRatio, 3180*yRatio);
+drawPin(ctxCont, 5414*xRatio, 3180*yRatio);
+ctxCont.beginPath();
+ctxCont.rect(4580*xRatio, 520*yRatio, 974*xRatio, 350*yRatio);
+ctxCont.stroke();
+ctxCont.closePath();
+drawPin(ctxCont, 4720*xRatio, 800*yRatio);
+drawPin(ctxCont, 4949*xRatio, 800*yRatio);
+drawPin(ctxCont, 5185*xRatio, 800*yRatio);
+drawPin(ctxCont, 5414*xRatio, 800*yRatio);
+
+cPlayer1.fillStyle = cPlayer1.color;
+drawPin(cPlayer1, 4720*xRatio, 3180*yRatio);
+cPlayer2.fillStyle = cPlayer2.color;
+drawPin(cPlayer2, 4949*xRatio, 3180*yRatio);
+cPlayer3.fillStyle = cPlayer3.color;
+drawPin(cPlayer3, 5185*xRatio, 3180*yRatio);
+cPlayer4.fillStyle = cPlayer4.color;
+drawPin(cPlayer4, 5414*xRatio, 3180*yRatio);
+
+/* c1.strokeStyle = "yellow";
+c1.lineWidth = 2;
+ */
+/* for(let i = 0; i< xOsa.length; i++){
+  c1.beginPath();
+  c1.arc(xOsa[i]*xRatio, yOsa[i]*yRatio, radius, 0, fullCircle);
+  c1.stroke();
+  c1.closePath();
+} */
+//-------------ending first setting canvas
+
+function dynamicCanvas() {
+  console.log(window.innerWidth)
+  canvas0.width = window.innerWidth * 0.8;
+  canvas0.height = canvas0.width * 2 / 3;
+  canvas1.width = window.innerWidth * 0.8;
+  canvas1.height = canvas0.width * 2 / 3;
+  canvasPlayer1.width = window.innerWidth * 0.8;
+  canvasPlayer1.height = canvas0.width * 2 / 3;
+  canvasPlayer2.width = window.innerWidth * 0.8;
+  canvasPlayer2.height = canvas0.width * 2 / 3;
+
+  boardImage.onload = function () {
+    c0.drawImage(boardImage, 0, 0, canvas0.width, canvas0.height);
+  };
+  boardImage.src = './img/board.png';
+  /*  c1.beginPath();
+   c1.arc(5200*canvas1.width/5670, 3490*canvas1.height/3780, 100 * canvas1.width/5670, 0, Math.PI *2)
+   c1.stroke();
+   c1.closePath(); */
+}
+//let currentPossition = 0;
+let i = 0;
+let number = 0;
+let diceNumber = 0;
+
+let movePlayer = (currentPossition) => {
+  if (i < number) {
+    setTimeout(function () {
+      requestAnimationFrame(() => { movePlayer(currentPossition) })
+      c1.beginPath();
+      c1.arc(xOsa[i + currentPossition] * xRatio, yOsa[i + currentPossition] * yRatio, radius, 0, fullCircle);
+      c1.fillStyle = "rgba(0, 0, 255, 0.5)";
+      c1.fill();
+      // c1.stroke();
+      c1.closePath();
+      i++;
+    }, 200)
+  } else {
+    setTimeout(() => endTurn(arrOfPlayers[0].ctx, currentPossition), 1000)
+  }
+}
+
+let movePlayerBack = (currentPossition) => {
+  if (i <= number) {
+    setTimeout(function () {
+      requestAnimationFrame(() => movePlayerBack(currentPossition))
+      c1.beginPath();
+      c1.arc(xOsa[currentPossition - i - 1] * xRatio, yOsa[currentPossition - i - 1] * yRatio, radius, 0, fullCircle);
+      c1.fill();
+      c1.fillStyle = "rgba(0, 0, 255, 0.5)";
+      // c1.stroke();
+      c1.closePath();
+      i++;
+    }, 200)
+  } else {
+    setTimeout(() => endTurnBack(arrOfPlayers[0].ctx, currentPossition), 1000)
+  }
+}
+
+let endTurnBack = (ctx, currentPossition) => {
+  c1.clearRect(0, 0, canvas0.width, canvas0.height);
+  ctx.clearRect(0, 0, canvas0.width, canvas0.height);
+  ctx.fillStyle = ctx.color;
+  
+  let startingPositionX = arrOfPlayers[0].currentPossition == 0 ? ctx.xOsaStart : xOsa[arrOfPlayers[0].currentPossition-1];
+  let startingPositionY = arrOfPlayers[0].currentPossition == 0 ? ctx.yOsaStart : yOsa[arrOfPlayers[0].currentPossition-1];
+
+  relocatePawn(ctx, startingPositionX * xRatio, startingPositionY * yRatio, xOsa[currentPossition - i] * xRatio, yOsa[currentPossition - i] * yRatio)
+
+ /*  ctx.beginPath();
+  ctx.arc(xOsa[currentPossition - i] * xRatio, yOsa[currentPossition - i] * yRatio, radius * 0.85, 0, fullCircle);
+  ctx.fillStyle = "rgba(0, 0, 255, 0.5)";
+  ctx.fill()
+  ctx.closePath(); */
+  i = 0;
+  if(occupiedFields.includes(arrOfPlayers[0].currentPossition)){
+  occupiedFields.splice(occupiedFields.indexOf(arrOfPlayers[0].currentPossition), 1);} 
+  arrOfPlayers[0].currentPossition -= number;
+  if(occupiedFields.includes(arrOfPlayers[0].currentPossition)){
+    for (let i = 1; i < arrOfPlayers.length; i++){
+      if(arrOfPlayers[i].currentPossition == arrOfPlayers[0].currentPossition){
+        okupator = arrOfPlayers[i];
+      }
+    }
+    alert(`Polje zauzeto! - ${okupator.player}`)
+  }
+  switch (arrOfPlayers[0].currentPossition) {
+    case 1:
+      number = 37;
+      movePlayer(arrOfPlayers[0].currentPossition);
+      break;
+    case 5:
+      number = 10;
+      movePlayer(arrOfPlayers[0].currentPossition);
+      break;
+    case 9:
+      number = 22;
+      movePlayer(arrOfPlayers[0].currentPossition);
+      break;
+    case 16:
+      number = 10;
+      movePlayerBack(arrOfPlayers[0].currentPossition);
+      break;
+    case 28:
+      number = 56;
+      movePlayer(arrOfPlayers[0].currentPossition);
+      break;
+    case 37:
+      number = 6;
+      movePlayer(arrOfPlayers[0].currentPossition);
+      break;
+    case 45:
+      number = 19;
+      movePlayerBack(arrOfPlayers[0].currentPossition);
+      break;
+    case 49:
+      number = 38;
+      movePlayerBack(arrOfPlayers[0].currentPossition);
+      break;
+    case 51:
+      number = 17;
+      movePlayer(arrOfPlayers[0].currentPossition);
+      break;
+    case 56:
+      number = 9;
+      movePlayerBack(arrOfPlayers[0].currentPossition);
+      break;
+    case 62:
+      number = 43;
+      movePlayerBack(arrOfPlayers[0].currentPossition);
+      break;
+    case 64:
+      number = 4;
+      movePlayerBack(arrOfPlayers[0].currentPossition);
+      break;
+    case 72:
+      number = 18;
+      movePlayer(arrOfPlayers[0].currentPossition);
+      break;
+    case 80:
+      number = 19;
+      movePlayer(arrOfPlayers[0].currentPossition);
+      break;
+    case 87:
+      number = 63;
+      movePlayerBack(arrOfPlayers[0].currentPossition);
+      break;
+    case 92:
+      number = 19;
+      movePlayerBack(arrOfPlayers[0].currentPossition);
+      break;
+    case 95:
+      number = 19;
+      movePlayerBack(arrOfPlayers[0].currentPossition);
+      break;
+    case 98:
+      number = 20;
+      movePlayerBack(arrOfPlayers[0].currentPossition);
+      break;
+    default:
+      occupiedFields.push(arrOfPlayers[0].currentPossition)
+     // console.log("zauzetoB", occupiedFields)
+      if (diceNumber != 6) {        
+        if(counter == playerOnMove.length){
+          turnFinished = true;
+          counter = 1;
+        } else {
+          turnFinished = false;
+          counter++;
+        }
+        console.log("hello winner BACK: ", counter, turnFinished, haveWinner)
+        if (haveWinner && turnFinished){
+          return setTimeout(()=>alert("game over!"),2500)
+        }
+        arrOfPlayers.push(arrOfPlayers.shift());
+      }
+      diceDIV.addEventListener('click', rollDice);
+      break;
+  }
+}
+
+function smazen (ctx){
+  if(ctx.currentPossition -12 > 0){
+    relocatePawn(ctx.ctx, xOsa[ctx.currentPossition-1] * xRatio, yOsa[ctx.currentPossition-1] * yRatio, xOsa[ctx.currentPossition-13] * xRatio, yOsa[ctx.currentPossition-13] * yRatio);
+    occupiedFields.splice(occupiedFields.indexOf(ctx.currentPossition), 1);
+    ctx.currentPossition -= 12;
+    occupiedFields.push(ctx.currentPossition); 
+  }else{
+    relocatePawn(ctx.ctx, xOsa[ctx.currentPossition-1] * xRatio, yOsa[ctx.currentPossition-1] * yRatio, ctx.ctx.xOsaStart * xRatio, ctx.ctx.yOsaStart * yRatio);
+    occupiedFields.splice(occupiedFields.indexOf(ctx.currentPossition), 1);
+    ctx.currentPossition = 0;
+  }
+  
+}
+
+let endTurn = (ctx, currentPossition) => {
+  c1.clearRect(0, 0, canvas0.width, canvas0.height);
+  ctx.clearRect(0, 0, canvas0.width, canvas0.height);
+  ctx.fillStyle = ctx.color;
+
+  let startingPositionX = arrOfPlayers[0].currentPossition == 0 ? ctx.xOsaStart : xOsa[arrOfPlayers[0].currentPossition-1];
+  let startingPositionY = arrOfPlayers[0].currentPossition == 0 ? ctx.yOsaStart : yOsa[arrOfPlayers[0].currentPossition-1];
+
+  if (arrOfPlayers[0].currentPossition + number == 100){
+    relocatePawn(ctx, startingPositionX * xRatio, startingPositionY * yRatio, xOsa[i + currentPossition - 1] * xRatio, yOsa[i + currentPossition - 1] * yRatio);
+    haveWinner = true;
+    ctx.winner = true;
+    diceNumber = 0;
+    setTimeout(()=>{      
+      relocatePawn(ctx, xOsa[99] * xRatio, yOsa[99] * yRatio, ctx.xOsaEnd * xRatio, ctx.yOsaEnd * yRatio)
+    },1000)
+  } else if(arrOfPlayers[0].currentPossition + number == 101){
+    relocatePawn(ctx, startingPositionX * xRatio, startingPositionY * yRatio, xOsa[100] * xRatio, yOsa[100] * yRatio)
+    haveWinner = true;
+    ctx.winner = true;
+    diceNumber = 0;
+    setTimeout(()=>{ 
+    relocatePawn(ctx, xOsa[100] * xRatio, yOsa[100] * yRatio, ctx.xOsaEnd * xRatio, ctx.yOsaEnd * yRatio)
+  },1000)
+  }else if(arrOfPlayers[0].currentPossition + number > 101){
+    occupiedFields.splice(occupiedFields.indexOf(arrOfPlayers[0].currentPossition), 1);
+    drawPin(ctx, xOsa[arrOfPlayers[0].currentPossition-1] * xRatio, yOsa[arrOfPlayers[0].currentPossition-1] * yRatio)
+    arrOfPlayers[0].currentPossition -= number;
+  }else {
+    relocatePawn(ctx, startingPositionX * xRatio, startingPositionY * yRatio, xOsa[i + currentPossition - 1] * xRatio, yOsa[i + currentPossition - 1] * yRatio)
+  }  
+
+  /* ctx.beginPath();
+  ctx.arc(xOsa[i + currentPossition - 1] * xRatio, yOsa[i + currentPossition - 1] * yRatio, radius * 0.85, 0, fullCircle);
+  ctx.fill()
+  ctx.closePath(); */
+  i = 0;
+  if(occupiedFields.includes(arrOfPlayers[0].currentPossition)){
+  occupiedFields.splice(occupiedFields.indexOf(arrOfPlayers[0].currentPossition), 1);}
+  arrOfPlayers[0].currentPossition += number;
+  if(occupiedFields.includes(arrOfPlayers[0].currentPossition)){
+    for (let i = 1; i < arrOfPlayers.length; i++){
+      if(arrOfPlayers[i].currentPossition == arrOfPlayers[0].currentPossition){
+        okupator = arrOfPlayers[i];
+      }
+    }
+    alert(`Polje zauzeto! - ${okupator.player}`)
+    smazen(okupator);
+
+  }
+  switch (arrOfPlayers[0].currentPossition) {
+    case 1:
+      number = 37;
+      movePlayer(arrOfPlayers[0].currentPossition);
+      break;
+    case 5:
+      number = 10;
+      movePlayer(arrOfPlayers[0].currentPossition);
+      break;
+    case 9:
+      number = 22;
+      movePlayer(arrOfPlayers[0].currentPossition);
+      break;
+   /*  case 16:
+      number = 10;
+      movePlayerBack(arrOfPlayers[0].currentPossition);
+      break; */
+    case 28:
+      number = 56;
+      movePlayer(arrOfPlayers[0].currentPossition);
+      break;
+    case 37:
+      number = 6;
+      movePlayer(arrOfPlayers[0].currentPossition);
+      break;
+    /* case 45:
+      number = 19;
+      movePlayerBack(arrOfPlayers[0].currentPossition);
+      break; */
+    /* case 49:
+      number = 38;
+      movePlayerBack(arrOfPlayers[0].currentPossition);
+      break; */
+    case 51:
+      number = 17;
+      movePlayer(arrOfPlayers[0].currentPossition);
+      break;
+    /* case 56:
+      number = 9;
+      movePlayerBack(arrOfPlayers[0].currentPossition);
+      break;
+    case 62:
+      number = 43;
+      movePlayerBack(arrOfPlayers[0].currentPossition);
+      break;
+    case 64:
+      number = 4;
+      movePlayerBack(arrOfPlayers[0].currentPossition);
+      break; */
+    case 72:
+      number = 18;
+      movePlayer(arrOfPlayers[0].currentPossition);
+      break;
+    case 80:
+      number = 19;
+      movePlayer(arrOfPlayers[0].currentPossition);
+      break;
+    /* case 87:
+      number = 63;
+      movePlayerBack(arrOfPlayers[0].currentPossition);
+      break;
+    case 92:
+      number = 19;
+      movePlayerBack(arrOfPlayers[0].currentPossition);
+      break;
+    case 95:
+      number = 19;
+      movePlayerBack(arrOfPlayers[0].currentPossition);
+      break;
+    case 98:
+      number = 20;
+      movePlayerBack(arrOfPlayers[0].currentPossition);
+      break; */
+    default:
+      occupiedFields.push(arrOfPlayers[0].currentPossition)
+     // console.log("zauzetoF", occupiedFields)      
+        if (diceNumber != 6) {
+        if(counter == playerOnMove.length){
+          turnFinished = true;
+          counter = 1;
+        } else {
+          turnFinished = false;
+          counter++;
+        }
+        console.log("hello winner: ", counter, turnFinished, haveWinner)
+        if (haveWinner && turnFinished){
+          return setTimeout(()=>alert("game over!"),2500)
+        }        
+        arrOfPlayers.push(arrOfPlayers.shift());        
+      }
+      console.log(occupiedFields)
+      diceDIV.addEventListener('click', rollDice);
+      break;
+  }
+}
+
+window.onresize = () => dynamicCanvas();
+// canvas0.onclick = () => alert("clicked canvas");
+// canvas0.style.border = "1px solid black";
+
+/* relocate player's pawn starts here */
+
+function relocatePawn(ctx, xs, ys, xd, yd) {
+  /* let [xs, ys] = [750, 590];
+  let [xc, yc] = [350, 250];
+  let [xd, yd] = [80, 350]; */
+  xc = (xd - xs) * 0.75 + xs
+  yc = yd <= ys ? (4 * yd - 3 * ys) * 0.65 : (4 * ys - 3 * yd) * 0.65;
+  let xr, yr, xl, yl, x, y;  
+
+  let i = 0;
+  let n = 64;
+  let radius = 10;
+  let resizer = 1;
+  
+  function makeMove() {
+    if (i <= n) {
+      ctx.clearRect(0, 0, canvas0.width, canvas0.height)
+      requestAnimationFrame(makeMove)
+      /* if (i > 0 && i < n/2) {
+        resizer += 2*1/n;
+      } else if (i >= n/2 && i < n) {
+        resizer -= 2*1/n;
+      } else {
+        resizer = 1;
+      } */
+      xr = (xc - xs) * i / n + xs;
+      yr = ys - (ys - yc) * (i) / n;
+      xl = (xd - xc) * i / n + xc;
+      yl = yd - (yd - yc) * (n - i) / n;
+      x = (xl - xr) * i / n + xr;
+      y = yl - (yl - yr) * (n - i) / n;
+     /*  console.log("sta je ovde: ", x, y)
+      ctx.beginPath();
+      ctx.moveTo(xs, ys);
+      ctx.quadraticCurveTo(xc, yc, xd, yd);
+      ctx.stroke();
+      ctx.closePath();
+      ctx.beginPath();
+      ctx.arc(xc, yc, 5, 0, Math.PI * 2, false) */
+     /*  ctx.fillStyle = "red" */
+      /* ctx.fill();
+      ctx.closePath();
+      ctx.beginPath();
+      ctx.arc(xs, ys, 5, 0, Math.PI * 2, false) */
+     /*  ctx.fillStyle = "red" */
+      /* ctx.fill();
+      ctx.closePath();
+      ctx.beginPath();
+      ctx.arc(xd, yd, 5, 0, Math.PI * 2, false) */
+     /*  ctx.fillStyle = "red" */
+     /*  ctx.fill();
+      ctx.closePath();
+      console.log("evo ga poziv x y", x , y) */
+      drawPin(ctx, x, y);
+      i++;
+    } else {
+      ctx.restore();
+    }
+  }
+
+  makeMove();
+}
+  function drawPin(ctx, x, y) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(-25, 0);
+    ctx.lineTo(0, -50);
+    ctx.lineTo(25, 0);
+    ctx.closePath();
+    ctx.lineTo(0, 0);
+    ctx.closePath();
+    ctx.arc(0, -15, 24, Math.PI/6, Math.PI*5/6, false)
+    ctx.closePath();
+    ctx.arc(0, -50, 15, 0, Math.PI * 2, false)
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+  }
+
+
+/* relocate player's pawn ends here */
+
+
+/* dice section starts here */
+const sides = [...document.querySelectorAll(".die-item")];
+const diceDIV = document.querySelector(".dice");
+diceDIV.addEventListener('click', rollDice);
+
+let diceCounterTest = 0;
+let diceTestArr = [3,3,6,6,6,6]
+function rollDice() {
+  diceDIV.removeEventListener('click', rollDice);
+  const dice = [...document.querySelectorAll(".die-list")];
+  for (let i = 1; i <= 6; i++) {
+    sides[i - 1].classList.remove("hide-side");
+  }
+  dice.forEach(die => {
+   die.dataset.roll = getRandomNumber(1, 6);
+    // die.dataset.roll = diceTestArr[diceCounterTest];
+    // diceCounterTest++
+    number = +die.dataset.roll;
+    diceNumber = number;
+    toggleClasses(die);
+  });
+  setTimeout(() => movePlayer(arrOfPlayers[0].currentPossition), 1500);
+}
+
+function toggleClasses(die) {
+  die.classList.toggle("odd-roll");
+  die.classList.toggle("even-roll");
+  setTimeout(() => {
+    for (let i = 1; i <= 6; i++) {
+      if (i == die.dataset.roll) {
+        continue;
+      } else {
+        sides[i - 1].classList.add("hide-side");
+      }
+    }
+  }, 1150)
+}
+
+}
+  function getRandomNumber(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
