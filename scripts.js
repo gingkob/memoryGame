@@ -11,44 +11,47 @@ let dice1 = document.getElementById("dice1")
 let names = {};
 let memoryCall = () => { 
   names = [
-    { play1:{ 
-        name: document.getElementById("player1").value.trim(),
-        dice: document.getElementById("dice1").value.trim()
-      }
+    { id: "player1",
+      name: document.getElementById("player1").value.trim(),
+      dice: document.getElementById("dice1").value.trim()
     },
-    { play2:{ 
-        name: document.getElementById("player2").value.trim(),
-        dice: document.getElementById("dice2").value.trim()
-      }
+    { id: "player2",
+      name: document.getElementById("player2").value.trim(),
+      dice: document.getElementById("dice2").value.trim()
     },
-    { play3:{ 
-        name: document.getElementById("player3").value.trim(),
-        dice: document.getElementById("dice3").value.trim()
-      }
+    {  id: "player3", 
+      name: document.getElementById("player3").value.trim(),
+      dice: document.getElementById("dice3").value.trim()
     },
-    { play4:{ 
-        name: document.getElementById("player4").value.trim(),
-        dice: document.getElementById("dice4").value.trim()
-      }
+    { id: "player4", 
+      name: document.getElementById("player4").value.trim(),
+      dice: document.getElementById("dice4").value.trim()
     }
   ]
 
   let validator = 0;
-  for(let i = 0; i < names.length; i++){
-      console.log(names[i][`play${i+1}`].name)
-      console.log(names[i][`play${i+1}`].dice)
-      if(!names[i][`play${i+1}`].name && !names[i][`play${i+1}`].dice){
-        validator++
-      }
-    }
+  let pairValidation = true;
 
-  if(validator <= 2){
-    // window.open("./memory/memory.html")
-    introGameSection.classList.add("show-nothing")
-    introGameSectionChild.remove();
-    memoryGameHtml.append(memoryGameHtmlChild);
-    memoryGameHtml.classList.remove("show-nothing");
-    startMemory(names);
+  names.forEach( item => {
+    if(item.name){
+      if(item.dice){
+        validator++;
+      }else{
+        pairValidation = false;
+      }
+    }    
+  })
+
+  if(validator > 1){
+    if(pairValidation){
+      introGameSection.classList.add("show-nothing")
+      introGameSectionChild.remove();
+      memoryGameHtml.append(memoryGameHtmlChild);
+      memoryGameHtml.classList.remove("show-nothing");
+      startMemory(names);
+    }else{
+      alert("Svaki uneti igrac mora baciti i kockicu")
+    }    
   }else{
     alert("Potrebno je bar 2 igraca za igru memorije")
   }
@@ -122,17 +125,10 @@ let rollDice = (dice) => {
 
 // --------------------start of memory section board----------------
 
-let startMemory = names => {
-  names.sort((a,b) =>{
-    console.log(names)
-    return b.dice - a.dice;
-  })
-  console.log(names)
+let startMemory = names => { 
+
   let playInfoArr = []
-  names.forEach(item => {
-    playInfoArr.push({"player":names[item], "score":0})
-  })
-  console.log(playInfoArr)
+  names.forEach(item => playInfoArr.push({"player":item.name, "score":0, id:item.id}))
 
   let playerActive = 0, playerPassive = 3, overAllScore = 0;
 
@@ -143,7 +139,6 @@ let startMemory = names => {
   let hasFlippedCard = false;
   let firstCard, secondCard;
   let lockBoard = false;
-  // let currentOnMove = ["player1", "player2", "player3", "player4"]
   let currentOnMove = [];
 
   let player1Container = document.getElementById("player1-container");
@@ -155,44 +150,101 @@ let startMemory = names => {
   let player2 = document.getElementById("player2");
   let player3 = document.getElementById("player3");
   let player4 = document.getElementById("player4");
-  let dice1 = document.getElementById("dice1");
-  let dice2 = document.getElementById("dice2");
-  let dice3 = document.getElementById("dice3");
-  let dice4 = document.getElementById("dice4");
 
   (() => {
     if (playInfoArr[0].player.trim() != "") {
-      currentOnMove.push("player1");
+//      currentOnMove.push("player1");
       player1Container.style.order = playerActive++;
     } else {
+    //  currentOnMove.push("");
       player1Container.style.order = playerPassive--;
       player1Container.classList.add("show-nothing")
     }
 
     if (playInfoArr[1].player.trim() != "") {
-      currentOnMove.push("player2");
+   //   currentOnMove.push("player2");
       player2Container.style.order = playerActive++;
     } else {
+    //  currentOnMove.push("");
       player2Container.style.order = playerPassive--;
       player2Container.classList.add("show-nothing")
     }
 
     if (playInfoArr[2].player.trim() != "") {
-      currentOnMove.push("player3");
+   //   currentOnMove.push("player3");
       player3Container.style.order = playerActive++;
     } else {
+     // currentOnMove.push("");
       player3Container.style.order = playerPassive--;
       player3Container.classList.add("show-nothing")
     }
 
     if (playInfoArr[3].player.trim() != "") {
-      currentOnMove.push("player4");
+   //   currentOnMove.push("player4");
       player4Container.style.order = playerActive++;
     } else {
+     // currentOnMove.push("");
       player4Container.style.order = playerPassive--;
       player4Container.classList.add("show-nothing")
     }
   })()
+/*   let playerContainerSetupAdd = (player) =>{
+    currentOnMove.push(player);
+      switch(player){
+        case "player1":
+          player1Container.style.order = playerActive++;
+          break;
+        case "player2":
+          player2Container.style.order = playerActive++;
+          break;
+        case "player3":
+          player3Container.style.order = playerActive++;
+          break;
+        case "player4":
+          player4Container.style.order = playerActive++;
+          break;
+      }      
+  }
+
+  let playerContainerSetupSubstract = (player) =>{
+      switch(player){
+        case "player1":
+          player1Container.style.order = playerPassive--;
+          player1Container.classList.add("show-nothing");
+          break;
+        case "player2":
+          player1Container.style.order = playerPassive--;
+          player1Container.classList.add("show-nothing");
+          break;
+        case "player3":
+          player1Container.style.order = playerPassive--;
+          player1Container.classList.add("show-nothing");
+          break;
+        case "player4":
+          player1Container.style.order = playerPassive--;
+          player1Container.classList.add("show-nothing");
+          break;
+      }      
+  }
+
+  (() => {
+    playInfoArr.forEach(item =>{
+      if (item.player.trim() != "") {
+        playerContainerSetupAdd(item.id)
+      } else {
+        playerContainerSetupSubstract(item.id)
+      }
+    })
+  })() */
+  
+  names.sort((a,b) =>b.dice - a.dice);
+  names.forEach(item => {
+    if(item.name != ""){
+      currentOnMove.push(item.id)
+    }    
+  })
+
+  console.log("on move: ", currentOnMove);
 
   player1.textContent = playInfoArr[0].player;
   player2.textContent = playInfoArr[1].player;
@@ -219,7 +271,6 @@ let startMemory = names => {
   }
 
   matchCheck = (a, b) => (a === b) ? disableCards() : unFlipCards();
-  // matchCheck = (a, b) => true ? disableCards() : unFlipCards();
 
   disableCards = () => {
 
@@ -251,13 +302,6 @@ let startMemory = names => {
 
     overAllScore++;
     if (overAllScore == 12) {
-      /* let prvi = [];
-      prvi.push(scorePlay1);
-      prvi.push(scorePlay2);
-      prvi.push(scorePlay3);
-      prvi.push(scorePlay4);
-      prvi.sort((a, b) => b - a);
-      console.log(prvi) */
       let maxScore = Math.max(...playInfoArr.map(o => o.score), 0);
       let winners = playInfoArr.filter(item => item.score == maxScore)
       console.log(winners)
@@ -294,7 +338,7 @@ let startMemory = names => {
       secondCard.classList.remove("flip")
       resetBoard();
       changeCurrentOnMoveIndicator(previous, onMove);
-    }, 750);
+    }, 1200);
   }
 
   resetBoard = () => {
@@ -336,6 +380,7 @@ let startMemory = names => {
       default: break;
     }
   }
+ changeCurrentOnMoveIndicator( null, currentOnMove[0]);
 
   (shuffle = () => cards.forEach(card => card.style.order = Math.floor(Math.random() * 12)))()
 

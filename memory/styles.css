@@ -228,7 +228,6 @@ p {
   backface-visibility: visible;
   transform: rotateY(180deg);
 }
-
 .player2-corner {
   width: 0;
   height: 0;
@@ -238,7 +237,6 @@ p {
   backface-visibility: visible;
   transform: rotateY(180deg);
 }
-
 .player3-corner {
   width: 0;
   height: 0;
@@ -248,7 +246,6 @@ p {
   backface-visibility: visible;
   transform: rotateY(180deg);
 }
-
 .player4-corner {
   width: 0;
   height: 0;
@@ -258,32 +255,26 @@ p {
   backface-visibility: visible;
   transform: rotateY(180deg);
 }
-
 .player1-border {
   border: 2px solid #d8eb4d;
 }
-
+.player2-border {
+	border: 2px solid #4deb6f;
+}
+.player3-border {
+  border: 2px solid #4de1eb;
+}
+.player4-border {
+	border: 2px solid #4d6aeb;
+}
 .next-player-onMove-up {
   transform: scale(1.1);
   transition: transform .7s;
 }
-
 .previous-player-onMove-down {
   transform: scale(1);
   transform-style: preserve-3d;
   transition: transform .7s;
-}
-
-.player2-border {
-	border: 2px solid #4deb6f;
-}
-
-.player3-border {
-  border: 2px solid #4de1eb;
-}
-
-.player4-border {
-	border: 2px solid #4d6aeb;
 }
 
 .right-corner {

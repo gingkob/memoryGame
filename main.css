@@ -81,6 +81,7 @@
   font-size: 1.5rem;
   margin: 1rem;
 }
+
 /* memory */
 .memory__container{
   height: 100vh;
@@ -100,7 +101,7 @@
 .memory__player{
   height: 17vh;
   margin: 0 1rem 0;
-  border: 1px solid red;
+  border: 1px solid green;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -133,8 +134,8 @@
   box-shadow: 0 0 15px rgba(0,0,0,.1);
 }
 .memory-card img{
-  width: 100%;
-  height: 100%;
+ width: 100%;
+  /*  height: 100%; */
   background-position: center;
 }
 .memory-card:active {
@@ -159,8 +160,74 @@
 .back-face{
   background:#eef9ed;
 }
+.player1-corner {
+  width: 0;
+  height: 0;
+	border-right: 2vw solid #d8eb4d;
+	border-left: 2vw solid transparent;
+  border-bottom: 2vw solid transparent;
+  backface-visibility: visible;
+  transform: rotateY(180deg);
+  background: none;
+}
+.player2-corner {
+  width: 0;
+  height: 0;
+	border-right: 2vw solid #4deb6f;
+	border-left: 2vw solid transparent;
+  border-bottom: 2vw solid transparent;
+  backface-visibility: visible;
+  transform: rotateY(180deg);
+  background: none;
+}
+.player3-corner {
+  width: 0;
+  height: 0;
+	border-right: 2vw solid #4de1eb;
+	border-left: 2vw solid transparent;
+  border-bottom: 2vw solid transparent;
+  backface-visibility: visible;
+  transform: rotateY(180deg);
+  background: none;
+}
+.player4-corner {
+  width: 0;
+  height: 0;
+	border-right: 2vw solid #4d6aeb;
+	border-left: 2vw solid transparent;
+  border-bottom: 2vw solid transparent;
+  backface-visibility: visible;
+  transform: rotateY(180deg);
+  background: none;
+}
+.player1-border {
+  border: 1px solid #d8eb4d;
+  background: #d8eb4d;
+}
+.player2-border {
+  border: 1px solid #4deb6f;
+  background: #4deb6f;
+}
+.player3-border {
+  border: 1px solid #4de1eb;
+  background: #4de1eb;
+}
+.player4-border {
+  border: 1px solid #4d6aeb;
+  background: #4d6aeb;
+}
+.next-player-onMove-up {
+  transform: scale(1.05);
+  transition: transform .7s;
+}
+.previous-player-onMove-down {
+  transform: scale(1);
+  transform-style: preserve-3d;
+  transition: transform .7s;
+}
 
 /* mountain */
+
 .show-nothing {
   display: none;
 }
