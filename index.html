@@ -47,7 +47,8 @@
   <!-- intro section ends here -->
 
   <!-- code for card memory game starts here -->
-  <div class="show-nothing" id="memory-game-html">
+  <!-- <div class="show-nothing" id="memory-game-html"> -->
+  <div id="memory-game-html">
     <div class="memory__container" id="memory-game-html-child">
       <div id="player-board-container">
         <div id="player-board">
@@ -55,23 +56,31 @@
             <!-- <div class="memory__playerboard" class="memory-game-player-left"> -->
               <!--<div class="one-player-container player1-border next-player-onMove-up" id="player1-container">-->
               <div class="memory__player" id="player1-container">
-                <label id="player1">Aleksandar</label>
-                <p id="score1">0</p>
+                <div>
+                  <label id="player1">Aleksandar</label>
+                  <p id="score1">0</p>
+                </div>
               </div>
               <!-- <div class="one-player-container" id="player2-container"> -->
               <div class="memory__player" id="player2-container">                
-                <label id="player2">kkk</label>
-                <p id="score2">0</p>
+                <div>
+                  <label id="player2">kkk</label>
+                  <p id="score2">0</p>
+                </div>
               </div>
               <!-- <div class="one-player-container" id="player3-container"> -->
-              <div class="memory__player" id="player3-container">                
-                <label id="player3">kkk</label>
-                <p id="score3">0</p>
+              <div class="memory__player" id="player3-container">
+                <div>                                
+                  <label id="player3">kkk</label>
+                  <p id="score3">0</p>
+                </div>
               </div>
               <!-- <div class="one-player-container" id="player4-container"> -->
-              <div class="memory__player" id="player4-container">                
-                <label id="player4">kkk</label>
-                <p id="score4">0</p>
+              <div class="memory__player" id="player4-container">
+                <div>
+                  <label id="player4">kkk</label>
+                  <p id="score4">0</p>
+                </div>
               </div>
           </section>
         </div>
@@ -176,11 +185,19 @@
         </div>
       </section>
       <section class="memory__playerboard__container">        
-        <div class="memory__player">
-          <label id="uputstvo">Uputstvo</label>
-          <p id="score3">0</p>
+        <div class="memory__manual">
+          <div>
+            <label id="uputstvo">Uputstvo</label>
+            <p id="score3">0</p>
+          </div>            
+          </div>
+          <div class="memory__buttons_container">
+            <button class="memory__button" type="button" id="new-game" onclick={newGame(id)}>НОВА ИГРА</button>
+            <button class="memory__button" type="button" id="choose-game" onclick={chooseGame(id)}>ПОВРАТАК НА ИЗБОР ИГРЕ</button>
+          </div>           
         </div>          
       </section>
+      
     </div>
   </div>
   <!-- code for card memory game ends here -->

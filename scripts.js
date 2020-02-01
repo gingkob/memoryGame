@@ -32,11 +32,11 @@ let memoryCall = () => {
   let validator = 0;
   let pairValidation = true;
 
+
   names.forEach( item => {
     if(item.name){
-      if(item.dice){
         validator++;
-      }else{
+      if(!item.dice){
         pairValidation = false;
       }
     }    
@@ -58,6 +58,7 @@ let memoryCall = () => {
 
 }
 let climbingToTheMountainCall = () => alert("mountain");
+
 let rollDice = (dice) => {
   switch (dice){
     case "dice1":
@@ -124,27 +125,27 @@ let rollDice = (dice) => {
 // --------------------end intro section-----------------
 
 // --------------------start of memory section board----------------
+let score1, score2, score3, score4, hasFlippedCard, firstCard, secondCard, lockBoard, currentOnMove, player1Container, player2Container, player3Container, player4Container;
 
 let startMemory = names => { 
 
   let playInfoArr = []
   names.forEach(item => playInfoArr.push({"player":item.name, "score":0, id:item.id}))
-
+console.log("play info: ", playInfoArr)
   let playerActive = 0, playerPassive = 3, overAllScore = 0;
 
-  let score1 = document.getElementById("score1");
-  let score2 = document.getElementById("score2");
-  let score3 = document.getElementById("score3");
-  let score4 = document.getElementById("score4");
-  let hasFlippedCard = false;
-  let firstCard, secondCard;
-  let lockBoard = false;
-  let currentOnMove = [];
+  score1 = document.getElementById("score1");
+  score2 = document.getElementById("score2");
+  score3 = document.getElementById("score3");
+  score4 = document.getElementById("score4");
+  hasFlippedCard = false;
+  lockBoard = false;
+  currentOnMove = [];
 
-  let player1Container = document.getElementById("player1-container");
-  let player2Container = document.getElementById("player2-container");
-  let player3Container = document.getElementById("player3-container");
-  let player4Container = document.getElementById("player4-container");
+  player1Container = document.getElementById("player1-container");
+  player2Container = document.getElementById("player2-container");
+  player3Container = document.getElementById("player3-container");
+  player4Container = document.getElementById("player4-container");
 
   let player1 = document.getElementById("player1");
   let player2 = document.getElementById("player2");
@@ -277,23 +278,23 @@ let startMemory = names => {
     switch (onMove) {
 
       case "player1":
-        firstCard.insertAdjacentHTML('beforeend', '<img class="player1-corner"/>');
-        secondCard.insertAdjacentHTML('beforeend', '<img class="player1-corner"/>');
+        firstCard.insertAdjacentHTML('beforeend', '<img class="player1-corner remove-tag"/>');
+        secondCard.insertAdjacentHTML('beforeend', '<img class="player1-corner remove-tag"/>');
         score1.textContent = ++playInfoArr[0].score;
         break;
       case "player2":
-        firstCard.insertAdjacentHTML('beforeend', '<img class="player2-corner"/>');
-        secondCard.insertAdjacentHTML('beforeend', '<img class="player2-corner"/>');
+        firstCard.insertAdjacentHTML('beforeend', '<img class="player2-corner remove-tag"/>');
+        secondCard.insertAdjacentHTML('beforeend', '<img class="player2-corner remove-tag"/>');
         score2.textContent = ++playInfoArr[1].score;
         break;
       case "player3":
-        firstCard.insertAdjacentHTML('beforeend', '<img class="player3-corner"/>');
-        secondCard.insertAdjacentHTML('beforeend', '<img class="player3-corner"/>');
+        firstCard.insertAdjacentHTML('beforeend', '<img class="player3-corner remove-tag"/>');
+        secondCard.insertAdjacentHTML('beforeend', '<img class="player3-corner remove-tag"/>');
         score3.textContent = ++playInfoArr[2].score;
         break;
       case "player4":
-        firstCard.insertAdjacentHTML('beforeend', '<img class="player4-corner"/>');
-        secondCard.insertAdjacentHTML('beforeend', '<img class="player4-corner"/>');
+        firstCard.insertAdjacentHTML('beforeend', '<img class="player4-corner remove-tag"/>');
+        secondCard.insertAdjacentHTML('beforeend', '<img class="player4-corner remove-tag"/>');
         score4.textContent = ++playInfoArr[3].score;
         break;
 
@@ -385,8 +386,31 @@ let startMemory = names => {
   (shuffle = () => cards.forEach(card => card.style.order = Math.floor(Math.random() * 12)))()
 
   cards.forEach(card => card.addEventListener("click", flipCard));
+
+  
 }
 
+function newGame(id) {
+  score1.textContent = 0;
+  score2.textContent = 0;
+  score3.textContent = 0;
+  score4.textContent = 0;
+  player1Container.classList.remove('player1-border')
+  player2Container.classList.remove('player2-border')
+  player3Container.classList.remove('player3-border')
+  player4Container.classList.remove('player4-border')
+  cards.forEach(card => {
+    card.classList.remove("flip");
+    let el = card.querySelector(".remove-tag");
+    if(el){
+      card.removeChild(el);
+    }
+})
+  setTimeout(()=>startMemory(names),500);
+}
+function chooseGame(id) {
+    alert('choose game')
+}
 // --------------------end of memory section board---------------------
 
-(() => memoryGameHtmlChild.remove())()
+//(() => memoryGameHtmlChild.remove())()
