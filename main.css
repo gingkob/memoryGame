@@ -253,6 +253,82 @@
   padding: 0.5rem;
 }
 
+/*custom alert section*/
+.alert{
+  position:fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background:white;
+  width:25vw;
+  height:15vh;
+  border-radius: 0.5rem;
+  z-index: 1001;
+}
+.closed {
+  display:none
+}
+.display-custom-alert {
+  display:block
+}
+
+.modal-overlay {
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:rgb(255, 255, 255, 0)
+
+}
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 1rem 1.5rem;
+  width: 25vw;
+ 
+}
+.close-button {
+  float: right;
+  width: 1.5rem;
+  line-height: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  background-color: lightgray;
+}
+.custom-alert-text{
+  background: white;
+}
+.custom-alert-button {
+  position: absolute;
+  width:10vh;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: none;
+  color: black;
+  padding: 0.2rem;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  box-shadow: 0 7px #999;
+}
+.custom-alert-button:hover {
+  background-color: #fffff5;
+}
+.custom-alert-button:active {
+  background-color:white;
+  box-shadow: 0 5px #666;
+  top: 91%
+}
+/*custom alert section end*/
+
 /* mountain */
 .mountain-part{
   width: 100vw;

@@ -52,10 +52,10 @@ let memoryCall = () => {
       memoryGameHtml.classList.remove("show-nothing");
       startMemory(names);
     }else{
-      alert("Svaki uneti igrac mora baciti i kockicu")
+      customAlertTime("Svaki uneti igrac mora baciti i kockicu", 4000)
     }    
   }else{
-    alert("Potrebno je bar 2 igraca za igru memorije")
+    customAlert("Potrebno je bar 2 igraca za igru memorije")
   }
 
 }
@@ -100,10 +100,10 @@ let climbingToTheMountainCall = () => {
       memoryGameHtml.classList.remove("show-nothing");
       startMountain(names);
     }else{
-      alert("Svaki uneti igrac mora baciti i kockicu")
+      customAlert("Svaki uneti igrac mora baciti i kockicu")
     }    
   }else{
-    alert("Potrebno je bar 2 igraca za igru memorije")
+    customAlert("Potrebno je bar 2 igraca za igru memorije")
   }
 
 };
@@ -120,7 +120,7 @@ let rollDice = (dice) => {
         document.getElementById("player1").setAttribute("disabled", true);
         document.getElementById("player1").classList.add("index__inputs__bordered");
       }else{
-        alert("input name");
+        customAlert("input name");
         return;
       }      
       break;    
@@ -134,7 +134,7 @@ let rollDice = (dice) => {
         document.getElementById("player2").setAttribute("disabled", true);
         document.getElementById("player2").classList.add("index__inputs__bordered");
       }else{
-        alert("input name");
+        customAlert("input name");
         return;
       }      
       break;
@@ -148,7 +148,7 @@ let rollDice = (dice) => {
         document.getElementById("player3").setAttribute("disabled", true);
         document.getElementById("player3").classList.add("index__inputs__bordered");
       }else{
-        alert("input name");
+        customAlert("input name");
         return;
       }      
       break;
@@ -162,7 +162,7 @@ let rollDice = (dice) => {
         document.getElementById("player4").setAttribute("disabled", true);
         document.getElementById("player4").classList.add("index__inputs__bordered");
       }else{
-        alert("input name");
+        customAlert("input name");
         return;
       }      
       break;
@@ -347,7 +347,7 @@ console.log("play info: ", playInfoArr)
         score4.textContent = ++playInfoArr[3].score;
         break;
 
-      default: alert("Something went wrong!");
+      default: customAlert("Something went wrong!");
     }
 
     overAllScore++;
@@ -357,11 +357,11 @@ console.log("play info: ", playInfoArr)
       console.log(winners)
       setTimeout(() => {
         if (winners.length == 1){
-          alert("kraj\nPobednik je: " + winners[0].player);
+          customAlert("kraj\nPobednik je: " + winners[0].player);
         } else {
           let winnersMulti = "";
           winners.forEach(item => winnersMulti += item.player + ", ")
-          alert("kraj\nPobednici su: " + winnersMulti.trim().slice(0,-1));
+          customAlert("kraj\nPobednici su: " + winnersMulti.trim().slice(0,-1));
         }
         
         changeCurrentOnMoveIndicator(onMove);
@@ -458,7 +458,7 @@ function newGame(id) {
   setTimeout(()=>startMemory(names),500);
 }
 function chooseGame(id) {
-    alert('choose game')
+    customAlert('choose game')
 }
 // --------------------end of memory section board---------------------
 
@@ -548,27 +548,40 @@ let canvasObj = {
   player4:cPlayer4,
 }
 let playerOnMove = [];
+let players = names.map(name => {
+ return name
+})
 names.sort((a,b) =>b.dice - a.dice);
   names.forEach(item => {
     if(item.name != ""){
       playerOnMove.push(item.id)
     }    
   })
-console.log(playerOnMove)
 let arrOfPlayers = []
 names.forEach(name => {
- arrOfPlayers.push({"player":name.name,currentPossition: 0, ctx:canvasObj[name.id] })
+  if(name.name && name.dice){
+    arrOfPlayers.push({"player":name.name,currentPossition: 0, ctx:canvasObj[name.id] })
+  }
 })
 
-console.log(arrOfPlayers)
 let player1 = document.getElementById("player-1");
 let player2 = document.getElementById("player-2");
 let player3 = document.getElementById("player-3");
 let player4 = document.getElementById("player-4");
-player1.textContent = arrOfPlayers[0].player;
-player2.textContent = arrOfPlayers[1].player;
-player3.textContent = arrOfPlayers[2].player;
-player4.textContent = arrOfPlayers[3].player;
+let playerObj = {
+  player1:player1,
+  player2:player2,
+  player3:player3,
+  player4:player4
+
+}
+// player1.textContent = arrOfPlayers[0].player;
+// player2.textContent = arrOfPlayers[1].player;
+// player3.textContent = arrOfPlayers[2].player;
+// player4.textContent = arrOfPlayers[3].player;
+players.forEach((player, i) => {
+  playerObj[`player${i+1}`].textContent = player.name
+})
 
 
 
@@ -725,7 +738,7 @@ let endTurnBack = (ctx, currentPossition) => {
         okupator = arrOfPlayers[i];
       }
     }
-    alert(`Polje zauzeto! - ${okupator.player}`)
+    customAlert(`Polje zauzeto! - ${okupator.player}`)
   }
   switch (arrOfPlayers[0].currentPossition) {
     case 1:
@@ -813,7 +826,7 @@ let endTurnBack = (ctx, currentPossition) => {
         }
         console.log("hello winner BACK: ", counter, turnFinished, haveWinner)
         if (haveWinner && turnFinished){
-          return setTimeout(()=>alert("game over!"),2500)
+          return setTimeout(()=>customAlert("game over!"),2500)
         }
         arrOfPlayers.push(arrOfPlayers.shift());
       }
@@ -882,7 +895,7 @@ let endTurn = (ctx, currentPossition) => {
         okupator = arrOfPlayers[i];
       }
     }
-    alert(`Polje zauzeto! - ${okupator.player}`)
+    customAlert(`Polje zauzeto! - ${okupator.player}`)
     smazen(okupator);
 
   }
@@ -972,7 +985,7 @@ let endTurn = (ctx, currentPossition) => {
         }
         console.log("hello winner: ", counter, turnFinished, haveWinner)
         if (haveWinner && turnFinished){
-          return setTimeout(()=>alert("game over!"),2500)
+          return setTimeout(()=>customAlert("game over!"),2500)
         }        
         arrOfPlayers.push(arrOfPlayers.shift());        
       }
@@ -1115,4 +1128,41 @@ function toggleClasses(die) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+
+  function customAlert(text){
+    let modal = document.querySelector('.alert');
+    let overlay = document.querySelector('.modal-overlay');
+    let paragraph = document.querySelector('.custom-alert-text');
+    paragraph.innerHTML=text
+    modal.classList.toggle('closed');
+    overlay.classList.toggle('closed')
+    if(time){
+      setTimeout(() => {
+        removeAlert()
+      }, time)
+    }
+  }
+
+  function customAlertTime(text, time=1500){
+    let modal = document.querySelector('.alert');
+    let overlay = document.querySelector('.modal-overlay');
+    let button = document.querySelector('.custom-alert-button').style.display = 'none';
+    let closeX = document.querySelector('.close-button').style.display = 'none';
+    let paragraph = document.querySelector('.custom-alert-text');
+    paragraph.innerHTML=text
+    modal.classList.toggle('closed');
+    overlay.classList.toggle('closed')
+   
+      setTimeout(() => {
+        removeAlert()
+      }, time)
+    
+  }
+  function removeAlert(){
+    let modal = document.querySelector('.alert');
+    let overlay = document.querySelector('.modal-overlay');
+    modal.classList.toggle('closed');
+    overlay.classList.toggle('closed')
   }

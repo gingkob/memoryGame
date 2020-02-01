@@ -275,6 +275,15 @@
         </div>
       </section>
     </div>
+<!-- modal section -->
+    <div class="alert closed">
+      <span class="close-button" onclick={removeAlert(id)}>&times;</span>           
+        <div class="modal-content">
+            <p class="custom-alert-text"></p>
+        </div>
+        <input type="button" class="custom-alert-button" value="OK" onclick={removeAlert(id)}>
+      </div>
+      <div class="modal-overlay closed" id="modal-overlay"></div>
   </div>
   <!-- code for card memory game ends here -->
 
