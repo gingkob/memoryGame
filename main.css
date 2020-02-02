@@ -231,28 +231,41 @@
 }
 
 .memory__manual{
+  text-align: center;
   height: 75vh;
-  margin: 0 0.3rem 0;
+  margin: 0.3rem 0.3rem 0;
   border: 1px solid green;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  box-shadow: 0 0 15px rgba(0,0,0,.3);
 }
 .memory__manual label {
+  color: green;
   padding: 0 0.3rem 0.3rem;
   font-size: 2.5rem;
 }
 .memory__manual p {
   padding: 0.3rem 0.3rem 0rem;
-  font-size: 3.5rem;
+  font-kerning: auto;
+  line-height: 2.5rem;
+  font-size: 2rem;
 }
-
+.memory__buttons_container{
+  padding: 0.2rem;
+}
 .memory__button{
   width: 100%;
   height: 3rem;
   padding: 0.5rem;
+  font-size: 1.25rem;
 }
-
+.new{
+  background: #4deb6f;
+}
+.choose{
+  background: #4de1eb;
+}
 /*custom alert section*/
 .alert{
   position:fixed;

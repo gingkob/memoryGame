@@ -18,22 +18,22 @@
       </div>
       <div class="index__players__container">
         <div class="index__player">
-          <input class="index__player__input" id="player1" type="text" placeholder="Unesite ime igraca..."/>
+          <input class="index__player__input" id="player1" type="text" placeholder="Унесите име играча..."/>
           <input class="index__player__color" id="boja1" type="color" value="#d8eb4d" disabled />
           <button class="index__player__dice" id="dice1" type="submit" onclick={rollDice(id)}></button>
         </div>
         <div class="index__player">
-          <input class="index__player__input" id="player2" type="text" placeholder="Unesite ime igraca..."/>
+          <input class="index__player__input" id="player2" type="text" placeholder="Унесите име играча..."/>
           <input class="index__player__color" id="boja2" type="color" value="#4deb6f" disabled />
           <button class="index__player__dice" id="dice2" type="submit" onclick={rollDice(id)}></button>
         </div>
         <div class="index__player">
-          <input class="index__player__input" id="player3" type="text" placeholder="Unesite ime igraca..."/>
+          <input class="index__player__input" id="player3" type="text" placeholder="Унесите име играча..."/>
           <input class="index__player__color" id="boja3" type="color" value="#4de1eb" disabled />
           <button class="index__player__dice" id="dice3" type="submit" onclick={rollDice(id)}></button>
         </div>
         <div class="index__player">
-          <input class="index__player__input" id="player4" type="text" placeholder="Unesite ime igraca..." />
+          <input class="index__player__input" id="player4" type="text" placeholder="Унесите име играча..." />
           <input class="index__player__color" id="boja4" type="color" value="#4d6aeb" disabled />
           <button class="index__player__dice" id="dice4" type="submit" onclick={rollDice(id)}></button>
         </div>
@@ -53,8 +53,6 @@
       <div id="player-board-container">
         <div id="player-board">
           <section class="memory__playerboard__container">
-            <!-- <div class="memory__playerboard" class="memory-game-player-left"> -->
-              <!--<div class="one-player-container player1-border next-player-onMove-up" id="player1-container">-->
               <div class="memory__player" id="player1-container">
                 <div>
                   <label id="player1">Aleksandar</label>
@@ -187,19 +185,19 @@
       <section class="memory__playerboard__container">        
         <div class="memory__manual">
           <div>
-            <label id="uputstvo">Uputstvo</label>
-            <p id="score3">0</p>
+            <label id="uputstvo">Упутство за игру меморије</label>
+            <p id="manual-memory"> <br/>Неко ће да напише упутство како се игра ова игра. И то упутство ће да се прикаже овде. За сада имамо само неки текст који нам приказује како ће то да изгледа. До тада - уживајте у игри меморије <br/>ПАМТИМ<br/>РЕЦИКЛИРАМ</p>
           </div>            
           </div>
           <div class="memory__buttons_container">
-            <button class="memory__button" type="button" id="new-game" onclick={newGame(id)}>НОВА ИГРА</button>
-            <button class="memory__button" type="button" id="choose-game" onclick={chooseGame(id)}>ПОВРАТАК НА ИЗБОР ИГРЕ</button>
+            <button class="memory__button new" type="button" id="new-game" onclick={newGame(id)}>НОВА ИГРА</button>
+            <button class="memory__button choose" type="button" id="choose-game" onclick={chooseGame(id)}>ПОВРАТАК НА ИЗБОР ИГРЕ</button>
           </div>           
         </div>          
       </section>
       
   </div>
-  <div id="mountain-game-html">
+  <div class="show-nothing" id="mountain-game-html">
     <div id="mountain-game-html-child">
       <section class="mountain-part">  
         <div class="canvas-container">

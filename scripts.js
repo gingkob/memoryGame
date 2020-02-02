@@ -9,6 +9,42 @@ let introGameSection = document.getElementById("intro-section")
 let introGameSectionChild = document.getElementById("intro-section-child")
 let dice1 = document.getElementById("dice1")
 
+function customAlert(text, time=2000){
+  let modal = document.querySelector('.alert');
+  let overlay = document.querySelector('.modal-overlay');
+  let paragraph = document.querySelector('.custom-alert-text');
+  paragraph.innerHTML=text
+  modal.classList.toggle('closed');
+  overlay.classList.toggle('closed')
+  if(time){
+    setTimeout(() => {
+      removeAlert()
+    }, time)
+  }
+}
+
+function customAlertTime(text, time=1500){
+  let modal = document.querySelector('.alert');
+  let overlay = document.querySelector('.modal-overlay');
+  let button = document.querySelector('.custom-alert-button').style.display = 'none';
+  let closeX = document.querySelector('.close-button').style.display = 'none';
+  let paragraph = document.querySelector('.custom-alert-text');
+  paragraph.innerHTML=text
+  modal.classList.toggle('closed');
+  overlay.classList.toggle('closed')
+ 
+    setTimeout(() => {
+      removeAlert()
+    }, time)
+  
+}
+function removeAlert(){
+  let modal = document.querySelector('.alert');
+  let overlay = document.querySelector('.modal-overlay');
+  modal.classList.toggle('closed');
+  overlay.classList.toggle('closed')
+}
+
 // -------------------start intro section------------------
 let names = {};
 let memoryCall = () => { 
@@ -52,10 +88,11 @@ let memoryCall = () => {
       memoryGameHtml.classList.remove("show-nothing");
       startMemory(names);
     }else{
-      customAlertTime("Svaki uneti igrac mora baciti i kockicu", 4000)
+      customAlertTime("Сваки унети играч мора бацити и коцкицу - тако се одређује редослед играча у игри :-)", 4000)
     }    
   }else{
-    customAlert("Potrebno je bar 2 igraca za igru memorije")
+    console.log("de ste bre")
+    customAlert("За игру је потребно најмање два играча. Унесите имена /n :-)")
   }
 
 }
@@ -100,10 +137,11 @@ let climbingToTheMountainCall = () => {
       memoryGameHtml.classList.remove("show-nothing");
       startMountain(names);
     }else{
-      customAlert("Svaki uneti igrac mora baciti i kockicu")
+      customAlert("Сваки унети играч мора бацити и коцкицу - тако се одређује редослед играча у игри :-)")
     }    
   }else{
-    customAlert("Potrebno je bar 2 igraca za igru memorije")
+    console.log("evo me ovde")
+    customAlert("За игру је потребно најмање два играча. Унесите имена :-)")
   }
 
 };
@@ -1130,39 +1168,3 @@ function toggleClasses(die) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-
-  function customAlert(text){
-    let modal = document.querySelector('.alert');
-    let overlay = document.querySelector('.modal-overlay');
-    let paragraph = document.querySelector('.custom-alert-text');
-    paragraph.innerHTML=text
-    modal.classList.toggle('closed');
-    overlay.classList.toggle('closed')
-    if(time){
-      setTimeout(() => {
-        removeAlert()
-      }, time)
-    }
-  }
-
-  function customAlertTime(text, time=1500){
-    let modal = document.querySelector('.alert');
-    let overlay = document.querySelector('.modal-overlay');
-    let button = document.querySelector('.custom-alert-button').style.display = 'none';
-    let closeX = document.querySelector('.close-button').style.display = 'none';
-    let paragraph = document.querySelector('.custom-alert-text');
-    paragraph.innerHTML=text
-    modal.classList.toggle('closed');
-    overlay.classList.toggle('closed')
-   
-      setTimeout(() => {
-        removeAlert()
-      }, time)
-    
-  }
-  function removeAlert(){
-    let modal = document.querySelector('.alert');
-    let overlay = document.querySelector('.modal-overlay');
-    modal.classList.toggle('closed');
-    overlay.classList.toggle('closed')
-  }
