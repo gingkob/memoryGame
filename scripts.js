@@ -126,8 +126,8 @@ let climbingToTheMountainCall = () => {
     if(pairValidation){
       introGameSection.classList.add("show-nothing")
       introGameSectionChild.remove();
-      memoryGameHtml.append(memoryGameHtmlChild);
-      memoryGameHtml.classList.remove("show-nothing");
+      mountainGameHtml.append(mountainGameHtmlChild);
+      mountainGameHtml.classList.remove("show-nothing");
       startMountain(names);
     }else{
       customAlert("Сваки унети играч мора бацити и коцкицу - тако се одређује редослед играча у игри :-)")
@@ -549,7 +549,7 @@ function chooseGame(id) {
 }
 // --------------------end of memory section board---------------------
 
-(() => memoryGameHtmlChild.remove())()
+
 
 // -------------------mountain section starts her----------------------
 
@@ -1216,4 +1216,7 @@ function toggleClasses(die) {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
+
+  (() => memoryGameHtmlChild.remove())()
+  (() => mountainGameHtmlChild.remove())()
 
