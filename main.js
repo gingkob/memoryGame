@@ -1,4 +1,7 @@
 let names = {};
+let memoryGameHtml = document.getElementById("memory-game-html");
+let memoryGameHtmlChild = document.getElementById("memory-game-html-child")
+(() => memoryGameHtmlChild.remove())()
 let memoryCall = () => { 
  /*  names = {
     play1: document.getElementById("player1").value.trim(),

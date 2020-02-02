@@ -8,30 +8,46 @@
 </head>
 
 <body>
-  <section class="player-container">
-    <div class="memory-game-player-left">
-      <div class="one-player-container">
-        <div class="memory-game-player sredina">
-        <label id="player1">Player1</label>
-        <p id="score1" style="text-align: left; padding-left: 1vw; font-size: 2.5vw;">0</p>
+  <div id="player-board-container">
+    <div id="player-board">
+      <section class="player-container">
+        <div class="memory-game-player-left">
+          <div class="one-player-container player1-border next-player-onMove-up" id="player1-container">
+            <div class="memory-game-player sredina">
+              <p id="player1"></p>
+              <p id="score1">0</p>
+            </div>
+          </div>
+          <div class="one-player-container" id="player2-container">
+            <div class="memory-game-player sredina">
+              <p id="player2"></p>
+              <p id="score2">0</p>
+            </div>
+          </div>
+          <div class="one-player-container" id="player3-container">
+            <div class="memory-game-player sredina">
+              <p id="player3"></p>
+              <p id="score3">0</p>
+            </div>
+          </div>
+          <div class="one-player-container" id="player4-container">
+            <div class="memory-game-player sredina">
+              <p id="player4"></p>
+              <p id="score4">0</p>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="one-player-container">
-        <div class="memory-game-player sredina">
-        <label id="player2">Player2</label>
-        <p id="score2" style="text-align: left; padding-left: 1vw; font-size: 2.5vw;">0</p>
-      </div>
-      </div>
-    </div>    
-  </section>
-  
+      </section>
+    </div>
+  </div>
+
   <section class="memory-game">
     <!-- <div class="sredina">    
       <div class="clear-format">
         <h2>СТРАНИЦА У ИЗРАДИ</h2>
       </div>
     </div> -->
-   <!--  <div class="memory-game-header">
+    <!--  <div class="memory-game-header">
       <div class="header-flex">
         <div class="header-column1">
           <input type="text"
@@ -67,7 +83,7 @@
           </div>
         </div>
       </div>
-    </div> -->    
+    </div> -->
     <div class="memory-card" data-name="guma1">
       <img class="front-face" src="img/Guma-01@0,5x.svg" alt="Guma1" />
       <img class="back-face" src="img/pamtim-recikliram.svg" alt="Pamtim Recikliram" />
@@ -169,17 +185,11 @@
     <div class="memory-game-player-left">
       <div class="one-player-container">
         <div class="memory-game-player sredina">
-        <label id="player3">Player3</label>
-        <p id="score3" style="text-align: left; padding-left: 1vw; font-size: 2.5vw;">0</p>
+          <label id="uputstvo">Uputstvo</label>
+          <p id="score3" style="text-align: left; padding-left: 1vw; font-size: 2.5vw;">0</p>
         </div>
       </div>
-      <div class="one-player-container">
-        <div class="memory-game-player sredina">
-        <label id="player4">Player4</label>
-        <p id="score4" style="text-align: left; padding-left: 1vw; font-size: 2.5vw;">0</p>
-      </div>
-      </div>
-    </div>    
+    </div>
   </section>
   <script src="scripts.js"></script>
 </body>

@@ -2,6 +2,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  background: #fffff5;
 }
 
 body {
@@ -13,8 +14,9 @@ body {
 }
 
 .player-container{
+  border: 2px solid green;
   width: 20vw;
-  height: 40vh;
+  height: 80vh;
   margin: 10px;
   display: flex;
   justify-content: center;
@@ -25,25 +27,28 @@ body {
   flex: 1;
   flex-direction: column;
 }
-.memory-game-player {
-  padding: 10px;
-  flex: 1;
-  flex-direction: column;
-}
 
 .one-player-container {
-  box-sizing: content-box;
+  height:19vh;
+  box-sizing: border-box;
   background: #eef9ed;
   color: #555555;
-  width: calc(100% - 10px);
-  height: calc(50% - 10px);
   position: relative;
   margin: 10px;  
   border-radius: 5px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   box-shadow: 0 0 15px rgba(0,0,0,.1);
+}
+
+.memory-game-player {
+  width: calc(33.33% - 10px);
+  height: calc(25% - 10px);
+  padding: 10px;
+  flex: 1;
+  flex-direction: column;
 }
 
 .memory-game {
@@ -56,7 +61,6 @@ body {
 }
 
 .sredina {
-  width: 100%;
   margin: 5px;
   display: flex;
   justify-content: center;
@@ -73,6 +77,10 @@ body {
 
 h2 { 
   font-size: 60px;
+}
+
+p { 
+  font-size: 3vw;
 }
 
 .memory-game-header {
@@ -157,7 +165,7 @@ h2 {
 .memory-card {
   width: calc(16.66% - 10px);
   height: calc(25% - 10px);
-  position: relative;
+  /*position: relative;*/
   margin: 5px;
   transform: scale(1);
   transform-style: preserve-3d;
@@ -178,7 +186,7 @@ h2 {
   width: 100%;
   height: 100%;
   padding: 5px;
-  position: absolute;
+  /*position: absolute;*/
   background: white;
   backface-visibility: hidden;
 }
@@ -220,7 +228,6 @@ h2 {
   backface-visibility: visible;
   transform: rotateY(180deg);
 }
-
 .player2-corner {
   width: 0;
   height: 0;
@@ -230,7 +237,6 @@ h2 {
   backface-visibility: visible;
   transform: rotateY(180deg);
 }
-
 .player3-corner {
   width: 0;
   height: 0;
@@ -240,7 +246,6 @@ h2 {
   backface-visibility: visible;
   transform: rotateY(180deg);
 }
-
 .player4-corner {
   width: 0;
   height: 0;
@@ -249,6 +254,27 @@ h2 {
   border-bottom: 2vw solid transparent;
   backface-visibility: visible;
   transform: rotateY(180deg);
+}
+.player1-border {
+  border: 2px solid #d8eb4d;
+}
+.player2-border {
+	border: 2px solid #4deb6f;
+}
+.player3-border {
+  border: 2px solid #4de1eb;
+}
+.player4-border {
+	border: 2px solid #4d6aeb;
+}
+.next-player-onMove-up {
+  transform: scale(1.1);
+  transition: transform .7s;
+}
+.previous-player-onMove-down {
+  transform: scale(1);
+  transform-style: preserve-3d;
+  transition: transform .7s;
 }
 
 .right-corner {
