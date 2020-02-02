@@ -9,18 +9,13 @@ let introGameSection = document.getElementById("intro-section")
 let introGameSectionChild = document.getElementById("intro-section-child")
 let dice1 = document.getElementById("dice1")
 
-function customAlert(text, time=2000){
+function customAlert(text){
   let modal = document.querySelector('.alert');
   let overlay = document.querySelector('.modal-overlay');
   let paragraph = document.querySelector('.custom-alert-text');
-  paragraph.innerHTML=text
+  paragraph.textContent=text
   modal.classList.toggle('closed');
   overlay.classList.toggle('closed')
-  if(time){
-    setTimeout(() => {
-      removeAlert()
-    }, time)
-  }
 }
 
 function customAlertTime(text, time=1500){
@@ -29,10 +24,9 @@ function customAlertTime(text, time=1500){
   let button = document.querySelector('.custom-alert-button').style.display = 'none';
   let closeX = document.querySelector('.close-button').style.display = 'none';
   let paragraph = document.querySelector('.custom-alert-text');
-  paragraph.innerHTML=text
+  paragraph.textContent=text
   modal.classList.toggle('closed');
-  overlay.classList.toggle('closed')
- 
+  overlay.classList.toggle('closed') 
     setTimeout(() => {
       removeAlert()
     }, time)
@@ -88,11 +82,10 @@ let memoryCall = () => {
       memoryGameHtml.classList.remove("show-nothing");
       startMemory(names);
     }else{
-      customAlertTime("Сваки унети играч мора бацити и коцкицу - тако се одређује редослед играча у игри :-)", 4000)
+      customAlert("Сваки унети играч мора бацити и коцкицу - тако се одређује редослед играча у игри.")
     }    
   }else{
-    console.log("de ste bre")
-    customAlert("За игру је потребно најмање два играча. Унесите имена /n :-)")
+    customAlert("За игру је потребно најмање два играча. Унесите њихова имена.")
   }
 
 }
@@ -395,11 +388,11 @@ console.log("play info: ", playInfoArr)
       console.log(winners)
       setTimeout(() => {
         if (winners.length == 1){
-          customAlert("kraj\nPobednik je: " + winners[0].player);
+          customAlert("Игра је завршена.\n Победник је: \n" + winners[0].player);
         } else {
           let winnersMulti = "";
           winners.forEach(item => winnersMulti += item.player + ", ")
-          customAlert("kraj\nPobednici su: " + winnersMulti.trim().slice(0,-1));
+          customAlert("Игра је завршена.\n Победници су: \n" + winnersMulti.trim().slice(0,-1));
         }
         
         changeCurrentOnMoveIndicator(onMove);
@@ -496,7 +489,63 @@ function newGame(id) {
   setTimeout(()=>startMemory(names),500);
 }
 function chooseGame(id) {
-    customAlert('choose game')
+  score1.textContent = 0;
+  score2.textContent = 0;
+  score3.textContent = 0;
+  score4.textContent = 0;
+  player1Container.classList.remove('player1-border')
+  player2Container.classList.remove('player2-border')
+  player3Container.classList.remove('player3-border')
+  player4Container.classList.remove('player4-border')
+  cards.forEach(card => {
+    card.classList.remove("flip");
+    let el = card.querySelector(".remove-tag");
+    if(el){
+      card.removeChild(el);
+    }
+})
+    names = {};
+    memoryGameHtml.classList.add("show-nothing");
+    memoryGameHtmlChild.remove();
+    introGameSection.classList.remove("show-nothing");    
+    introGameSection.appendChild(introGameSectionChild);
+    let dice1 = document.getElementById("dice1")
+    let dice2 = document.getElementById("dice2")
+    let dice3 = document.getElementById("dice3")
+    let dice4 = document.getElementById("dice4")
+    
+    dice1.classList.remove("index__player__dice__rolled", "index__inputs__bordered");
+    dice1.classList.add("index__player__dice");
+    dice1.textContent = "";
+    dice1.removeAttribute("disabled");
+    dice1.setAttribute("value", dice1.textContent);
+    document.getElementById("player1").removeAttribute("disabled");
+    document.getElementById("player1").classList.remove("index__inputs__bordered");
+
+    dice2.classList.remove("index__player__dice__rolled", "index__inputs__bordered");
+    dice2.classList.add("index__player__dice");
+    dice2.textContent = "";
+    dice2.removeAttribute("disabled");
+    dice2.setAttribute("value", dice2.textContent);
+    document.getElementById("player2").removeAttribute("disabled");
+    document.getElementById("player2").classList.remove("index__inputs__bordered");
+
+    dice3.classList.remove("index__player__dice__rolled", "index__inputs__bordered");
+    dice3.classList.add("index__player__dice");
+    dice3.textContent = "";
+    dice3.removeAttribute("disabled");
+    dice3.setAttribute("value", dice3.textContent);
+    document.getElementById("player3").removeAttribute("disabled");
+    document.getElementById("player3").classList.remove("index__inputs__bordered");
+
+    dice4.classList.remove("index__player__dice__rolled", "index__inputs__bordered");
+    dice4.classList.add("index__player__dice");
+    dice4.textContent = "";
+    dice4.removeAttribute("disabled");
+    dice4.setAttribute("value", dice4.textContent);
+    document.getElementById("player4").removeAttribute("disabled");
+    document.getElementById("player4").classList.remove("index__inputs__bordered");
+    
 }
 // --------------------end of memory section board---------------------
 
@@ -933,7 +982,7 @@ let endTurn = (ctx, currentPossition) => {
         okupator = arrOfPlayers[i];
       }
     }
-    customAlert(`Polje zauzeto! - ${okupator.player}`)
+  //  customAlert(`Polje zauzeto! - ${okupator.player}`)
     smazen(okupator);
 
   }
