@@ -999,10 +999,10 @@ let endTurn = (ctx, currentPossition) => {
       number = 22;
       movePlayer(arrOfPlayers[0].currentPossition);
       break;
-   /*  case 16:
+    case 16:
       number = 10;
       movePlayerBack(arrOfPlayers[0].currentPossition);
-      break; */
+      break;
     case 28:
       number = 56;
       movePlayer(arrOfPlayers[0].currentPossition);
@@ -1011,19 +1011,19 @@ let endTurn = (ctx, currentPossition) => {
       number = 6;
       movePlayer(arrOfPlayers[0].currentPossition);
       break;
-    /* case 45:
+    case 45:
       number = 19;
       movePlayerBack(arrOfPlayers[0].currentPossition);
-      break; */
-    /* case 49:
+      break;
+    case 49:
       number = 38;
       movePlayerBack(arrOfPlayers[0].currentPossition);
-      break; */
+      break;
     case 51:
       number = 17;
       movePlayer(arrOfPlayers[0].currentPossition);
       break;
-    /* case 56:
+    case 56:
       number = 9;
       movePlayerBack(arrOfPlayers[0].currentPossition);
       break;
@@ -1034,7 +1034,7 @@ let endTurn = (ctx, currentPossition) => {
     case 64:
       number = 4;
       movePlayerBack(arrOfPlayers[0].currentPossition);
-      break; */
+      break;
     case 72:
       number = 18;
       movePlayer(arrOfPlayers[0].currentPossition);
@@ -1043,7 +1043,7 @@ let endTurn = (ctx, currentPossition) => {
       number = 19;
       movePlayer(arrOfPlayers[0].currentPossition);
       break;
-    /* case 87:
+    case 87:
       number = 63;
       movePlayerBack(arrOfPlayers[0].currentPossition);
       break;
@@ -1058,7 +1058,7 @@ let endTurn = (ctx, currentPossition) => {
     case 98:
       number = 20;
       movePlayerBack(arrOfPlayers[0].currentPossition);
-      break; */
+      break;
     default:
       occupiedFields.push(arrOfPlayers[0].currentPossition)
      // console.log("zauzetoF", occupiedFields)      
