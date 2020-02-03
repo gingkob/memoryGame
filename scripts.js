@@ -8,14 +8,16 @@ let mountainGameHtmlChild = document.getElementById("mountain-game-html-child")
 let introGameSection = document.getElementById("intro-section")
 let introGameSectionChild = document.getElementById("intro-section-child")
 let dice1 = document.getElementById("dice1")
-
+let namesCopyArr = []
 function customAlert(text) {
   let modal = document.querySelector('.alert');
   let overlay = document.querySelector('.modal-overlay');
   let paragraph = document.querySelector('.custom-alert-text');
   paragraph.textContent = text
+  modal.classList.remove('startClosed')
   modal.classList.toggle('closed');
-  overlay.classList.toggle('closed')
+  overlay.classList.remove('startClosed')
+  overlay.classList.toggle('closedOverlay')
 }
 
 function customAlertTime(text, time = 1500) {
@@ -26,7 +28,7 @@ function customAlertTime(text, time = 1500) {
   let paragraph = document.querySelector('.custom-alert-text');
   paragraph.textContent = text
   modal.classList.toggle('closed');
-  overlay.classList.toggle('closed')
+  overlay.classList.toggle('closedOverlay')
   setTimeout(() => {
     removeAlert()
   }, time)
@@ -36,7 +38,7 @@ function removeAlert() {
   let modal = document.querySelector('.alert');
   let overlay = document.querySelector('.modal-overlay');
   modal.classList.toggle('closed');
-  overlay.classList.toggle('closed')
+  overlay.classList.toggle('closedOverlay')
 }
 
 // -------------------start intro section------------------
@@ -77,7 +79,6 @@ let memoryCall = () => {
       }
     }
   })
-
   if (validator > 1) {
     if (pairValidation) {
       introGameSection.classList.add("show-nothing")
@@ -215,12 +216,10 @@ let rollDice = (dice) => {
 let score1, score2, score3, score4, hasFlippedCard, firstCard, secondCard, lockBoard, currentOnMove, player1Container, player2Container, player3Container, player4Container;
 
 let startMemory = names => {
-
   let playInfoArr = []
   names.forEach(item => playInfoArr.push({ "player": item.name, "score": 0, id: item.id }))
 
   let playerActive = 0, playerPassive = 3, overAllScore = 0;
-
   score1 = document.getElementById("score1");
   score2 = document.getElementById("score2");
   score3 = document.getElementById("score3");
@@ -243,6 +242,7 @@ let startMemory = names => {
     if (playInfoArr[0].player.trim() != "") {
       //      currentOnMove.push("player1");
       player1Container.style.order = playerActive++;
+      player1Container.classList.remove("show-nothing")
     } else {
       //  currentOnMove.push("");
       player1Container.style.order = playerPassive--;
@@ -252,6 +252,7 @@ let startMemory = names => {
     if (playInfoArr[1].player.trim() != "") {
       //   currentOnMove.push("player2");
       player2Container.style.order = playerActive++;
+      player2Container.classList.remove("show-nothing")
     } else {
       //  currentOnMove.push("");
       player2Container.style.order = playerPassive--;
@@ -261,6 +262,7 @@ let startMemory = names => {
     if (playInfoArr[2].player.trim() != "") {
       //   currentOnMove.push("player3");
       player3Container.style.order = playerActive++;
+      player3Container.classList.remove("show-nothing")
     } else {
       // currentOnMove.push("");
       player3Container.style.order = playerPassive--;
@@ -270,6 +272,7 @@ let startMemory = names => {
     if (playInfoArr[3].player.trim() != "") {
       //   currentOnMove.push("player4");
       player4Container.style.order = playerActive++;
+      player4Container.classList.remove("show-nothing")
     } else {
       // currentOnMove.push("");
       player4Container.style.order = playerPassive--;
@@ -324,7 +327,7 @@ let startMemory = names => {
         }
       })
     })() */
-
+  namesCopyArr = [...names];
   names.sort((a, b) => b.dice - a.dice);
   names.forEach(item => {
     if (item.name != "") {
@@ -498,7 +501,7 @@ function newGame(id) {
         card.removeChild(el);
       }
     })
-    setTimeout(() => startMemory(names), 500);
+    setTimeout(() => startMemory(namesCopyArr), 500);
   } else {
     alert("new game clicked!")
   }
@@ -1278,6 +1281,6 @@ function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-(() => memoryGameHtmlChild.remove())()
-(() => mountainGameHtmlChild.remove())()
+(() => memoryGameHtmlChild.remove())();
+(() => mountainGameHtmlChild.remove())();
 

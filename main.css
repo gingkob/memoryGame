@@ -272,8 +272,7 @@
 /*custom alert section*/
 .alert{
   position:fixed;
-  top: 25%;
-  left: 50%;
+  left: 50%; 
   transform: translate(-50%, -20%);
   background:#e0f5d2;
   opacity: 95%;
@@ -281,9 +280,51 @@
   height:60vh;
   border-radius: 0.05rem;
   z-index: 1001;
+  animation-name: example;
+  animation-duration: 1.5s;
+  animation-fill-mode: forwards;
+
 }
+@keyframes example {
+  from {
+    top: 0%;
+    opacity: 0;
+  }
+
+  to {
+    top: 25%;
+    opacity: 1;
+  }
+}
+
+@keyframes exampleExit {
+  0% {
+    top: 25%;
+  }
+ 
+  99% {   
+    top:0%;
+
+    /* overflow: hidden; */
+    /* visibility: hidden; */
+  }
+  100% {
+    display: none;
+    opacity: 0;
+    }
+  
+}
+
 .closed {
-  display:none
+  animation-name: exampleExit;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+.closedOverlay {
+  display:none;
+}
+.startClosed {
+  display:none;
 }
 .display-custom-alert {
   display:block
