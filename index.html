@@ -304,11 +304,18 @@
   </div>
   <!-- modal section -->
   <div class="alert closed startClosed">
-    <span class="close-button" onclick={removeAlert(id)}>&times;</span>
+    <span class="close-button" onclick={removeAlert()}>&times;</span>
     <div class="modal-content">
       <p class="custom-alert-text"></p>
     </div>
-    <input type="button" class="custom-alert-button" value="У РЕДУ" onclick={removeAlert(id)}>
+    <input type="button" class="custom-alert-button" value="У РЕДУ" onclick={removeAlert()}>
+  </div>
+  <div class="alertManual closed startClosed">
+    <span class="close-button" onclick={removeAlertManual()}>&times;</span>
+    <div class="modal-contentManual">
+      <p class="custom-alert-textManual"></p>
+    </div>
+    <!-- <input type="button" class="custom-alert-button" value="У РЕДУ" onclick={removeAlertManual()}> -->
   </div>
   <div class="modal-overlay closedOverlay startClosed" id="modal-overlay"></div>
   <script src="./scripts.js"></script>

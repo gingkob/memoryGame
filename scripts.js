@@ -9,11 +9,23 @@ let introGameSection = document.getElementById("intro-section")
 let introGameSectionChild = document.getElementById("intro-section-child")
 let dice1 = document.getElementById("dice1")
 let namesCopyArr = []
+
 function customAlert(text) {
   let modal = document.querySelector('.alert');
   let overlay = document.querySelector('.modal-overlay');
   let paragraph = document.querySelector('.custom-alert-text');
   paragraph.textContent = text
+  modal.classList.remove('startClosed')
+  modal.classList.toggle('closed');
+  overlay.classList.remove('startClosed')
+  overlay.classList.toggle('closedOverlay')
+}
+
+function customAlertManual(text) {
+  let modal = document.querySelector('.alertManual');
+  let overlay = document.querySelector('.modal-overlay');
+  let paragraph = document.querySelector('.modal-contentManual');
+  paragraph.innerHTML = text
   modal.classList.remove('startClosed')
   modal.classList.toggle('closed');
   overlay.classList.remove('startClosed')
@@ -40,6 +52,31 @@ function removeAlert() {
   modal.classList.toggle('closed');
   overlay.classList.toggle('closedOverlay')
 }
+function removeAlertManual() {
+  let modal = document.querySelector('.alertManual');
+  let overlay = document.querySelector('.modal-overlay');
+  modal.classList.toggle('closed');
+  overlay.classList.toggle('closedOverlay')
+}
+
+const textManualMountain = (`<p>За многе планине везују се фантастичне приче о великом благу, које вековима заборављено лежи на неприступачним местима. У тим причама новац и злато најчешће су сакрили хајдуци или су га закопали богати трговци, кријући га од хорди пљачкаша. Децо, истинско благо свих планина \n није сакривено. Благо наше планине су њена природна богатства, њене шуме и реке, животиње и биљке, реке и језера, птице и стене...</p>
+ <br/>
+<p>Благо наше планине данас је у опасности!  У великој је опасности због тога што човек у својој жељи да покори силе природе уништава све пред собом. Сече шуме, преграђује реке, гради путеве и насеља тамо где је некада била нетакнута природа. Децо, истинско благо свих планина није сакривено али зато мора бити сачувано, зато</p>
+<br/>
+<p><strong>ИГРАЈ СЕ, ИСТРАЖИ, ОТКРИЈ И САЧУВАЈ
+БЛАГО НАШЕ ПЛАНИНЕ!</strong></p>
+<br/>
+<p>Благо нaше планине је игра коју обично играју деца. Она уче кроз игру о важности очувања природних ресурса, правећи притом јасну разлику између поступака који воде ка уништењу природе и поступака који помажу очување животне средине. Пријатељско понашање води играча брже ка циљу. Лоши поступци воде играча назад, ка почетку игре.</p>
+<br/>
+<p><strong>Правила игре</strong></p>
+<ol>
+<li> Игру играју два до четири играча. Сваки играч једном баца коцку да би одредио свој редни број. Највећи бачени број први почиње игру.</li>
+<li> Када играч дође на наградна поља плаве боје помера своју фигурицу напред на зелено поље са истим симболoм у складу са табелом.</li> 
+<li> Када играч дође на казнена поља црне боје враћа се  на поља црвене боје са истим симболом, у складу са табелом.</li> 
+<li> Победник је играч који први дође до поља 100 или 101. Играч мора да баца коцку све док не добије одговарајући број којим заузима победничко поље.</li>
+<li> Ако у последњем кругу бацања и други играч добије одговарајући број и заузме једно од два победничка поља, игра се завршава нерешено.</li>
+<li> Шестица добијена из бацања у току игре доноси играчу додатно бацање.</li>
+<li> Ако у току игре играч после бацања заузме поље које је претходник већ заузео - предходник мора да се врати 12 поља у назад.</li></ol>`)
 
 // -------------------start intro section------------------
 let names = {};
@@ -481,7 +518,7 @@ let startMemory = names => {
 }
 
 function showManual() {
-  alert("Show manual!")
+  customAlertManual(textManualMountain)
 }
 
 function newGame(id) {
@@ -629,25 +666,25 @@ function startMountain(names) {
   let ctxCont = canvasCont.getContext("2d");
   let c1 = canvas1.getContext("2d");
   let cPlayer1 = canvasPlayer1.getContext("2d");
-  cPlayer1.color = "rgba(0, 255, 255, 0.95)"
+  cPlayer1.color = "rgba(216, 235, 77, 1)"
   cPlayer1.xOsaStart = 4720;
   cPlayer1.yOsaStart = 3180;
   cPlayer1.xOsaEnd = 4720;
   cPlayer1.yOsaEnd = 800;
   let cPlayer2 = canvasPlayer2.getContext("2d");
-  cPlayer2.color = "rgba(255, 0, 255, 0.95)"
+  cPlayer2.color = "rgba(77, 235, 111, 1)"
   cPlayer2.xOsaStart = 4949;
   cPlayer2.yOsaStart = 3180;
   cPlayer2.xOsaEnd = 4949;
   cPlayer2.yOsaEnd = 800;
   let cPlayer3 = canvasPlayer3.getContext("2d");
-  cPlayer3.color = "rgba(50, 170, 255, 0.95)"
+  cPlayer3.color = "rgba(77, 225, 235, 1)"
   cPlayer3.xOsaStart = 5185;
   cPlayer3.yOsaStart = 3180;
   cPlayer3.xOsaEnd = 5185;
   cPlayer3.yOsaEnd = 800;
   let cPlayer4 = canvasPlayer4.getContext("2d");
-  cPlayer4.color = "rgba(22, 255, 70, 0.95)"
+  cPlayer4.color = "rgba(77, 106, 235, 1)"
   cPlayer4.xOsaStart = 5414;
   cPlayer4.yOsaStart = 3180;
   cPlayer4.xOsaEnd = 5414;
@@ -675,6 +712,8 @@ function startMountain(names) {
     }
   })
 
+  let playerActive = 0, playerPassive = 3;
+
   let player1 = document.getElementById("player-1");
   let player2 = document.getElementById("player-2");
   let player3 = document.getElementById("player-3");
@@ -691,24 +730,67 @@ function startMountain(names) {
     playerObj[`player${i + 1}`].textContent = player.name
   })
 
-  /* player1Container = document.getElementById("player-1-container");
+  player1Container = document.getElementById("player-1-container");
   player2Container = document.getElementById("player-2-container");
   player3Container = document.getElementById("player-3-container");
-  player4Container = document.getElementById("player-4-container"); */
+  player4Container = document.getElementById("player-4-container");
+  console.log(arrOfPlayers);
 
-/*   changeCurrentOnMoveIndicator = (previous, next) => {
+  (() => {
+    if (arrOfPlayers[0] && arrOfPlayers[0].player.trim() != "") {
+      //      currentOnMove.push("player1");
+      player1Container.style.order = playerActive++;
+      player1Container.classList.remove("show-nothing")
+    } else {
+      //  currentOnMove.push("");
+      player1Container.style.order = playerPassive--;
+      player1Container.classList.add("show-nothing")
+    }
+
+    if (arrOfPlayers[1] && arrOfPlayers[1].player.trim() != "") {
+      //   currentOnMove.push("player2");
+      player2Container.style.order = playerActive++;
+      player2Container.classList.remove("show-nothing")
+    } else {
+      //  currentOnMove.push("");
+      player2Container.style.order = playerPassive--;
+      player2Container.classList.add("show-nothing")
+    }
+
+    if (arrOfPlayers[2] && arrOfPlayers[2].player.trim() != "") {
+      //   currentOnMove.push("player3");
+      player3Container.style.order = playerActive++;
+      player3Container.classList.remove("show-nothing")
+    } else {
+      // currentOnMove.push("");
+      player3Container.style.order = playerPassive--;
+      player3Container.classList.add("show-nothing")
+    }
+
+    if (arrOfPlayers[3] && arrOfPlayers[3].player.trim() != "") {
+      //   currentOnMove.push("player4");
+      player4Container.style.order = playerActive++;
+      player4Container.classList.remove("show-nothing")
+    } else {
+      // currentOnMove.push("");
+      player4Container.style.order = playerPassive--;
+      player4Container.classList.add("show-nothing")
+    }
+  })()
+
+  changeCurrentOnMoveIndicator = (previous, next) => {
 
     switch (previous) {
-      case "player1": player1Container.classList.remove("player1-border", "next-player-onMove-up");
+      case "player1": player1Container.classList.remove("player-1-border", "next-player-onMove-up");
         player1Container.classList.add("previous-player-onMove-down");
         break;
-      case "player2": player2Container.classList.remove("player2-border", "next-player-onMove-up");
+      case "player2": player2Container.classList.remove("player-2-border", "next-player-onMove-up");
         player2Container.classList.add("previous-player-onMove-down");
         break;
-      case "player3": player3Container.classList.remove("player3-border", "next-player-onMove-up");
+      case "player3": player3Container.classList.remove("player-3-border", "next-player-onMove-up");
         player3Container.classList.add("previous-player-onMove-down");
         break;
-      case "player4": player4Container.classList.remove("player4-border", "next-player-onMove-up");
+      case "player4": player4Container.classList.remove("player-4-border", "next-player-onMove-up");
         player4Container.classList.add("previous-player-onMove-down");
         break;
       default: break;
@@ -716,21 +798,21 @@ function startMountain(names) {
 
     switch (next) {
       case "player1": player1Container.classList.remove("previous-player-onMove-down");
-        player1Container.classList.add("player1-border", "next-player-onMove-up");
+        player1Container.classList.add("player-1-border", "next-player-onMove-up");
         break;
       case "player2": player2Container.classList.remove("previous-player-onMove-down");
-        player2Container.classList.add("player2-border", "next-player-onMove-up");
+        player2Container.classList.add("player-2-border", "next-player-onMove-up");
         break;
       case "player3": player3Container.classList.remove("previous-player-onMove-down");
-        player3Container.classList.add("player3-border", "next-player-onMove-up");
+        player3Container.classList.add("player-3-border", "next-player-onMove-up");
         break;
       case "player4": player4Container.classList.remove("previous-player-onMove-down");
-        player4Container.classList.add("player4-border", "next-player-onMove-up");
+        player4Container.classList.add("player-4-border", "next-player-onMove-up");
         break;
       default: break;
     }
   }
-  changeCurrentOnMoveIndicator(null, playerOnMove[0]); */
+  changeCurrentOnMoveIndicator(null, playerOnMove[0]);
 
 
   //-------------very first time seting canvas0-4
@@ -887,7 +969,7 @@ function startMountain(names) {
           okupator = arrOfPlayers[i];
         }
       }
-      customAlert(`Polje zauzeto! - ${okupator.player}`)
+     // customAlert(`Polje zauzeto! - ${okupator.player}`)
     }
   //  customAlert(`Polje zauzeto! - ${okupator.player}`)
     smazen(okupator);
@@ -982,6 +1064,8 @@ function startMountain(names) {
             return setTimeout(() => customAlert("game over!"), 2500)
           }
           arrOfPlayers.push(arrOfPlayers.shift());
+          playerOnMove.push(playerOnMove.shift());
+          changeCurrentOnMoveIndicator(playerOnMove[playerOnMove.length-1], playerOnMove[0]);
         }
         diceDIV.addEventListener('click', rollDice);
         break;
@@ -1142,6 +1226,8 @@ function startMountain(names) {
             return setTimeout(() => customAlert("game over!"), 2500)
           }
           arrOfPlayers.push(arrOfPlayers.shift());
+          playerOnMove.push(playerOnMove.shift());
+          changeCurrentOnMoveIndicator(playerOnMove[playerOnMove.length-1], playerOnMove[0]);
         }
         console.log(occupiedFields)
         diceDIV.addEventListener('click', rollDice);
