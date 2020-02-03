@@ -889,82 +889,86 @@ function startMountain(names) {
       }
       customAlert(`Polje zauzeto! - ${okupator.player}`)
     }
-    switch (arrOfPlayers[0].currentPossition) {
-      case 1:
-        number = 37;
-        movePlayer(arrOfPlayers[0].currentPossition);
-        break;
-      case 5:
-        number = 10;
-        movePlayer(arrOfPlayers[0].currentPossition);
-        break;
-      case 9:
-        number = 22;
-        movePlayer(arrOfPlayers[0].currentPossition);
-        break;
-      case 16:
-        number = 10;
-        movePlayerBack(arrOfPlayers[0].currentPossition);
-        break;
-      case 28:
-        number = 56;
-        movePlayer(arrOfPlayers[0].currentPossition);
-        break;
-      case 37:
-        number = 6;
-        movePlayer(arrOfPlayers[0].currentPossition);
-        break;
-      case 45:
-        number = 19;
-        movePlayerBack(arrOfPlayers[0].currentPossition);
-        break;
-      case 49:
-        number = 38;
-        movePlayerBack(arrOfPlayers[0].currentPossition);
-        break;
-      case 51:
-        number = 17;
-        movePlayer(arrOfPlayers[0].currentPossition);
-        break;
-      case 56:
-        number = 9;
-        movePlayerBack(arrOfPlayers[0].currentPossition);
-        break;
-      case 62:
-        number = 43;
-        movePlayerBack(arrOfPlayers[0].currentPossition);
-        break;
-      case 64:
-        number = 4;
-        movePlayerBack(arrOfPlayers[0].currentPossition);
-        break;
-      case 72:
-        number = 18;
-        movePlayer(arrOfPlayers[0].currentPossition);
-        break;
-      case 80:
-        number = 19;
-        movePlayer(arrOfPlayers[0].currentPossition);
-        break;
-      case 87:
-        number = 63;
-        movePlayerBack(arrOfPlayers[0].currentPossition);
-        break;
-      case 92:
-        number = 19;
-        movePlayerBack(arrOfPlayers[0].currentPossition);
-        break;
-      case 95:
-        number = 19;
-        movePlayerBack(arrOfPlayers[0].currentPossition);
-        break;
-      case 98:
-        number = 20;
-        movePlayerBack(arrOfPlayers[0].currentPossition);
-        break;
-      default:
-        occupiedFields.push(arrOfPlayers[0].currentPossition)
-        // console.log("zauzetoB", occupiedFields)
+  //  customAlert(`Polje zauzeto! - ${okupator.player}`)
+    smazen(okupator);
+
+  
+  switch (arrOfPlayers[0].currentPossition) {
+    case 1:
+      number = 37;
+      movePlayer(arrOfPlayers[0].currentPossition);
+      break;
+    case 5:
+      number = 10;
+      movePlayer(arrOfPlayers[0].currentPossition);
+      break;
+    case 9:
+      number = 22;
+      movePlayer(arrOfPlayers[0].currentPossition);
+      break;
+    case 16:
+      number = 10;
+      movePlayerBack(arrOfPlayers[0].currentPossition);
+      break;
+    case 28:
+      number = 56;
+      movePlayer(arrOfPlayers[0].currentPossition);
+      break;
+    case 37:
+      number = 6;
+      movePlayer(arrOfPlayers[0].currentPossition);
+      break;
+    case 45:
+      number = 19;
+      movePlayerBack(arrOfPlayers[0].currentPossition);
+      break;
+    case 49:
+      number = 38;
+      movePlayerBack(arrOfPlayers[0].currentPossition);
+      break;
+    case 51:
+      number = 17;
+      movePlayer(arrOfPlayers[0].currentPossition);
+      break;
+    case 56:
+      number = 9;
+      movePlayerBack(arrOfPlayers[0].currentPossition);
+      break;
+    case 62:
+      number = 43;
+      movePlayerBack(arrOfPlayers[0].currentPossition);
+      break;
+    case 64:
+      number = 4;
+      movePlayerBack(arrOfPlayers[0].currentPossition);
+      break;
+    case 72:
+      number = 18;
+      movePlayer(arrOfPlayers[0].currentPossition);
+      break;
+    case 80:
+      number = 19;
+      movePlayer(arrOfPlayers[0].currentPossition);
+      break;
+    case 87:
+      number = 63;
+      movePlayerBack(arrOfPlayers[0].currentPossition);
+      break;
+    case 92:
+      number = 19;
+      movePlayerBack(arrOfPlayers[0].currentPossition);
+      break;
+    case 95:
+      number = 19;
+      movePlayerBack(arrOfPlayers[0].currentPossition);
+      break;
+    case 98:
+      number = 20;
+      movePlayerBack(arrOfPlayers[0].currentPossition);
+      break;
+    default:
+      occupiedFields.push(arrOfPlayers[0].currentPossition)
+     // console.log("zauzetoF", occupiedFields)      
         if (diceNumber != 6) {
           if (counter == playerOnMove.length) {
             turnFinished = true;
