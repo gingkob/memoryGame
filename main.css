@@ -266,6 +266,9 @@
 .choose{
   background: #4de1eb;
 }
+.manual{
+  background: #d8eb4d;
+}
 /*custom alert section*/
 .alert{
   position:fixed;
@@ -357,34 +360,55 @@
 .right-panel {
   width: 20vw;
 }
-.player-container{
+.mountain__playerboard__container{
+  height: 58vh;
   width: 18vw;
-  height: 65vh;
-  box-sizing: border-box;
-  border: 2px solid green;
-  padding: 0 1rem 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: stretch;
+  border: 0.2rem solid green;
+  margin: 0 0.75rem 0;
 }
-.one-player-container {
-  height: 14vh;
-  box-shadow: 0 0 1rem rgba(0,0,0,.1);
-  border-radius: 0.3rem;
-  background: #eef9ed;
-  color: #555555;
+.mountain__player{
+  height: 13vh;
+  margin: 0 .75rem 0;
+  border: 1px solid green;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
 }
+.mountain__player label {
+  padding: 0 0.3rem 0.3rem;
+  font-size: 2.5rem;
+}
+
+.mountain__control__container{
+  height: 15vh;
+  width: 18vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: stretch;
+  border: 0.2rem solid green;
+  margin: 0 0.75rem 0;
+  padding: 0.2rem;
+}
+.mountain__button{
+  width: 100%;
+  height: 3rem;
+  padding: 0.5rem;
+  font-size: 1.25rem;
+}
+
 .dice-container{
   width: 18vw;
-  height: 35vh;
+  height: 24vh;
   font-family: system-ui, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0 0.75rem 0;
 }
 .die-list {
   width: 10rem;

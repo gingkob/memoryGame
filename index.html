@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Memory Game</title>
+  <title>PamtimRecikliramSacuvajmoBlagoMojePlanine</title>
 </head>
 
 <body>
@@ -14,21 +14,21 @@
   <div class="index__container" id="intro-section">
     <div id="intro-section-child">
       <div class="index__title__container">
-        <h1 class="index__title">Одабери игру</h1>      
+        <h1 class="index__title">Одабери игру</h1>
       </div>
       <div class="index__players__container">
         <div class="index__player">
-          <input class="index__player__input" id="player1" type="text" placeholder="Унесите име играча..."/>
+          <input class="index__player__input" id="player1" type="text" placeholder="Унесите име играча..." />
           <input class="index__player__color" id="boja1" type="color" value="#d8eb4d" disabled />
           <button class="index__player__dice" id="dice1" type="submit" onclick={rollDice(id)}></button>
         </div>
         <div class="index__player">
-          <input class="index__player__input" id="player2" type="text" placeholder="Унесите име играча..."/>
+          <input class="index__player__input" id="player2" type="text" placeholder="Унесите име играча..." />
           <input class="index__player__color" id="boja2" type="color" value="#4deb6f" disabled />
           <button class="index__player__dice" id="dice2" type="submit" onclick={rollDice(id)}></button>
         </div>
         <div class="index__player">
-          <input class="index__player__input" id="player3" type="text" placeholder="Унесите име играча..."/>
+          <input class="index__player__input" id="player3" type="text" placeholder="Унесите име играча..." />
           <input class="index__player__color" id="boja3" type="color" value="#4de1eb" disabled />
           <button class="index__player__dice" id="dice3" type="submit" onclick={rollDice(id)}></button>
         </div>
@@ -37,53 +37,52 @@
           <input class="index__player__color" id="boja4" type="color" value="#4d6aeb" disabled />
           <button class="index__player__dice" id="dice4" type="submit" onclick={rollDice(id)}></button>
         </div>
-      </div>        
+      </div>
       <div class="index__buttons_container">
         <button class="index__button" type="button" id="memory" onclick={memoryCall()}>ИГРА МЕМОРИЈЕ</button>
-        <button class="index__button" type="button" id="mountain" onclick={climbingToTheMountainCall()}>САЧУВАЈМО БЛАГО НАШИХ ПЛАНИНА</button>
-      </div> 
-    </div>   
+        <button class="index__button" type="button" id="mountain" onclick={climbingToTheMountainCall()}>САЧУВАЈМО БЛАГО
+          НАШИХ ПЛАНИНА</button>
+      </div>
+    </div>
   </div>
   <!-- intro section ends here -->
 
   <!-- code for card memory game starts here -->
   <div class="show-nothing" id="memory-game-html">
-  <!-- <div id="memory-game-html"> -->
     <div class="memory__container" id="memory-game-html-child">
       <div id="player-board-container">
         <div id="player-board">
           <section class="memory__playerboard__container">
-              <div class="memory__player" id="player1-container">
-                <div>
-                  <label id="player1">Aleksandar</label>
-                  <p id="score1">0</p>
-                </div>
+            <div class="memory__player" id="player1-container">
+              <div>
+                <label id="player1">Player1</label>
+                <p id="score1">0</p>
               </div>
-              <!-- <div class="one-player-container" id="player2-container"> -->
-              <div class="memory__player" id="player2-container">                
-                <div>
-                  <label id="player2">kkk</label>
-                  <p id="score2">0</p>
-                </div>
+            </div>
+            <div class="memory__player" id="player2-container">
+              <div>
+                <label id="player2">Player2</label>
+                <p id="score2">0</p>
               </div>
-              <!-- <div class="one-player-container" id="player3-container"> -->
-              <div class="memory__player" id="player3-container">
-                <div>                                
-                  <label id="player3">kkk</label>
-                  <p id="score3">0</p>
-                </div>
+            </div>
+            <!-- <div class="one-player-container" id="player3-container"> -->
+            <div class="memory__player" id="player3-container">
+              <div>
+                <label id="player3">Player3</label>
+                <p id="score3">0</p>
               </div>
-              <!-- <div class="one-player-container" id="player4-container"> -->
-              <div class="memory__player" id="player4-container">
-                <div>
-                  <label id="player4">kkk</label>
-                  <p id="score4">0</p>
-                </div>
+            </div>
+            <!-- <div class="one-player-container" id="player4-container"> -->
+            <div class="memory__player" id="player4-container">
+              <div>
+                <label id="player4">Player4</label>
+                <p id="score4">0</p>
               </div>
+            </div>
           </section>
         </div>
       </div>
-    
+
       <section class="memory-game">
         <div class="memory-card" data-name="guma1">
           <img class="front-face" src="img/Guma-01@0,5x.svg" alt="Guma1" />
@@ -182,109 +181,136 @@
           <img class="back-face" src="img/pamtim-recikliram.svg" alt="Pamtim Recikliram" />
         </div>
       </section>
-      <section class="memory__playerboard__container">        
+      <section class="memory__playerboard__container">
         <div class="memory__manual">
           <div>
             <label id="uputstvo">Упутство за игру меморије</label>
-            <p id="manual-memory"> <br/>Неко ће да напише упутство како се игра ова игра. И то упутство ће да се прикаже овде. За сада имамо само неки текст који нам приказује како ће то да изгледа. До тада - уживајте у игри меморије <br/>ПАМТИМ<br/>РЕЦИКЛИРАМ</p>
-          </div>            
-          </div>
-          <div class="memory__buttons_container">
-            <button class="memory__button new" type="button" id="new-game" onclick={newGame(id)}>НОВА ИГРА</button>
-            <button class="memory__button choose" type="button" id="choose-game" onclick={chooseGame(id)}>ПОВРАТАК НА ИЗБОР ИГРЕ</button>
-          </div>           
-        </div>          
-      </section>
-      
-  </div>
-  <div class="show-nothing" id="mountain-game-html">
-    <div id="mountain-game-html-child">
-      <section class="mountain-part">  
-        <div class="canvas-container">
-          <div style="position:relative;">
-            <canvas id="canvas0" style="position: absolute; left: 0; top: 0; z-index: 1; background:transparent;"></canvas>
-            <canvas id="canvasCont" style="position: absolute; left: 0; top: 0; z-index: 2; background:transparent;"></canvas>
-            <canvas id="canvas1" style="position: absolute; left: 0; top: 0; z-index: 3; background:transparent;"></canvas>
-            <canvas id="canvasPlayer1" style="position: absolute; left: 0; top: 0; z-index: 4; background:transparent;"></canvas>
-            <canvas id="canvasPlayer2" style="position: absolute; left: 0; top: 0; z-index: 5; background:transparent;"></canvas>
-            <canvas id="canvasPlayer3" style="position: absolute; left: 0; top: 0; z-index: 6; background:transparent;"></canvas>
-            <canvas id="canvasPlayer4" style="position: absolute; left: 0; top: 0; z-index: 7; background:transparent;"></canvas>
-            <!-- <canvas id="canvas4"></canvas> -->
+            <p id="manual-memory"> <br />Неко ће да напише упутство како се игра ова игра. И то упутство ће да се
+              прикаже овде. За сада имамо само неки текст који нам приказује како ће то да изгледа. До тада - уживајте у
+              игри меморије <br />ПАМТИМ<br />РЕЦИКЛИРАМ</p>
           </div>
         </div>
-      
-        <div class="right-panel">
-          <div id="player-board-container">
-            <div class="player-container" id="player-board">
-              <div class="one-player-container" id="player1-container">              
-                <p id="player-1">Nesto</p>              
-              </div>
-              <div class="one-player-container" id="player2-container">              
-                <p id="player-2">Jos nesto</p>              
-              </div>
-              <div class="one-player-container" id="player3-container">              
-                <p id="player-3">Treci covek</p>              
-              </div>
-              <div class="one-player-container" id="player4-container">              
-                <p id="player-4">I cetvrti</p>              
-              </div>
-            </div>
-          </div>
-      
-         <div class="dice-container">
-          <div class="dice">
-            <ol class="die-list even-roll" data-roll="1" id="die-1">
-              <li class="die-item" data-side="1">      
-                <span class="dot"></span>
-              </li>
-              <li class="die-item hide-side" data-side="2">
-                <span class="dot"></span>
-                <span class="dot"></span>
-              </li>
-              <li class="die-item hide-side" data-side="3">
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-              </li>
-              <li class="die-item hide-side" data-side="4">
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-              </li>
-              <li class="die-item hide-side" data-side="5">
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-              </li>
-              <li class="die-item hide-side" data-side="6">
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-              </li>
-            </ol>
-          </div>
-         </div>
+        <div class="memory__buttons_container">
+          <button class="memory__button new" type="button" id="new-game" onclick={newGame(id)}>НОВА ИГРА</button>
+          <button class="memory__button choose" type="button" id="choose-game" onclick={chooseGame(id)}>ПОВРАТАК НА
+            ИЗБОР ИГРЕ</button>
         </div>
       </section>
     </div>
-<!-- modal section -->
-    
   </div>
   <!-- code for card memory game ends here -->
-<div class="alert closed">
-      <span class="close-button" onclick={removeAlert(id)}>&times;</span>           
-        <div class="modal-content">
-            <p class="custom-alert-text"></p>
+
+
+  <div class="show-nothing" id="mountain-game-html">
+    <div id="mountain-game-html-child">
+      <section class="mountain-part">
+        <div class="canvas-container">
+          <div style="position:relative;">
+            <canvas id="canvas0"
+              style="position: absolute; left: 0; top: 0; z-index: 1; background:transparent;"></canvas>
+            <canvas id="canvasCont"
+              style="position: absolute; left: 0; top: 0; z-index: 2; background:transparent;"></canvas>
+            <canvas id="canvas1"
+              style="position: absolute; left: 0; top: 0; z-index: 3; background:transparent;"></canvas>
+            <canvas id="canvasPlayer1"
+              style="position: absolute; left: 0; top: 0; z-index: 4; background:transparent;"></canvas>
+            <canvas id="canvasPlayer2"
+              style="position: absolute; left: 0; top: 0; z-index: 5; background:transparent;"></canvas>
+            <canvas id="canvasPlayer3"
+              style="position: absolute; left: 0; top: 0; z-index: 6; background:transparent;"></canvas>
+            <canvas id="canvasPlayer4"
+              style="position: absolute; left: 0; top: 0; z-index: 7; background:transparent;"></canvas>
+            <!-- <canvas id="canvas4"></canvas> -->
+          </div>
         </div>
-        <input type="button" class="custom-alert-button" value="У РЕДУ" onclick={removeAlert(id)}>
-      </div>
-      <div class="modal-overlay closed" id="modal-overlay"></div>
+
+        <div class="right-panel">
+          <div id="player-board-container">
+            <div id="player-board">
+              <div class="mountain__playerboard__container">
+                <div class="mountain__player" id="player-1-container">
+                  <div>
+                    <label id="player-1">Player1</label>
+                  </div>
+                </div>
+                <div class="mountain__player" id="player-2-container">
+                  <div>
+                    <label id="player-2">Player2</label>
+                  </div>
+                </div>
+                <div class="mountain__player" id="player-3-container">
+                  <div>
+                    <label id="player-3">Player3</label>
+                  </div>
+                </div>
+                <div class="mountain__player" id="player-4-container">
+                  <div>
+                    <label id="player-4">Player4</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="dice-container">
+            <div class="dice">
+              <ol class="die-list even-roll" data-roll="1" id="die-1">
+                <li class="die-item" data-side="1">
+                  <span class="dot"></span>
+                </li>
+                <li class="die-item hide-side" data-side="2">
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                </li>
+                <li class="die-item hide-side" data-side="3">
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                </li>
+                <li class="die-item hide-side" data-side="4">
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                </li>
+                <li class="die-item hide-side" data-side="5">
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                </li>
+                <li class="die-item hide-side" data-side="6">
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                </li>
+              </ol>
+            </div>
+          </div>
+          <div class="mountain__control__container">
+            <button class="mountain__button new" type="button" id="new-game-mnt" onclick={newGame(id)}>НОВА
+              ИГРА</button>
+            <button class="mountain__button choose" type="button" id="choose-game-mnt" onclick={chooseGame(id)}>ПОВРАТАК
+              НА ИЗБОР ИГРЕ</button>
+            <button class="mountain__button manual" type="button" id="manual" onclick={showManual()}>ПРАВИЛА
+              ИГРЕ</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <!-- modal section -->
+  <div class="alert closed">
+    <span class="close-button" onclick={removeAlert(id)}>&times;</span>
+    <div class="modal-content">
+      <p class="custom-alert-text"></p>
+    </div>
+    <input type="button" class="custom-alert-button" value="У РЕДУ" onclick={removeAlert(id)}>
+  </div>
+  <div class="modal-overlay closed" id="modal-overlay"></div>
   <script src="./scripts.js"></script>
 </body>
 
