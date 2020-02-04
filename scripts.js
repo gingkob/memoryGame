@@ -7,8 +7,8 @@ let mountainGameHtml = document.getElementById("mountain-game-html");
 let mountainGameHtmlChild = document.getElementById("mountain-game-html-child")
 let introGameSection = document.getElementById("intro-section")
 let introGameSectionChild = document.getElementById("intro-section-child");
-let diceDIV = document.querySelector(".dice");
 let dice1 = document.getElementById("dice1")
+let newGameButton = document.getElementById('new-game-mnt')
 let namesCopyArr = []
 
 function customAlert(text) {
@@ -133,28 +133,28 @@ let memoryCall = () => {
 
 }
 let climbingToTheMountainCall = () => {
-  names = [
-    {
-      id: "player1",
-      name: document.getElementById("player1").value.trim(),
-      dice: document.getElementById("dice1").value.trim()
-    },
-    {
-      id: "player2",
-      name: document.getElementById("player2").value.trim(),
-      dice: document.getElementById("dice2").value.trim()
-    },
-    {
-      id: "player3",
-      name: document.getElementById("player3").value.trim(),
-      dice: document.getElementById("dice3").value.trim()
-    },
-    {
-      id: "player4",
-      name: document.getElementById("player4").value.trim(),
-      dice: document.getElementById("dice4").value.trim()
-    }
-  ]
+    names = [
+      {
+        id: "player1",
+        name: document.getElementById("player1").value.trim(),
+        dice: document.getElementById("dice1").value.trim()
+      },
+      {
+        id: "player2",
+        name: document.getElementById("player2").value.trim(),
+        dice: document.getElementById("dice2").value.trim()
+      },
+      {
+        id: "player3",
+        name: document.getElementById("player3").value.trim(),
+        dice: document.getElementById("dice3").value.trim()
+      },
+      {
+        id: "player4",
+        name: document.getElementById("player4").value.trim(),
+        dice: document.getElementById("dice4").value.trim()
+      }
+    ]
 
   let validator = 0;
   let pairValidation = true;
@@ -541,12 +541,17 @@ function newGame(id) {
     })
     setTimeout(() => startMemory(namesCopyArr), 500);
   } else {
-    // player1Container.classList.remove('player-1-border')
-    // player2Container.classList.remove('player-2-border')
-    // player3Container.classList.remove('player-3-border')
-    // player4Container.classList.remove('player-4-border')
-    diceDIV.removeEventListener('click', rollDice);
-    setTimeout(() => startMountain(namesCopyArr), 500);
+    player1Container.classList.remove('player-1-border')
+    player2Container.classList.remove('player-2-border')
+    player3Container.classList.remove('player-3-border')
+    player4Container.classList.remove('player-4-border')
+    let diceContainer = document.querySelector('.dice-container')
+    let dice = document.querySelector('.dice')
+    diceContainer.removeChild(dice);
+    diceContainer.innerHTML = diceHTML;
+   
+
+    setTimeout(() => startMountain(namesCopyArr), 500);    
   }
 }
 function chooseGame() {
@@ -559,7 +564,6 @@ function chooseGame() {
 // -------------------mountain section starts her----------------------
 
 function startMountain(names) {
-
   const canvas0 = document.getElementById("canvas0");
   const canvasCont = document.getElementById("canvasCont");
   const canvas1 = document.getElementById("canvas1");
@@ -571,13 +575,12 @@ function startMountain(names) {
   //const canvas5 = document.getElementById("canvas5"); // for rolling dice webgl
 
   let currentPossitionArr = [];
-  let occupiedFields = [];
+  let diceDIV = document.querySelector(".dice");
   let haveWinner = false;
   let turnFinished = false;
   let counter = 1;
   let okupator = "";
-
-
+  var occupiedFields = [];
 
   const xOsa = [
     5200, 4975, 4743, 4511, 4294, 4046, 3788, 3564, 3338, 3118,
@@ -633,6 +636,15 @@ function startMountain(names) {
   cPlayer4.yOsaStart = 3180;
   cPlayer4.xOsaEnd = 5414;
   cPlayer4.yOsaEnd = 800;
+  c0.clearRect(0, 0, canvas0.width, canvas0.height);
+  ctxCont.clearRect(0, 0, canvas0.width, canvas0.height);
+  c1.clearRect(0, 0, canvas0.width, canvas0.height);
+  cPlayer1.clearRect(0, 0, canvas0.width, canvas0.height);
+  cPlayer2.clearRect(0, 0, canvas0.width, canvas0.height);
+  cPlayer3.clearRect(0, 0, canvas0.width, canvas0.height);
+  cPlayer4.clearRect(0, 0, canvas0.width, canvas0.height);
+  
+
   let canvasObj = {
     player1: cPlayer1,
     player2: cPlayer2,
@@ -681,7 +693,7 @@ function startMountain(names) {
   player2Container = document.getElementById("player-2-container");
   player3Container = document.getElementById("player-3-container");
   player4Container = document.getElementById("player-4-container");
-  (() => {
+const setBorders = () => {
 
     arrOfPlayers.forEach(player => {
       switch(player.id){
@@ -733,7 +745,9 @@ function startMountain(names) {
           console.log("Usao u default")
       }
     })
-  })()
+  }
+
+  setBorders();
   
   arrOfPlayers = arrOfPlayers.filter(player => player.player != "")
   arrOfPlayers.sort((a,b) => b.dice - a.dice)
@@ -1045,6 +1059,7 @@ function startMountain(names) {
   }
 
   let endTurn = (ctx, currentPossition) => {
+ 
     c1.clearRect(0, 0, canvas0.width, canvas0.height);
     ctx.clearRect(0, 0, canvas0.width, canvas0.height);
     ctx.fillStyle = ctx.color;
@@ -1108,10 +1123,10 @@ function startMountain(names) {
         number = 22;
         movePlayer(arrOfPlayers[0].currentPossition);
         break;
-      /*  case 16:
+       case 16:
          number = 10;
          movePlayerBack(arrOfPlayers[0].currentPossition);
-         break; */
+         break;
       case 28:
         number = 56;
         movePlayer(arrOfPlayers[0].currentPossition);
@@ -1120,19 +1135,19 @@ function startMountain(names) {
         number = 6;
         movePlayer(arrOfPlayers[0].currentPossition);
         break;
-      /* case 45:
+      case 45:
         number = 19;
         movePlayerBack(arrOfPlayers[0].currentPossition);
-        break; */
-      /* case 49:
+        break;
+      case 49:
         number = 38;
         movePlayerBack(arrOfPlayers[0].currentPossition);
-        break; */
+        break;
       case 51:
         number = 17;
         movePlayer(arrOfPlayers[0].currentPossition);
         break;
-      /* case 56:
+      case 56:
         number = 9;
         movePlayerBack(arrOfPlayers[0].currentPossition);
         break;
@@ -1143,7 +1158,7 @@ function startMountain(names) {
       case 64:
         number = 4;
         movePlayerBack(arrOfPlayers[0].currentPossition);
-        break; */
+        break;
       case 72:
         number = 18;
         movePlayer(arrOfPlayers[0].currentPossition);
@@ -1152,7 +1167,7 @@ function startMountain(names) {
         number = 19;
         movePlayer(arrOfPlayers[0].currentPossition);
         break;
-      /* case 87:
+      case 87:
         number = 63;
         movePlayerBack(arrOfPlayers[0].currentPossition);
         break;
@@ -1167,7 +1182,7 @@ function startMountain(names) {
       case 98:
         number = 20;
         movePlayerBack(arrOfPlayers[0].currentPossition);
-        break; */
+        break;
       default:
         occupiedFields.push(arrOfPlayers[0].currentPossition)
         // console.log("zauzetoF", occupiedFields)      
@@ -1189,6 +1204,7 @@ function startMountain(names) {
         }
         console.log(occupiedFields)
         diceDIV.addEventListener('click', rollDice);
+        
         break;
     }
   }
@@ -1255,6 +1271,7 @@ function startMountain(names) {
         i++;
       } else {
         ctx.restore();
+        newGameButton.removeAttribute("disabled");
       }
     }
 
@@ -1291,6 +1308,7 @@ function startMountain(names) {
   let diceTestArr = [3, 3, 6, 6, 6, 6]
   function rollDice() {
     diceDIV.removeEventListener('click', rollDice);
+    newGameButton.setAttribute("disabled", true);
     const dice = [...document.querySelectorAll(".die-list")];
     for (let i = 1; i <= 6; i++) {
       sides[i - 1].classList.remove("hide-side");
@@ -1331,3 +1349,42 @@ function getRandomNumber(min, max) {
 (() => memoryGameHtmlChild.remove())();
 (() => mountainGameHtmlChild.remove())();
 
+let diceHTML = (` 
+      <div class="dice">
+        <ol class="die-list even-roll" data-roll="1" id="die-1">
+          <li class="die-item" data-side="1">
+            <span class="dot"></span>
+          </li>
+          <li class="die-item hide-side" data-side="2">
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </li>
+          <li class="die-item hide-side" data-side="3">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </li>
+          <li class="die-item hide-side" data-side="4">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </li>
+          <li class="die-item hide-side" data-side="5">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </li>
+          <li class="die-item hide-side" data-side="6">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </li>
+        </ol>
+      </div>
+    `)
