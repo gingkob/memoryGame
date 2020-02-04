@@ -278,93 +278,38 @@ let startMemory = names => {
 
   (() => {
     if (playInfoArr[0].player.trim() != "") {
-      //      currentOnMove.push("player1");
       player1Container.style.order = playerActive++;
       player1Container.classList.remove("show-nothing")
     } else {
-      //  currentOnMove.push("");
       player1Container.style.order = playerPassive--;
       player1Container.classList.add("show-nothing")
     }
 
     if (playInfoArr[1].player.trim() != "") {
-      //   currentOnMove.push("player2");
       player2Container.style.order = playerActive++;
       player2Container.classList.remove("show-nothing")
     } else {
-      //  currentOnMove.push("");
       player2Container.style.order = playerPassive--;
       player2Container.classList.add("show-nothing")
     }
 
     if (playInfoArr[2].player.trim() != "") {
-      //   currentOnMove.push("player3");
       player3Container.style.order = playerActive++;
       player3Container.classList.remove("show-nothing")
     } else {
-      // currentOnMove.push("");
       player3Container.style.order = playerPassive--;
       player3Container.classList.add("show-nothing")
     }
 
     if (playInfoArr[3].player.trim() != "") {
-      //   currentOnMove.push("player4");
       player4Container.style.order = playerActive++;
       player4Container.classList.remove("show-nothing")
     } else {
-      // currentOnMove.push("");
       player4Container.style.order = playerPassive--;
       player4Container.classList.add("show-nothing")
     }
   })()
-  /*   let playerContainerSetupAdd = (player) =>{
-      currentOnMove.push(player);
-        switch(player){
-          case "player1":
-            player1Container.style.order = playerActive++;
-            break;
-          case "player2":
-            player2Container.style.order = playerActive++;
-            break;
-          case "player3":
-            player3Container.style.order = playerActive++;
-            break;
-          case "player4":
-            player4Container.style.order = playerActive++;
-            break;
-        }      
-    }
-  
-    let playerContainerSetupSubstract = (player) =>{
-        switch(player){
-          case "player1":
-            player1Container.style.order = playerPassive--;
-            player1Container.classList.add("show-nothing");
-            break;
-          case "player2":
-            player1Container.style.order = playerPassive--;
-            player1Container.classList.add("show-nothing");
-            break;
-          case "player3":
-            player1Container.style.order = playerPassive--;
-            player1Container.classList.add("show-nothing");
-            break;
-          case "player4":
-            player1Container.style.order = playerPassive--;
-            player1Container.classList.add("show-nothing");
-            break;
-        }      
-    }
-  
-    (() => {
-      playInfoArr.forEach(item =>{
-        if (item.player.trim() != "") {
-          playerContainerSetupAdd(item.id)
-        } else {
-          playerContainerSetupSubstract(item.id)
-        }
-      })
-    })() */
+ 
   namesCopyArr = [...names];
   names.sort((a, b) => b.dice - a.dice);
   names.forEach(item => {
@@ -372,8 +317,6 @@ let startMemory = names => {
       currentOnMove.push(item.id)
     }
   })
-
-  console.log("on move: ", currentOnMove);
 
   player1.textContent = playInfoArr[0].player;
   player2.textContent = playInfoArr[1].player;
@@ -386,8 +329,6 @@ let startMemory = names => {
     if (lockBoard) return;
     if (this === firstCard) return;
     this.classList.add("flip")
-    // this.querySelector(".front-face").classList.add("corner-ribbon", "top-right", "sticky", "blue")
-    // firstOnMove ? this.querySelector(".front-face").classList.add("firstcolor") : this.querySelector(".front-face").classList.add("secondcolor");
     if (!hasFlippedCard && !lockBoard) {
       hasFlippedCard = !hasFlippedCard;
       firstCard = this;
@@ -522,37 +463,7 @@ function showManual() {
   customAlertManual(textManualMountain);
 }
 
-function newGame(id) {
-  if (id == "new-game") {
-    score1.textContent = 0;
-    score2.textContent = 0;
-    score3.textContent = 0;
-    score4.textContent = 0;
-    player1Container.classList.remove('player1-border')
-    player2Container.classList.remove('player2-border')
-    player3Container.classList.remove('player3-border')
-    player4Container.classList.remove('player4-border')
-    cards.forEach(card => {
-      card.classList.remove("flip");
-      let el = card.querySelector(".remove-tag");
-      if (el) {
-        card.removeChild(el);
-      }
-    })
-    setTimeout(() => startMemory(namesCopyArr), 500);
-  } else {
-    // player1Container.classList.remove('player-1-border')
-    // player2Container.classList.remove('player-2-border')
-    // player3Container.classList.remove('player-3-border')
-    // player4Container.classList.remove('player-4-border')
-    // diceDIV.removeEventListener('click', rollDice);
-    // setTimeout(() => startMountain(namesCopyArr), 500);
-    console.log("to be implemented");
-  }
-}
-function chooseGame() {
- window.location.reload();
-}
+
 // --------------------end of memory section board---------------------
 
 
@@ -688,44 +599,36 @@ function startMountain(names) {
       switch(player.id){
         case 'player1':
           if (player.player ) {
-            //      currentOnMove.push("player1");
             player1Container.style.order = playerActive++;
             player1Container.classList.remove("show-nothing")
           } else {
-            //  currentOnMove.push("");
             player1Container.style.order = playerPassive--;
             player1Container.classList.add("show-nothing")
           }
           break;
         case 'player2':
           if (player.player ) {
-            //      currentOnMove.push("player1");
             player2Container.style.order = playerActive++;
             player2Container.classList.remove("show-nothing")
           } else {
-            //  currentOnMove.push("");
             player2Container.style.order = playerPassive--;
             player2Container.classList.add("show-nothing")
           }
           break;
         case 'player3':
         if (player.player) {
-          //      currentOnMove.push("player1");
           player3Container.style.order = playerActive++;
           player3Container.classList.remove("show-nothing")
         } else {
-          //  currentOnMove.push("");
           player3Container.style.order = playerPassive--;
           player3Container.classList.add("show-nothing")
         }
         break;
         case 'player4':
           if (player.player ) {
-            //      currentOnMove.push("player1");
             player4Container.style.order = playerActive++;
             player4Container.classList.remove("show-nothing")
           } else {
-            //  currentOnMove.push("");
             player4Container.style.order = playerPassive--;
             player4Container.classList.add("show-nothing")
           }
@@ -797,20 +700,24 @@ function startMountain(names) {
   };
   boardImage.src = './img/board.png';
 
-  console.log("*********", boardImage)
-
   let xRatio = canvas0.width / 5670;
   let yRatio = canvas0.height / 3780;
   let radius = 100 * xRatio;
   let fullCircle = Math.PI * 2;
-
-  ctxCont.beginPath();
-  ctxCont.rect(4580 * xRatio, 2900 * yRatio, 974 * xRatio, 350 * yRatio);
+  
   ctxCont.strokeStyle = "green";
   ctxCont.lineWidth = 1;
+  ctxCont.fillStyle = "rgba(255, 255, 255, 0.35)";
+  cPlayer1.fillStyle = cPlayer1.color;
+  cPlayer2.fillStyle = cPlayer2.color;
+  cPlayer3.fillStyle = cPlayer3.color;
+  cPlayer4.fillStyle = cPlayer4.color;
+
+function initalDraw(){
+  ctxCont.beginPath();
+  ctxCont.rect(4580 * xRatio, 2900 * yRatio, 974 * xRatio, 350 * yRatio);  
   ctxCont.stroke();
-  ctxCont.closePath();
-  ctxCont.fillStyle = "rgba(255, 255, 255, 0.35)"
+  ctxCont.closePath();  
   drawPin(ctxCont, 4720 * xRatio, 3180 * yRatio);
   drawPin(ctxCont, 4949 * xRatio, 3180 * yRatio);
   drawPin(ctxCont, 5185 * xRatio, 3180 * yRatio);
@@ -823,15 +730,15 @@ function startMountain(names) {
   drawPin(ctxCont, 4949 * xRatio, 800 * yRatio);
   drawPin(ctxCont, 5185 * xRatio, 800 * yRatio);
   drawPin(ctxCont, 5414 * xRatio, 800 * yRatio);
-
-  cPlayer1.fillStyle = cPlayer1.color;
+  
   drawPin(cPlayer1, 4720 * xRatio, 3180 * yRatio);
-  cPlayer2.fillStyle = cPlayer2.color;
   drawPin(cPlayer2, 4949 * xRatio, 3180 * yRatio);
-  cPlayer3.fillStyle = cPlayer3.color;
   drawPin(cPlayer3, 5185 * xRatio, 3180 * yRatio);
-  cPlayer4.fillStyle = cPlayer4.color;
   drawPin(cPlayer4, 5414 * xRatio, 3180 * yRatio);
+}
+
+initalDraw()
+
 
   /* c1.strokeStyle = "yellow";
   c1.lineWidth = 2;
@@ -850,10 +757,19 @@ function startMountain(names) {
     canvas0.height = canvas0.width * 2 / 3;
     canvas1.width = window.innerWidth * 0.8;
     canvas1.height = canvas0.width * 2 / 3;
+    ctxCont.width = window.innerWidth * 0.8;
+    ctxCont.height = canvas0.width * 2 / 3;
     canvasPlayer1.width = window.innerWidth * 0.8;
     canvasPlayer1.height = canvas0.width * 2 / 3;
     canvasPlayer2.width = window.innerWidth * 0.8;
     canvasPlayer2.height = canvas0.width * 2 / 3;
+    canvasPlayer3.width = window.innerWidth * 0.8;
+    canvasPlayer3.height = canvas0.width * 2 / 3;
+    canvasPlayer4.width = window.innerWidth * 0.8;
+    canvasPlayer4.height = canvas0.width * 2 / 3;
+    xRatio = canvas0.width / 5670;
+    yRatio = canvas0.height / 3780;
+    radius = 100 * xRatio;
 
     boardImage.onload = function () {
       c0.drawImage(boardImage, 0, 0, canvas0.width, canvas0.height);
@@ -1327,6 +1243,39 @@ function getRandomNumber(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function newGame(id) {
+  if (id == "new-game") {
+    score1.textContent = 0;
+    score2.textContent = 0;
+    score3.textContent = 0;
+    score4.textContent = 0;
+    player1Container.classList.remove('player1-border')
+    player2Container.classList.remove('player2-border')
+    player3Container.classList.remove('player3-border')
+    player4Container.classList.remove('player4-border')
+    cards.forEach(card => {
+      card.classList.remove("flip");
+      let el = card.querySelector(".remove-tag");
+      if (el) {
+        card.removeChild(el);
+      }
+    })
+    setTimeout(() => startMemory(namesCopyArr), 500);
+  } else {
+    // player1Container.classList.remove('player-1-border')
+    // player2Container.classList.remove('player-2-border')
+    // player3Container.classList.remove('player-3-border')
+    // player4Container.classList.remove('player-4-border')
+    // diceDIV.removeEventListener('click', rollDice);
+    // setTimeout(() => startMountain(namesCopyArr), 500);
+    alert("to be implemented");
+  }
+}
+
+function chooseGame() {
+ window.location.reload();
 }
 
 (() => memoryGameHtmlChild.remove())();
