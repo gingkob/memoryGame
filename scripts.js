@@ -519,7 +519,7 @@ let startMemory = names => {
 }
 
 function showManual() {
-  customAlertManual(textManualMountain)
+  customAlertManual(textManualMountain);
 }
 
 function newGame(id) {
@@ -545,8 +545,9 @@ function newGame(id) {
     // player2Container.classList.remove('player-2-border')
     // player3Container.classList.remove('player-3-border')
     // player4Container.classList.remove('player-4-border')
-    diceDIV.removeEventListener('click', rollDice);
-    setTimeout(() => startMountain(namesCopyArr), 500);
+    // diceDIV.removeEventListener('click', rollDice);
+    // setTimeout(() => startMountain(namesCopyArr), 500);
+    console.log("to be implemented");
   }
 }
 function chooseGame() {
