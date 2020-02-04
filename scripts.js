@@ -6,7 +6,8 @@ let memoryGameHtmlChild = document.getElementById("memory-game-html-child")
 let mountainGameHtml = document.getElementById("mountain-game-html");
 let mountainGameHtmlChild = document.getElementById("mountain-game-html-child")
 let introGameSection = document.getElementById("intro-section")
-let introGameSectionChild = document.getElementById("intro-section-child")
+let introGameSectionChild = document.getElementById("intro-section-child");
+let diceDIV = document.querySelector(".dice");
 let dice1 = document.getElementById("dice1")
 let namesCopyArr = []
 
@@ -540,73 +541,16 @@ function newGame(id) {
     })
     setTimeout(() => startMemory(namesCopyArr), 500);
   } else {
-    alert("new game clicked!")
+    // player1Container.classList.remove('player-1-border')
+    // player2Container.classList.remove('player-2-border')
+    // player3Container.classList.remove('player-3-border')
+    // player4Container.classList.remove('player-4-border')
+    diceDIV.removeEventListener('click', rollDice);
+    setTimeout(() => startMountain(namesCopyArr), 500);
   }
-
 }
-function chooseGame(id) {
-  if (id == "choose-game") {
-    score1.textContent = 0;
-    score2.textContent = 0;
-    score3.textContent = 0;
-    score4.textContent = 0;
-    player1Container.classList.remove('player1-border')
-    player2Container.classList.remove('player2-border')
-    player3Container.classList.remove('player3-border')
-    player4Container.classList.remove('player4-border')
-    cards.forEach(card => {
-      card.classList.remove("flip");
-      let el = card.querySelector(".remove-tag");
-      if (el) {
-        card.removeChild(el);
-      }
-    })
-    names = {};
-    memoryGameHtml.classList.add("show-nothing");
-    memoryGameHtmlChild.remove();
-    introGameSection.classList.remove("show-nothing");
-    introGameSection.appendChild(introGameSectionChild);
-    let dice1 = document.getElementById("dice1")
-    let dice2 = document.getElementById("dice2")
-    let dice3 = document.getElementById("dice3")
-    let dice4 = document.getElementById("dice4")
-
-    dice1.classList.remove("index__player__dice__rolled", "index__inputs__bordered");
-    dice1.classList.add("index__player__dice");
-    dice1.textContent = "";
-    dice1.removeAttribute("disabled");
-    dice1.setAttribute("value", dice1.textContent);
-    document.getElementById("player1").removeAttribute("disabled");
-    document.getElementById("player1").classList.remove("index__inputs__bordered");
-
-    dice2.classList.remove("index__player__dice__rolled", "index__inputs__bordered");
-    dice2.classList.add("index__player__dice");
-    dice2.textContent = "";
-    dice2.removeAttribute("disabled");
-    dice2.setAttribute("value", dice2.textContent);
-    document.getElementById("player2").removeAttribute("disabled");
-    document.getElementById("player2").classList.remove("index__inputs__bordered");
-
-    dice3.classList.remove("index__player__dice__rolled", "index__inputs__bordered");
-    dice3.classList.add("index__player__dice");
-    dice3.textContent = "";
-    dice3.removeAttribute("disabled");
-    dice3.setAttribute("value", dice3.textContent);
-    document.getElementById("player3").removeAttribute("disabled");
-    document.getElementById("player3").classList.remove("index__inputs__bordered");
-
-    dice4.classList.remove("index__player__dice__rolled", "index__inputs__bordered");
-    dice4.classList.add("index__player__dice");
-    dice4.textContent = "";
-    dice4.removeAttribute("disabled");
-    dice4.setAttribute("value", dice4.textContent);
-    document.getElementById("player4").removeAttribute("disabled");
-    document.getElementById("player4").classList.remove("index__inputs__bordered");
-  } else {
-    alert("choose game clicked!")
-  }
-
-
+function chooseGame() {
+ window.location.reload();
 }
 // --------------------end of memory section board---------------------
 
@@ -699,16 +643,17 @@ function startMountain(names) {
   let players = names.map(name => {
     return name
   })
+  let arrOfPlayers = []
+  namesCopyArr = [...names];
+  names.forEach(name => {
+    // if (name.name && name.dice) {
+      arrOfPlayers.push({ "player": name.name, currentPossition: 0, ctx: canvasObj[name.id], id:name.id, dice:name.dice })
+      // }
+    })
   names.sort((a, b) => b.dice - a.dice);
   names.forEach(item => {
     if (item.name != "") {
       playerOnMove.push(item.id)
-    }
-  })
-  let arrOfPlayers = []
-  names.forEach(name => {
-    if (name.name && name.dice) {
-      arrOfPlayers.push({ "player": name.name, currentPossition: 0, ctx: canvasObj[name.id] })
     }
   })
 
@@ -727,57 +672,71 @@ function startMountain(names) {
   }
 
   players.forEach((player, i) => {
-    playerObj[`player${i + 1}`].textContent = player.name
+    if(player.name){
+      playerObj[`player${i + 1}`].textContent = player.name
+    }
   })
 
   player1Container = document.getElementById("player-1-container");
   player2Container = document.getElementById("player-2-container");
   player3Container = document.getElementById("player-3-container");
   player4Container = document.getElementById("player-4-container");
-  console.log(arrOfPlayers);
-
   (() => {
-    if (arrOfPlayers[0] && arrOfPlayers[0].player.trim() != "") {
-      //      currentOnMove.push("player1");
-      player1Container.style.order = playerActive++;
-      player1Container.classList.remove("show-nothing")
-    } else {
-      //  currentOnMove.push("");
-      player1Container.style.order = playerPassive--;
-      player1Container.classList.add("show-nothing")
-    }
 
-    if (arrOfPlayers[1] && arrOfPlayers[1].player.trim() != "") {
-      //   currentOnMove.push("player2");
-      player2Container.style.order = playerActive++;
-      player2Container.classList.remove("show-nothing")
-    } else {
-      //  currentOnMove.push("");
-      player2Container.style.order = playerPassive--;
-      player2Container.classList.add("show-nothing")
-    }
-
-    if (arrOfPlayers[2] && arrOfPlayers[2].player.trim() != "") {
-      //   currentOnMove.push("player3");
-      player3Container.style.order = playerActive++;
-      player3Container.classList.remove("show-nothing")
-    } else {
-      // currentOnMove.push("");
-      player3Container.style.order = playerPassive--;
-      player3Container.classList.add("show-nothing")
-    }
-
-    if (arrOfPlayers[3] && arrOfPlayers[3].player.trim() != "") {
-      //   currentOnMove.push("player4");
-      player4Container.style.order = playerActive++;
-      player4Container.classList.remove("show-nothing")
-    } else {
-      // currentOnMove.push("");
-      player4Container.style.order = playerPassive--;
-      player4Container.classList.add("show-nothing")
-    }
+    arrOfPlayers.forEach(player => {
+      switch(player.id){
+        case 'player1':
+          if (player.player ) {
+            //      currentOnMove.push("player1");
+            player1Container.style.order = playerActive++;
+            player1Container.classList.remove("show-nothing")
+          } else {
+            //  currentOnMove.push("");
+            player1Container.style.order = playerPassive--;
+            player1Container.classList.add("show-nothing")
+          }
+          break;
+        case 'player2':
+          if (player.player ) {
+            //      currentOnMove.push("player1");
+            player2Container.style.order = playerActive++;
+            player2Container.classList.remove("show-nothing")
+          } else {
+            //  currentOnMove.push("");
+            player2Container.style.order = playerPassive--;
+            player2Container.classList.add("show-nothing")
+          }
+          break;
+        case 'player3':
+        if (player.player) {
+          //      currentOnMove.push("player1");
+          player3Container.style.order = playerActive++;
+          player3Container.classList.remove("show-nothing")
+        } else {
+          //  currentOnMove.push("");
+          player3Container.style.order = playerPassive--;
+          player3Container.classList.add("show-nothing")
+        }
+        break;
+        case 'player4':
+          if (player.player ) {
+            //      currentOnMove.push("player1");
+            player4Container.style.order = playerActive++;
+            player4Container.classList.remove("show-nothing")
+          } else {
+            //  currentOnMove.push("");
+            player4Container.style.order = playerPassive--;
+            player4Container.classList.add("show-nothing")
+          }
+          break;
+        default:
+          console.log("Usao u default")
+      }
+    })
   })()
-
+  
+  arrOfPlayers = arrOfPlayers.filter(player => player.player != "")
+  arrOfPlayers.sort((a,b) => b.dice - a.dice)
   changeCurrentOnMoveIndicator = (previous, next) => {
 
     switch (previous) {
@@ -908,8 +867,8 @@ function startMountain(names) {
   let i = 0;
   let number = 0;
   let diceNumber = 0;
-
   let movePlayer = (currentPossition) => {
+    console.log(currentPossition)
     if (i < number) {
       setTimeout(function () {
         requestAnimationFrame(() => { movePlayer(currentPossition) })
@@ -925,7 +884,6 @@ function startMountain(names) {
       setTimeout(() => endTurn(arrOfPlayers[0].ctx, currentPossition), 1000)
     }
   }
-
   let movePlayerBack = (currentPossition) => {
     if (i <= number) {
       setTimeout(function () {
@@ -1327,7 +1285,6 @@ function startMountain(names) {
 
   /* dice section starts here */
   const sides = [...document.querySelectorAll(".die-item")];
-  const diceDIV = document.querySelector(".dice");
   diceDIV.addEventListener('click', rollDice);
 
   let diceCounterTest = 0;
