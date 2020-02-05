@@ -494,7 +494,7 @@ function newGame(id) {
 
     setTimeout(() => startMountain(namesCopyArr), 500);    
   }
-}W
+}
 function chooseGame() {
  window.location.reload();
 }
