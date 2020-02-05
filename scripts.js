@@ -182,7 +182,6 @@ let climbingToTheMountainCall = () => {
   } else {
     customAlert("За игру је потребно најмање два играча. Унесите имена :-)")
   }
-
 };
 
 let rollDice = (dice) => {
@@ -394,8 +393,6 @@ let startMemory = names => {
     secondCard.removeEventListener('click', flipCard);
     resetBoard();
 
-    // firstOnMove ? score1.textContent = ++scorePlay1 : score2.textContent = ++scorePlay2;
-
   }
 
   let unFlipCards = () => {
@@ -479,8 +476,6 @@ function startMountain(names) {
   const canvasPlayer2 = document.getElementById("canvasPlayer2");
   const canvasPlayer3 = document.getElementById("canvasPlayer3");
   const canvasPlayer4 = document.getElementById("canvasPlayer4");
-  //const canvas4 = document.getElementById("canvas4");
-  //const canvas5 = document.getElementById("canvas5"); // for rolling dice webgl
 
   let currentPossitionArr = [];
   let occupiedFields = [];
@@ -739,16 +734,6 @@ function initalDraw(){
 
 initalDraw()
 
-
-  /* c1.strokeStyle = "yellow";
-  c1.lineWidth = 2;
-   */
-  /* for(let i = 0; i< xOsa.length; i++){
-    c1.beginPath();
-    c1.arc(xOsa[i]*xRatio, yOsa[i]*yRatio, radius, 0, fullCircle);
-    c1.stroke();
-    c1.closePath();
-  } */
   //-------------ending first setting canvas
 
   function dynamicCanvas() {
@@ -775,10 +760,6 @@ initalDraw()
       c0.drawImage(boardImage, 0, 0, canvas0.width, canvas0.height);
     };
     boardImage.src = './img/board.png';
-    /*  c1.beginPath();
-     c1.arc(5200*canvas1.width/5670, 3490*canvas1.height/3780, 100 * canvas1.width/5670, 0, Math.PI *2)
-     c1.stroke();
-     c1.closePath(); */
   }
   //let currentPossition = 0;
   let i = 0;
@@ -828,11 +809,6 @@ initalDraw()
 
     relocatePawn(ctx, startingPositionX * xRatio, startingPositionY * yRatio, xOsa[currentPossition - i] * xRatio, yOsa[currentPossition - i] * yRatio)
 
-    /*  ctx.beginPath();
-     ctx.arc(xOsa[currentPossition - i] * xRatio, yOsa[currentPossition - i] * yRatio, radius * 0.85, 0, fullCircle);
-     ctx.fillStyle = "rgba(0, 0, 255, 0.5)";
-     ctx.fill()
-     ctx.closePath(); */
     i = 0;
     if (occupiedFields.includes(arrOfPlayers[0].currentPossition)) {
       occupiedFields.splice(occupiedFields.indexOf(arrOfPlayers[0].currentPossition), 1);
@@ -844,11 +820,8 @@ initalDraw()
           okupator = arrOfPlayers[i];
         }
       }
-     // customAlert(`Polje zauzeto! - ${okupator.player}`)
     }
-  //  customAlert(`Polje zauzeto! - ${okupator.player}`)
     smazen(okupator);
-
   
   switch (arrOfPlayers[0].currentPossition) {
     case 1:
@@ -924,8 +897,7 @@ initalDraw()
       movePlayerBack(arrOfPlayers[0].currentPossition);
       break;
     default:
-      occupiedFields.push(arrOfPlayers[0].currentPossition)
-     // console.log("zauzetoF", occupiedFields)      
+      occupiedFields.push(arrOfPlayers[0].currentPossition)    
         if (diceNumber != 6) {
           if (counter == playerOnMove.length) {
             turnFinished = true;
@@ -958,7 +930,6 @@ initalDraw()
       occupiedFields.splice(occupiedFields.indexOf(ctx.currentPossition), 1);
       ctx.currentPossition = 0;
     }
-
   }
 
   let endTurn = (ctx, currentPossition) => {
@@ -993,10 +964,6 @@ initalDraw()
       relocatePawn(ctx, startingPositionX * xRatio, startingPositionY * yRatio, xOsa[i + currentPossition - 1] * xRatio, yOsa[i + currentPossition - 1] * yRatio)
     }
 
-    /* ctx.beginPath();
-    ctx.arc(xOsa[i + currentPossition - 1] * xRatio, yOsa[i + currentPossition - 1] * yRatio, radius * 0.85, 0, fullCircle);
-    ctx.fill()
-    ctx.closePath(); */
     i = 0;
     if (occupiedFields.includes(arrOfPlayers[0].currentPossition)) {
       occupiedFields.splice(occupiedFields.indexOf(arrOfPlayers[0].currentPossition), 1);
@@ -1008,7 +975,6 @@ initalDraw()
           okupator = arrOfPlayers[i];
         }
       }
-      //  customAlert(`Polje zauzeto! - ${okupator.player}`)
       smazen(okupator);
 
     }
@@ -1025,10 +991,10 @@ initalDraw()
         number = 22;
         movePlayer(arrOfPlayers[0].currentPossition);
         break;
-      /*  case 16:
+       case 16:
          number = 10;
          movePlayerBack(arrOfPlayers[0].currentPossition);
-         break; */
+         break;
       case 28:
         number = 56;
         movePlayer(arrOfPlayers[0].currentPossition);
@@ -1037,19 +1003,19 @@ initalDraw()
         number = 6;
         movePlayer(arrOfPlayers[0].currentPossition);
         break;
-      /* case 45:
+      case 45:
         number = 19;
         movePlayerBack(arrOfPlayers[0].currentPossition);
-        break; */
-      /* case 49:
+        break;
+      case 49:
         number = 38;
         movePlayerBack(arrOfPlayers[0].currentPossition);
-        break; */
+        break;
       case 51:
         number = 17;
         movePlayer(arrOfPlayers[0].currentPossition);
         break;
-      /* case 56:
+      case 56:
         number = 9;
         movePlayerBack(arrOfPlayers[0].currentPossition);
         break;
@@ -1060,7 +1026,7 @@ initalDraw()
       case 64:
         number = 4;
         movePlayerBack(arrOfPlayers[0].currentPossition);
-        break; */
+        break;
       case 72:
         number = 18;
         movePlayer(arrOfPlayers[0].currentPossition);
@@ -1069,7 +1035,7 @@ initalDraw()
         number = 19;
         movePlayer(arrOfPlayers[0].currentPossition);
         break;
-      /* case 87:
+      case 87:
         number = 63;
         movePlayerBack(arrOfPlayers[0].currentPossition);
         break;
@@ -1084,7 +1050,7 @@ initalDraw()
       case 98:
         number = 20;
         movePlayerBack(arrOfPlayers[0].currentPossition);
-        break; */
+        break;
       default:
         occupiedFields.push(arrOfPlayers[0].currentPossition)
         // console.log("zauzetoF", occupiedFields)      
@@ -1111,8 +1077,6 @@ initalDraw()
   }
 
   window.onresize = () => dynamicCanvas();
-  // canvas0.onclick = () => alert("clicked canvas");
-  // canvas0.style.border = "1px solid black";
 
   /* relocate player's pawn starts here */
 
@@ -1133,41 +1097,12 @@ initalDraw()
       if (i <= n) {
         ctx.clearRect(0, 0, canvas0.width, canvas0.height)
         requestAnimationFrame(makeMove)
-        /* if (i > 0 && i < n/2) {
-          resizer += 2*1/n;
-        } else if (i >= n/2 && i < n) {
-          resizer -= 2*1/n;
-        } else {
-          resizer = 1;
-        } */
         xr = (xc - xs) * i / n + xs;
         yr = ys - (ys - yc) * (i) / n;
         xl = (xd - xc) * i / n + xc;
         yl = yd - (yd - yc) * (n - i) / n;
         x = (xl - xr) * i / n + xr;
         y = yl - (yl - yr) * (n - i) / n;
-        /*  console.log("sta je ovde: ", x, y)
-         ctx.beginPath();
-         ctx.moveTo(xs, ys);
-         ctx.quadraticCurveTo(xc, yc, xd, yd);
-         ctx.stroke();
-         ctx.closePath();
-         ctx.beginPath();
-         ctx.arc(xc, yc, 5, 0, Math.PI * 2, false) */
-        /*  ctx.fillStyle = "red" */
-        /* ctx.fill();
-        ctx.closePath();
-        ctx.beginPath();
-        ctx.arc(xs, ys, 5, 0, Math.PI * 2, false) */
-        /*  ctx.fillStyle = "red" */
-        /* ctx.fill();
-        ctx.closePath();
-        ctx.beginPath();
-        ctx.arc(xd, yd, 5, 0, Math.PI * 2, false) */
-        /*  ctx.fillStyle = "red" */
-        /*  ctx.fill();
-         ctx.closePath();
-         console.log("evo ga poziv x y", x , y) */
         drawPin(ctx, x, y);
         i++;
       } else {
