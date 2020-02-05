@@ -494,7 +494,7 @@ function newGame(id) {
 
     setTimeout(() => startMountain(namesCopyArr), 500);    
   }
-}
+}W
 function chooseGame() {
  window.location.reload();
 }
@@ -1291,39 +1291,6 @@ function getRandomNumber(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function newGame(id) {
-  if (id == "new-game") {
-    score1.textContent = 0;
-    score2.textContent = 0;
-    score3.textContent = 0;
-    score4.textContent = 0;
-    player1Container.classList.remove('player1-border')
-    player2Container.classList.remove('player2-border')
-    player3Container.classList.remove('player3-border')
-    player4Container.classList.remove('player4-border')
-    cards.forEach(card => {
-      card.classList.remove("flip");
-      let el = card.querySelector(".remove-tag");
-      if (el) {
-        card.removeChild(el);
-      }
-    })
-    setTimeout(() => startMemory(namesCopyArr), 500);
-  } else {
-    // player1Container.classList.remove('player-1-border')
-    // player2Container.classList.remove('player-2-border')
-    // player3Container.classList.remove('player-3-border')
-    // player4Container.classList.remove('player-4-border')
-    // diceDIV.removeEventListener('click', rollDice);
-    // setTimeout(() => startMountain(namesCopyArr), 500);
-    alert("to be implemented");
-  }
-}
-
-function chooseGame() {
- window.location.reload();
 }
 
 (() => memoryGameHtmlChild.remove())();
