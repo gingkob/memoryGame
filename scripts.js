@@ -2,14 +2,15 @@ const cards = document.querySelectorAll(".memory-card");
 const playerBoard = document.getElementById("player-board");
 const playerBoardContainer = document.getElementById("player-board-container");
 let memoryGameHtml = document.getElementById("memory-game-html");
-let memoryGameHtmlChild = document.getElementById("memory-game-html-child")
+let memoryGameHtmlChild = document.getElementById("memory-game-html-child");
 let mountainGameHtml = document.getElementById("mountain-game-html");
-let mountainGameHtmlChild = document.getElementById("mountain-game-html-child")
-let introGameSection = document.getElementById("intro-section")
+let mountainGameHtmlChild = document.getElementById("mountain-game-html-child");
+let introGameSection = document.getElementById("intro-section");
 let introGameSectionChild = document.getElementById("intro-section-child");
-let dice1 = document.getElementById("dice1")
-let newGameButton = document.getElementById('new-game-mnt')
-let namesCopyArr = []
+let dice1 = document.getElementById("dice1");
+let newGameButton = document.getElementById('new-game-mnt');
+let namesCopyArr = [];
+let diceDIV = document.querySelector(".dice");
 
 function customAlert(text) {
   let modal = document.querySelector('.alert');
@@ -511,8 +512,7 @@ function startMountain(names) {
   const canvasPlayer3 = document.getElementById("canvasPlayer3");
   const canvasPlayer4 = document.getElementById("canvasPlayer4");
 
-  let currentPossitionArr = [];
-  let diceDIV = document.querySelector(".dice");
+  let currentPossitionArr = [];  
   let haveWinner = false;
   let turnFinished = false;
   let counter = 1;
@@ -562,7 +562,7 @@ function startMountain(names) {
   cPlayer2.xOsaEnd = 4949;
   cPlayer2.yOsaEnd = 800;
   let cPlayer3 = canvasPlayer3.getContext("2d");
-  cPlayer3.color = "rgba(77, 225, 235, 1)"
+  cPlayer3.color = "rgba(255, 77, 12, 1)"
   cPlayer3.xOsaStart = 5185;
   cPlayer3.yOsaStart = 3180;
   cPlayer3.xOsaEnd = 5185;
@@ -864,8 +864,9 @@ initalDraw()
           okupator = arrOfPlayers[i];
         }
       }
+      smazen(okupator);
     }
-    smazen(okupator);
+    
   
   switch (arrOfPlayers[0].currentPossition) {
     case 1:
@@ -1021,8 +1022,8 @@ initalDraw()
         }
       }
       smazen(okupator);
-
     }
+    
     switch (arrOfPlayers[0].currentPossition) {
       case 1:
         number = 37;

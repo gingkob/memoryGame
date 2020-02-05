@@ -183,7 +183,7 @@
 .player3-corner {
   width: 0;
   height: 0;
-	border-right: 2vw solid #4de1eb;
+	border-right: 2vw solid #ff4d0c;
 	border-left: 2vw solid transparent;
   border-bottom: 2vw solid transparent;
   backface-visibility: visible;
@@ -211,8 +211,8 @@
   box-shadow: 0 0 15px rgba(0,0,0,.3);
 }
 .player3-border {
-  border: 1px solid #4de1eb;
-  background: #4de1eb;
+  border: 1px solid #ff4d0c;
+  background: #ff4d0c;
   box-shadow: 0 0 15px rgba(0,0,0,.3);
 }
 .player4-border {
@@ -264,7 +264,7 @@
   background: #4deb6f;
 }
 .choose{
-  background: #4de1eb;
+  background: #ff4d0c;
 }
 .manual{
   background: #d8eb4d;
@@ -419,7 +419,7 @@
   text-decoration: none;
   font-size: 16px;
   box-shadow: 0 7px #999;
-  background-color: #4de1eb;
+  background-color: #ff4d0c;
 }
 .custom-alert-button:hover {
   background-color: #fffff5;
@@ -477,7 +477,7 @@
 }
 .player-3-border {
   border-width:2rem 1px 2rem;
-  border-color: #4de1eb;
+  border-color: #ff4d0c;
   box-shadow: 0 0 15px rgba(0,0,0,.3);
 }
 .player-4-border {
