@@ -518,6 +518,7 @@ function startMountain(names) {
   let counter = 1;
   let okupator = "";
   var occupiedFields = [];
+  let winnersArr = [];
 
   const xOsa = [
     5200, 4975, 4743, 4511, 4294, 4046, 3788, 3564, 3338, 3118,
@@ -941,8 +942,10 @@ initalDraw()
       number = 20;
       movePlayerBack(arrOfPlayers[0].currentPossition);
       break;
-    default:
-      occupiedFields.push(arrOfPlayers[0].currentPossition)    
+    default:      
+      if(arrOfPlayers[0].currentPossition < 100){
+        occupiedFields.push(arrOfPlayers[0].currentPossition);
+      }        
         if (diceNumber != 6) {
           if (counter == playerOnMove.length) {
             turnFinished = true;
@@ -987,6 +990,7 @@ initalDraw()
     let startingPositionY = arrOfPlayers[0].currentPossition == 0 ? ctx.yOsaStart : yOsa[arrOfPlayers[0].currentPossition - 1];
 
     if (arrOfPlayers[0].currentPossition + number == 100) {
+      winnersArr.push(arrOfPlayers[0]);
       relocatePawn(ctx, startingPositionX * xRatio, startingPositionY * yRatio, xOsa[i + currentPossition - 1] * xRatio, yOsa[i + currentPossition - 1] * yRatio);
       haveWinner = true;
       ctx.winner = true;
@@ -995,6 +999,7 @@ initalDraw()
         relocatePawn(ctx, xOsa[99] * xRatio, yOsa[99] * yRatio, ctx.xOsaEnd * xRatio, ctx.yOsaEnd * yRatio)
       }, 1000)
     } else if (arrOfPlayers[0].currentPossition + number == 101) {
+      winnersArr.push(arrOfPlayers[0]);
       relocatePawn(ctx, startingPositionX * xRatio, startingPositionY * yRatio, xOsa[100] * xRatio, yOsa[100] * yRatio)
       haveWinner = true;
       ctx.winner = true;
@@ -1097,9 +1102,10 @@ initalDraw()
         number = 20;
         movePlayerBack(arrOfPlayers[0].currentPossition);
         break;
-      default:
-        occupiedFields.push(arrOfPlayers[0].currentPossition)
-        // console.log("zauzetoF", occupiedFields)      
+      default:        
+      if(arrOfPlayers[0].currentPossition < 100){
+        occupiedFields.push(arrOfPlayers[0].currentPossition);
+      }     
         if (diceNumber != 6) {
           if (counter == playerOnMove.length) {
             turnFinished = true;
@@ -1110,15 +1116,19 @@ initalDraw()
           }
           console.log("hello winner: ", counter, turnFinished, haveWinner)
           if (haveWinner && turnFinished) {
-            return setTimeout(() => customAlert("game over!"), 2500)
+            if(winnersArr.length > 1){
+              let winnersMulti = "";
+              winnersArr.forEach(item => winnersMulti += item.player + ", ")
+              customAlert("Игра је завршена.\n Победници су: \n" + winnersMulti.trim().slice(0, -1));
+            }else{
+              return setTimeout(() => customAlert("Игра је завршена. Победник је " + winnersArr[0].player) +"!", 2500)
+            }            
           }
           arrOfPlayers.push(arrOfPlayers.shift());
           playerOnMove.push(playerOnMove.shift());
           changeCurrentOnMoveIndicator(playerOnMove[playerOnMove.length-1], playerOnMove[0]);
         }
-        console.log(occupiedFields)
         diceDIV.addEventListener('click', rollDice);
-        
         break;
     }
   }
